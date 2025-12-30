@@ -1,6 +1,39 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
 import Link from "next/link"
+import { Menu, X } from "lucide-react"
 
 export default function CorrespondencePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [formState, setFormState] = useState({
+    name: "",
+    organization: "",
+    email: "",
+    inquiryType: "general",
+    referralSource: "",
+    message: "",
+  })
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Send to API route that forwards to email
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      })
+      setSubmitted(true)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
       {/* Header */}
@@ -9,7 +42,8 @@ export default function CorrespondencePage() {
           <Link href="/" className="font-serif text-2xl tracking-tight text-[#1a2332]">
             SLOANE <span className="text-slate-500">/</span> Adler
           </Link>
-          <nav className="flex gap-12">
+
+          <nav className="hidden md:flex gap-12">
             <Link href="/" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
               Home
             </Link>
@@ -19,29 +53,59 @@ export default function CorrespondencePage() {
             >
               Approach
             </Link>
-            <Link
-              href="/domains"
-              className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
-            >
-              Domains
-            </Link>
-            <Link
-              href="/counsel"
-              className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
-            >
-              Counsel
-            </Link>
-            <Link
-              href="/access"
-              className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
-            >
-              Access
+            <Link href="/news" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
+              News
             </Link>
             <Link href="/correspondence" className="text-sm tracking-wide text-[#1a2332] transition-colors">
               Contact
             </Link>
+            <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
+              Login
+            </Link>
           </nav>
+
+          <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-slate-200 px-8 py-6">
+            <nav className="flex flex-col gap-4">
+              <Link href="/" className="text-sm tracking-wide text-slate-600" onClick={() => setMobileMenuOpen(false)}>
+                Home
+              </Link>
+              <Link
+                href="/approach"
+                className="text-sm tracking-wide text-slate-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Approach
+              </Link>
+              <Link
+                href="/news"
+                className="text-sm tracking-wide text-slate-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                News
+              </Link>
+              <Link
+                href="/correspondence"
+                className="text-sm tracking-wide text-[#1a2332]"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                href="/login"
+                className="text-sm tracking-wide text-slate-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -49,49 +113,104 @@ export default function CorrespondencePage() {
         <div className="max-w-2xl mx-auto">
           <h1 className="font-serif text-5xl md:text-6xl leading-tight mb-8 text-balance">Correspondence</h1>
 
-          <div className="space-y-8 mb-16">
+          <div className="space-y-6 mb-12">
             <p className="text-xl text-slate-600 leading-relaxed">
-              SLOANE / Adler operates by referral. Direct correspondence is reserved for inquiries introduced through
-              established counsel or institutional relationships.
+              Inquiries are welcomed through referral or introduction. Please provide context for your correspondence.
             </p>
           </div>
 
-          <div className="space-y-12">
-            <div className="space-y-4">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">For Referred Inquiries</h2>
-              <p className="text-slate-600 leading-relaxed">
-                If you have been referred by existing counsel or institutional introduction, please include the
-                referring party's name and context in your correspondence.
+          {submitted ? (
+            <div className="bg-slate-50 border border-slate-200 p-8 text-center">
+              <h2 className="font-serif text-2xl text-[#1a2332] mb-4">Received</h2>
+              <p className="text-slate-600">
+                Your correspondence has been received and will be reviewed with discretion.
               </p>
-              <p className="text-slate-600 leading-relaxed">Correspondence should be directed to:</p>
-              <div className="bg-slate-50 p-6 border border-slate-200">
-                <p className="text-[#1a2332] font-medium">correspondence@sloane-adler.com</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm text-slate-600">Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] focus:outline-none focus:border-slate-400 transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm text-slate-600">Organization</label>
+                  <input
+                    type="text"
+                    value={formState.organization}
+                    onChange={(e) => setFormState({ ...formState, organization: e.target.value })}
+                    className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] focus:outline-none focus:border-slate-400 transition-colors"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="h-px w-24 bg-slate-200"></div>
+              <div className="space-y-2">
+                <label className="text-sm text-slate-600">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={formState.email}
+                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                  className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] focus:outline-none focus:border-slate-400 transition-colors"
+                />
+              </div>
 
-            <div className="space-y-4">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Response Protocol</h2>
-              <p className="text-slate-600 leading-relaxed">
-                All correspondence is reviewed and evaluated with discretion. Response times vary based on context,
-                complexity, and referral source.
+              <div className="space-y-2">
+                <label className="text-sm text-slate-600">Nature of Inquiry</label>
+                <select
+                  value={formState.inquiryType}
+                  onChange={(e) => setFormState({ ...formState, inquiryType: e.target.value })}
+                  className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] focus:outline-none focus:border-slate-400 transition-colors"
+                >
+                  <option value="general">General Inquiry</option>
+                  <option value="advisory">Advisory Services</option>
+                  <option value="access">Access Request</option>
+                  <option value="press">Press & Media</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm text-slate-600">Referral Source or Introduction</label>
+                <input
+                  type="text"
+                  placeholder="If applicable"
+                  value={formState.referralSource}
+                  onChange={(e) => setFormState({ ...formState, referralSource: e.target.value })}
+                  className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] placeholder:text-slate-400 focus:outline-none focus:border-slate-400 transition-colors"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm text-slate-600">Message</label>
+                <textarea
+                  required
+                  rows={5}
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  className="w-full px-4 py-3 border border-slate-200 bg-white text-[#1a2332] focus:outline-none focus:border-slate-400 transition-colors resize-none"
+                />
+              </div>
+
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="px-8 py-3 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors"
+                >
+                  Submit Correspondence
+                </button>
+              </div>
+
+              <p className="text-sm text-slate-500">
+                All correspondence is treated as confidential. Response times vary based on context and referral source.
               </p>
-              <p className="text-slate-600 leading-relaxed">
-                Unsolicited inquiries without institutional introduction are not accepted.
-              </p>
-            </div>
-
-            <div className="h-px w-24 bg-slate-200"></div>
-
-            <div className="space-y-4">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Confidentiality</h2>
-              <p className="text-slate-600 leading-relaxed">
-                All correspondence is treated as confidential. We do not retain contact information without express
-                engagement or mutual agreement.
-              </p>
-            </div>
-          </div>
+            </form>
+          )}
         </div>
       </main>
 
@@ -107,17 +226,14 @@ export default function CorrespondencePage() {
               <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 Approach
               </Link>
-              <Link href="/domains" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Domains
-              </Link>
-              <Link href="/counsel" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Counsel
+              <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
+                News
               </Link>
               <Link href="/policies" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 Policies
               </Link>
               <Link href="/correspondence" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Correspondence
+                Contact
               </Link>
             </nav>
           </div>

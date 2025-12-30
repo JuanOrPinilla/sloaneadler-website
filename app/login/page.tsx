@@ -1,11 +1,20 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 
-export default function PoliciesPage() {
+export default function LoginPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Placeholder - auth not yet implemented
+  }
 
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
@@ -26,6 +35,12 @@ export default function PoliciesPage() {
             >
               Approach
             </Link>
+            <Link
+              href="/investor"
+              className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
+            >
+              Investor
+            </Link>
             <Link href="/news" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
               News
             </Link>
@@ -35,7 +50,7 @@ export default function PoliciesPage() {
             >
               Contact
             </Link>
-            <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
+            <Link href="/login" className="text-sm tracking-wide text-[#1a2332] transition-colors">
               Login
             </Link>
           </nav>
@@ -59,6 +74,13 @@ export default function PoliciesPage() {
                 Approach
               </Link>
               <Link
+                href="/investor"
+                className="text-sm tracking-wide text-slate-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Investor
+              </Link>
+              <Link
                 href="/news"
                 className="text-sm tracking-wide text-slate-600"
                 onClick={() => setMobileMenuOpen(false)}
@@ -74,7 +96,7 @@ export default function PoliciesPage() {
               </Link>
               <Link
                 href="/login"
-                className="text-sm tracking-wide text-slate-600"
+                className="text-sm tracking-wide text-[#1a2332]"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Login
@@ -84,51 +106,72 @@ export default function PoliciesPage() {
         )}
       </header>
 
-      {/* Main Content - Removed contractual language, kept institutional guidelines */}
-      <main className="pt-32 pb-24 px-8">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight mb-16 text-balance">Policies</h1>
+      {/* Main Content */}
+      <main className="pt-32 pb-24 px-8 min-h-screen flex items-center justify-center">
+        <div className="max-w-md w-full">
+          <h1 className="font-serif text-4xl leading-tight mb-2 text-[#1a2332] text-center">Client Access</h1>
+          <p className="text-slate-500 text-center mb-8">Secure portal for existing clients and investors</p>
 
-          <div className="space-y-16">
-            <div className="space-y-6">
-              <h2 className="font-serif text-xl text-[#1a2332]">Confidentiality</h2>
-              <p className="text-slate-600 leading-relaxed">
-                All engagements, correspondence, and counsel provided by SLOANE / Adler are strictly confidential. We do
-                not disclose client relationships, matters under advisement, or any information shared in the course of
-                counsel.
-              </p>
+          <form onSubmit={handleSubmit} className="bg-white border border-slate-200 p-8 space-y-6">
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm text-slate-600">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 text-[#1a2332] focus:outline-none focus:border-[#1a2332] transition-colors"
+                placeholder="you@example.com"
+              />
             </div>
 
-            <div className="h-px w-24 bg-slate-200"></div>
-
-            <div className="space-y-6">
-              <h2 className="font-serif text-xl text-[#1a2332]">Referral Protocol</h2>
-              <p className="text-slate-600 leading-relaxed">
-                SLOANE / Adler welcomes inquiries through referral and institutional introduction. We do not market,
-                compete for mandates, or engage in promotional activity.
-              </p>
+            <div className="space-y-2">
+              <label htmlFor="password" className="block text-sm text-slate-600">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-300 text-[#1a2332] focus:outline-none focus:border-[#1a2332] transition-colors"
+                placeholder="••••••••"
+              />
             </div>
 
-            <div className="h-px w-24 bg-slate-200"></div>
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors"
+            >
+              Sign In
+            </button>
 
-            <div className="space-y-6">
-              <h2 className="font-serif text-xl text-[#1a2332]">Independence</h2>
-              <p className="text-slate-600 leading-relaxed">
-                We maintain strict independence in all advisory relationships. Conflicts of interest are evaluated with
-                rigor, and we decline engagements where counsel cannot be provided with complete objectivity.
-              </p>
+            <div className="text-center">
+              <button type="button" className="text-sm text-slate-500 hover:text-[#1a2332] transition-colors">
+                Forgot password?
+              </button>
             </div>
+          </form>
 
-            <div className="h-px w-24 bg-slate-200"></div>
-
-            <div className="space-y-6">
-              <h2 className="font-serif text-xl text-[#1a2332]">Data and Records</h2>
-              <p className="text-slate-600 leading-relaxed">
-                All information, correspondence, and documentation are retained with the highest standards of security
-                and confidentiality. We do not share, sell, or distribute any client information.
-              </p>
-            </div>
+          <div className="mt-8 p-6 bg-slate-50 border border-slate-200 text-center">
+            <div className="h-px w-12 bg-[#b8a07e] mx-auto mb-4"></div>
+            <p className="font-serif text-lg text-[#1a2332] mb-2">Coming Soon</p>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Secure client portal access is currently under development. Existing clients and investors will receive
+              credentials upon launch.
+            </p>
+            <div className="h-px w-12 bg-[#b8a07e] mx-auto mt-4"></div>
           </div>
+
+          <p className="mt-6 text-sm text-slate-500 text-center">
+            For immediate assistance, please use the{" "}
+            <Link href="/correspondence" className="text-[#1a2332] underline underline-offset-2">
+              contact form
+            </Link>
+            .
+          </p>
         </div>
       </main>
 
@@ -143,6 +186,9 @@ export default function PoliciesPage() {
             <nav className="flex flex-col md:flex-row gap-6 text-sm">
               <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 Approach
+              </Link>
+              <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
+                Investor
               </Link>
               <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 News
