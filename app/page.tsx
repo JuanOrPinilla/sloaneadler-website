@@ -153,12 +153,12 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative flex justify-center">
-              <Image
-                src="/images/hero-watercolor.jpeg"
-                alt="SLOANE / Adler principal in counsel"
-                width={500}
-                height={500}
-                className="w-full max-w-md h-auto"
+              <img
+                src="/images/gemini-generated-image-puk5pgpuk5pgpuk5.png"
+                alt="Two figures in counsel - artistic print"
+                width={600}
+                height={450}
+                className="w-full max-w-lg h-auto"
               />
             </div>
           </div>
@@ -231,7 +231,12 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 relative aspect-square overflow-hidden">
-              <Image src="/images/img-7483.jpeg" alt="Counsel in dialogue" fill className="object-cover" />
+              <Image
+                src="/images/gemini-generated-image-y1jpcoy1jpcoy1jp.png"
+                alt="Abstract composition"
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="lg:col-span-3 space-y-6">
               <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Engagement</h2>
