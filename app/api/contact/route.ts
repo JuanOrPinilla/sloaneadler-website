@@ -5,8 +5,6 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { name, organization, email, inquiryType, referralSource, message } = body
 
-    // In production, this would send an email using a service like Resend, SendGrid, etc.
-    // For now, we log the submission. The email is hidden from the frontend.
     const emailContent = `
 New Correspondence from SLOANE / Adler Website
 
@@ -18,14 +16,46 @@ Referral Source: ${referralSource || "Not provided"}
 
 Message:
 ${message}
-    `
+    `.trim()
 
-    // Email would be sent to: ike_umunnah@mail.harvard.edu
-    console.log("Contact form submission:", emailContent)
+    const RESEND_API_KEY = process.env.RESEND_API_KEY
+    const TO_EMAIL = process.env.CONTACT_EMAIL || "ike.umunnah@mail.harvard.edu"
 
-    return NextResponse.json({ success: true })
+    if (!RESEND_API_KEY) {
+      return NextResponse.json({ error: "Email service not configured" }, { status: 500 })
+    }
+
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "SLOANE / Adler <contact@sloaneadler.com>",
+        to: [TO_EMAIL],
+        subject: `New Inquiry: ${inquiryType} from ${name}`,
+        text: emailContent,
+        reply_to: email,
+      }),
+    })
+
+    const responseData = await resendResponse.json()
+
+    if (!resendResponse.ok) {
+      console.error("Resend API error:", responseData)
+      throw new Error(responseData.message || "Failed to send email")
+    }
+
+    return NextResponse.json({ success: true, id: responseData.id })
   } catch (error) {
     console.error("Error processing contact form:", error)
-    return NextResponse.json({ error: "Failed to process submission" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Failed to process submission",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
