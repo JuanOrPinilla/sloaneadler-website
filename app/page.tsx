@@ -161,7 +161,7 @@ export default function HomePage() {
                 className="w-full max-w-lg h-auto mb-3"
               />
               <div className="w-full max-w-lg text-[10px] uppercase tracking-wider text-slate-400 font-sans leading-relaxed border-t border-slate-100 pt-2">
-                Luc Tuymans, <span className="italic">The Conversation</span>, 1995
+                Luc Tuymans, The Conversation, 1995
               </div>
             </div>
           </div>
