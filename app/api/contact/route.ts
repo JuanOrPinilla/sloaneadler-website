@@ -19,7 +19,7 @@ ${message}
     `.trim()
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY
-    const TO_EMAIL = process.env.CONTACT_EMAIL || "ike.umunnah@mail.harvard.edu"
+    const TO_EMAIL = "ike.umunnah@mail.harvard.edu"
 
     if (!RESEND_API_KEY) {
       return NextResponse.json({ error: "Email service not configured" }, { status: 500 })

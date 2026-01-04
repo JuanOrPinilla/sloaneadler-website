@@ -152,14 +152,17 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-            <div className="relative flex justify-center">
+            <div className="flex flex-col items-center lg:items-end">
               <img
-                src="/images/gemini-generated-image-puk5pgpuk5pgpuk5.png"
-                alt="Two figures in counsel - artistic print"
+                src="/images/d7hftxdivxxvm.webp"
+                alt="Two figures in counsel - blue textured art print"
                 width={600}
                 height={450}
-                className="w-full max-w-lg h-auto"
+                className="w-full max-w-lg h-auto mb-3"
               />
+              <div className="w-full max-w-lg text-[10px] uppercase tracking-wider text-slate-400 font-sans leading-relaxed border-t border-slate-100 pt-2">
+                Luc Tuymans, <span className="italic">The Conversation</span>, 1995
+              </div>
             </div>
           </div>
         </div>
@@ -230,13 +233,18 @@ export default function HomePage() {
       <section className="py-20 px-8 bg-[#f8f7f5]">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-            <div className="lg:col-span-2 relative aspect-square overflow-hidden">
-              <Image
-                src="/images/gemini-generated-image-y1jpcoy1jpcoy1jp.png"
-                alt="Abstract composition"
-                fill
-                className="object-cover"
-              />
+            <div className="lg:col-span-2 relative">
+              <div className="aspect-square overflow-hidden mb-3 relative">
+                <Image
+                  src="/images/4226.webp"
+                  alt="Abstract colorful painting with heavy texture"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="text-[10px] uppercase tracking-wider text-slate-400 font-sans leading-relaxed border-t border-slate-200/50 pt-2">
+                Gerhard Richter, Oil on Alu Dibond, 1999
+              </div>
             </div>
             <div className="lg:col-span-3 space-y-6">
               <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Engagement</h2>
