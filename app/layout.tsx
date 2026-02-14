@@ -15,7 +15,7 @@ const crimsonPro = Crimson_Pro({
 })
 
 export const metadata: Metadata = {
-  title: "SLOANE / Adler — Stewardship Across Generations",
+  title: "SLOANE / Adler - Stewardship Across Generations",
   description:
     "Advisory counsel for families, enterprises, and institutions across capital, reputation, governance, and continuity.",
   generator: "v0.app",

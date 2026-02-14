@@ -206,7 +206,7 @@ export default function ApproachPage() {
             <div className="space-y-4">
               <h3 className="font-serif text-xl text-[#1a2332]">Strategic Review</h3>
               <p className="text-slate-600 leading-relaxed">
-                Focused assessment of specific matters—transactions, transitions, or structural decisions—with
+                Focused assessment of specific matters - transactions, transitions, or structural decisions - with
                 recommendations.
               </p>
             </div>
