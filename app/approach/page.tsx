@@ -23,6 +23,12 @@ export default function ApproachPage() {
             <Link href="/approach" className="text-sm tracking-wide text-[#1a2332] transition-colors">
               Approach
             </Link>
+            <Link
+              href="/investor"
+              className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
+            >
+              Investor
+            </Link>
             <Link href="/news" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
               News
             </Link>
@@ -54,6 +60,13 @@ export default function ApproachPage() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Approach
+              </Link>
+              <Link
+                href="/investor"
+                className="text-sm tracking-wide text-slate-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Investor
               </Link>
               <Link
                 href="/news"
@@ -226,6 +239,9 @@ export default function ApproachPage() {
             <nav className="flex flex-col md:flex-row gap-6 text-sm">
               <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 Approach
+              </Link>
+              <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
+                Investor
               </Link>
               <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
                 News
