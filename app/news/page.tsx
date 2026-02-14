@@ -11,7 +11,7 @@ const posts = [
     title: "On the Nature of Patient Capital",
     summary:
       "In an environment shaped by short-term pressures, the discipline of long-horizon thinking remains essential.",
-    body: `The current landscape rewards speed and scale. Yet for families and institutions with multi-generational mandates, the calculus differs fundamentally. Patient capital is not passive capital—it is capital deployed with the clarity that comes from understanding time differently.
+    body: `The current landscape rewards speed and scale. Yet for families and institutions with multi-generational mandates, the calculus differs fundamentally. Patient capital is not passive capital; it is capital deployed with the clarity that comes from understanding time differently.
 
 We continue to advise principals who measure outcomes across decades, not quarters. This orientation shapes everything: the relationships we enter, the counsel we provide, and the structures we recommend.`,
   },
@@ -21,7 +21,7 @@ We continue to advise principals who measure outcomes across decades, not quarte
     title: "Governance in Transition",
     summary:
       "Leadership succession remains one of the most consequential challenges facing enterprises and families alike.",
-    body: `The transfer of leadership—whether in a family enterprise, a sovereign context, or a closely-held fund—carries implications that extend far beyond the immediate transition. Done well, it preserves institutional knowledge while creating space for necessary evolution.
+    body: `The transfer of leadership; whether in a family enterprise, a sovereign context, or a closely-held fund, carries implications that extend far beyond the immediate transition. Done well, it preserves institutional knowledge while creating space for necessary evolution.
 
 Our work in this area emphasizes preparation over reaction. The most successful transitions we have counseled share a common thread: they began years before any formal announcement.`,
   },
@@ -32,7 +32,7 @@ Our work in this area emphasizes preparation over reaction. The most successful 
     summary: "In an age of transparency, the value of measured communication has only increased.",
     body: `Discretion is often misunderstood as secrecy. In practice, it is the discipline of speaking precisely, sharing deliberately, and understanding that not all matters benefit from broad visibility.
 
-For the families and institutions we serve, this discipline is foundational. Reputation is built through consistent action over time—and preserved through the wisdom to know when silence serves better than statement.`,
+For the families and institutions we serve, this discipline is foundational. Reputation is built through consistent action over time, and preserved through the wisdom to know when silence serves better than statement.`,
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ For the families and institutions we serve, this discipline is foundational. Rep
     summary: "Navigating capital, reputation, and governance across jurisdictions requires integrated counsel.",
     body: `The principals we advise rarely operate within a single jurisdiction. Their interests span continents, their families cross borders, and their enterprises face regulatory environments that shift with political winds.
 
-This complexity demands counsel that sees the whole picture. We work at the intersections—where tax meets reputation, where governance meets culture, where capital meets policy.`,
+This complexity demands counsel that sees the whole picture. We work at the intersections; where tax meets reputation, where governance meets culture, where capital meets policy.`,
   },
 ]
 
