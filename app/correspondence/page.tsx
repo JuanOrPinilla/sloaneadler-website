@@ -60,7 +60,7 @@ export default function CorrespondencePage() {
               Contact
             </Link>
             <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
-              Login
+              Principals
             </Link>
           </nav>
 
@@ -101,7 +101,7 @@ export default function CorrespondencePage() {
                 className="text-sm tracking-wide text-slate-600"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Login
+                Principals
               </Link>
             </nav>
           </div>
@@ -116,6 +116,9 @@ export default function CorrespondencePage() {
           <div className="space-y-6 mb-12">
             <p className="text-xl text-slate-600 leading-relaxed">
               Inquiries are welcomed through referral or introduction. Please provide context for your correspondence.
+            </p>
+            <p className="text-sm text-slate-500 leading-relaxed border-l-2 border-[#b8a07e] pl-4">
+              Sloane / Adler accepts new mandates by introduction only. To verify a principal or request a secure file transfer, please use the form below.
             </p>
           </div>
 
@@ -239,7 +242,7 @@ export default function CorrespondencePage() {
           </div>
 
           <div className="text-sm text-slate-500 text-center md:text-left">
-            © {new Date().getFullYear()} SLOANE / Adler. Confidential and proprietary.
+            {"© SLOANE / Adler Holdings. Confidential and proprietary."}
           </div>
         </div>
       </footer>
