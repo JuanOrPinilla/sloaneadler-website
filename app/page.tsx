@@ -17,7 +17,12 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300">
+      {/* Global Posture Bar */}
+      <div className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center">
+        SAN FRANCISCO 10:00 PM · NEW YORK 1:00 AM · PARIS 7:00 AM · ABU DHABI 10:00 AM · SINGAPORE 2:00 PM
+      </div>
+
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300" style={{ top: scrollY > 50 ? 0 : 28 }}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="font-serif text-2xl tracking-tight text-[#1a2332]">
             SLOANE <span className="text-slate-500">/</span> Adler
@@ -50,7 +55,7 @@ export default function HomePage() {
               Contact
             </Link>
             <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
-              Login
+              Principals
             </Link>
           </nav>
 
@@ -104,14 +109,14 @@ export default function HomePage() {
                 className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Login
+                Principals
               </Link>
             </nav>
           </div>
         )}
       </header>
 
-      <section className="pt-40 pb-20 px-8">
+      <section className="pt-48 pb-20 px-8">
         <div className="max-w-4xl mx-auto">
           <div
             className="text-center"
@@ -121,35 +126,29 @@ export default function HomePage() {
             }}
           >
             <h1 className="font-serif text-5xl md:text-6xl leading-tight text-balance mb-6 text-[#1a2332]">
-              Stewardship Across Generations
+              Where Capital Stops Solving Problems.
             </h1>
             <p className="text-xl leading-relaxed text-slate-600 max-w-2xl mx-auto">
-              Advisory for families, enterprises, and institutions navigating capital, reputation, and continuity.
+              Complexity expands faster than internal leadership. Exposure increases without warning. Decisions carry weight beyond the balance sheet. We exist at those moments.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Origins Section */}
+      {/* The Fracturing Section */}
       <section className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Origins</h2>
+              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">The Fracturing</h2>
               <p className="text-2xl font-serif leading-relaxed text-[#1a2332] text-balance">
-                Sloane Adler emerged from conversations with corporate principals, family offices, and funds seeking a
-                place where reputation, policy, and capital aligned.
+                Sloane / Adler emerged during a period of intense trade and regulatory fracturing.
               </p>
               <div className="space-y-6 text-slate-600 leading-relaxed">
                 <p>
-                  The name carries intent. <em>Sloane</em>, of Gaelic lineage, speaks to protection and steadiness.{" "}
-                  <em>Adler</em>, from the Germanic for eagle, conveys clarity and vigilance.
+                  We were initially engaged to navigate this volatility for corporate stakeholders. The practice expanded when we recognized that private capital—family offices and investment principals—faced the same systemic opacity.
                 </p>
-                <p>Together they embody the discipline to see widely and act with care.</p>
-                <p>
-                  We advise across continents, cultures, and currencies. Every relationship begins through familiarity
-                  or introduction and continues through judgment, steadfastness, and an enduring sense of continuity.
-                </p>
+                <p>We bridge the gap between regulatory reality and strategic intent.</p>
               </div>
             </div>
             <div className="flex flex-col items-center lg:items-end">
@@ -168,12 +167,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Scope Section */}
-      <section id="scope" className="py-20 px-8 bg-slate-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500 mb-6">Scope</h2>
-          <p className="text-2xl font-serif leading-relaxed text-[#1a2332] text-balance">
-            We operate where complexity demands clarity and consequence demands counsel.
+      {/* The Quiet Operator */}
+      <section id="philosophy" className="py-20 px-8 bg-slate-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500 mb-6 text-center">The Quiet Operator</h2>
+          <p className="text-2xl font-serif leading-relaxed text-[#1a2332] text-balance text-center">
+            We operate across governments, institutions, and markets, where discretion and experience matter more than volume.
+          </p>
+          <p className="text-lg text-slate-600 leading-relaxed mt-6 text-center">
+            We step in when families and enterprises step into visibility without institutional muscle memory.
           </p>
         </div>
       </section>
@@ -344,6 +346,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Velvet Rope */}
+      <section className="py-12 px-8 border-t border-slate-200">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm text-slate-500 leading-relaxed">
+            Sloane / Adler accepts new mandates by introduction only. To verify a principal or request a secure file transfer, please{" "}
+            <Link href="/correspondence" className="text-[#1a2332] underline underline-offset-2">contact us</Link>.
+          </p>
+        </div>
+      </section>
+
       <footer className="py-16 px-8 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
@@ -371,7 +383,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-sm text-slate-500 text-center md:text-left">
-            © {new Date().getFullYear()} SLOANE / Adler. Confidential and proprietary.
+            {"© SLOANE / Adler Holdings. Confidential and proprietary."}
           </div>
         </div>
       </footer>

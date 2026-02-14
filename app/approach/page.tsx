@@ -33,7 +33,7 @@ export default function ApproachPage() {
               Contact
             </Link>
             <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
-              Login
+              Principals
             </Link>
           </nav>
 
@@ -74,7 +74,7 @@ export default function ApproachPage() {
                 className="text-sm tracking-wide text-slate-600"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Login
+                Principals
               </Link>
             </nav>
           </div>
@@ -240,7 +240,7 @@ export default function ApproachPage() {
           </div>
 
           <div className="text-sm text-slate-500 text-center md:text-left">
-            © {new Date().getFullYear()} SLOANE / Adler. Confidential and proprietary.
+            {"© SLOANE / Adler Holdings. Confidential and proprietary."}
           </div>
         </div>
       </footer>

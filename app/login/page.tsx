@@ -51,7 +51,7 @@ export default function LoginPage() {
               Contact
             </Link>
             <Link href="/login" className="text-sm tracking-wide text-[#1a2332] transition-colors">
-              Login
+              Principals
             </Link>
           </nav>
 
@@ -99,7 +99,7 @@ export default function LoginPage() {
                 className="text-sm tracking-wide text-[#1a2332]"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Login
+                Principals
               </Link>
             </nav>
           </div>
@@ -109,21 +109,22 @@ export default function LoginPage() {
       {/* Main Content */}
       <main className="pt-32 pb-24 px-8 min-h-screen flex items-center justify-center">
         <div className="max-w-md w-full">
-          <h1 className="font-serif text-4xl leading-tight mb-2 text-[#1a2332] text-center">Client Access</h1>
-          <p className="text-slate-500 text-center mb-8">Secure portal for existing clients and investors</p>
+          <h1 className="font-serif text-4xl leading-tight mb-4 text-[#1a2332] text-center">Restricted Access</h1>
+          <p className="text-slate-500 text-center mb-10 text-sm leading-relaxed max-w-sm mx-auto">
+            Access to the Sloane / Adler Partner Portal is restricted to authorized principals and client designees. Unsuccessful login attempts are logged for security purposes.
+          </p>
 
           <form onSubmit={handleSubmit} className="bg-white border border-slate-200 p-8 space-y-6">
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm text-slate-600">
-                Email Address
+                Username
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-slate-300 text-[#1a2332] focus:outline-none focus:border-[#1a2332] transition-colors"
-                placeholder="you@example.com"
               />
             </div>
 
@@ -137,41 +138,16 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 border border-slate-300 text-[#1a2332] focus:outline-none focus:border-[#1a2332] transition-colors"
-                placeholder="••••••••"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors"
+              className="w-full py-3 bg-[#1a2332] text-white text-sm tracking-widest uppercase hover:bg-[#2a3342] transition-colors"
             >
-              Sign In
+              Enter
             </button>
-
-            <div className="text-center">
-              <button type="button" className="text-sm text-slate-500 hover:text-[#1a2332] transition-colors">
-                Forgot password?
-              </button>
-            </div>
           </form>
-
-          <div className="mt-8 p-6 bg-slate-50 border border-slate-200 text-center">
-            <div className="h-px w-12 bg-[#b8a07e] mx-auto mb-4"></div>
-            <p className="font-serif text-lg text-[#1a2332] mb-2">Coming Soon</p>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Secure client portal access is currently under development. Existing clients and investors will receive
-              credentials upon launch.
-            </p>
-            <div className="h-px w-12 bg-[#b8a07e] mx-auto mt-4"></div>
-          </div>
-
-          <p className="mt-6 text-sm text-slate-500 text-center">
-            For immediate assistance, please use the{" "}
-            <Link href="/correspondence" className="text-[#1a2332] underline underline-offset-2">
-              contact form
-            </Link>
-            .
-          </p>
         </div>
       </main>
 
@@ -203,7 +179,7 @@ export default function LoginPage() {
           </div>
 
           <div className="text-sm text-slate-500 text-center md:text-left">
-            © {new Date().getFullYear()} SLOANE / Adler. Confidential and proprietary.
+            {"© SLOANE / Adler Holdings. Confidential and proprietary."}
           </div>
         </div>
       </footer>
