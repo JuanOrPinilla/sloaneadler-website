@@ -9,6 +9,7 @@ export default function HomePage() {
   const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [postureBarHeight, setPostureBarHeight] = useState(28)
+  const [currentTime, setCurrentTime] = useState(new Date())
   const postureBarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,11 +29,40 @@ export default function HomePage() {
     return () => window.removeEventListener("resize", measureBar)
   }, [])
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000) // Update every minute
+    return () => clearInterval(timer)
+  }, [])
+
+  const formatTime = (date: Date, timeZone: string) => {
+    return date.toLocaleTimeString("en-US", {
+      timeZone,
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).toUpperCase()
+  }
+
+  const timeZones = [
+    { city: "SAN FRANCISCO", zone: "America/Los_Angeles" },
+    { city: "NEW YORK", zone: "America/New_York" },
+    { city: "PARIS", zone: "Europe/Paris" },
+    { city: "ABU DHABI", zone: "Asia/Dubai" },
+    { city: "SINGAPORE", zone: "Asia/Singapore" },
+  ]
+
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
       {/* Global Posture Bar */}
       <div ref={postureBarRef} className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-5 sm:py-2 px-4 text-center sm:whitespace-nowrap">
-        SAN FRANCISCO 10:00 PM · NEW YORK 1:00 AM · PARIS 7:00 AM · ABU DHABI 10:00 AM · SINGAPORE 2:00 PM
+        {timeZones.map((tz, index) => (
+          <span key={tz.zone}>
+            {tz.city} {formatTime(currentTime, tz.zone)}
+            {index < timeZones.length - 1 && " · "}
+          </span>
+        ))}
       </div>
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300" style={{ top: scrollY > 50 ? 0 : postureBarHeight }}>
