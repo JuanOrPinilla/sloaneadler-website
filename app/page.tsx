@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
       {/* Global Posture Bar */}
-      <div className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center overflow-x-auto">
+      <div className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center overflow-x-auto whitespace-nowrap">
         SAN FRANCISCO 10:00 PM · NEW YORK 1:00 AM · PARIS 7:00 AM · ABU DHABI 10:00 AM · SINGAPORE 2:00 PM
       </div>
 
