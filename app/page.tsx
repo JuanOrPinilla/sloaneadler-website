@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
@@ -8,6 +8,8 @@ import { Menu, X } from "lucide-react"
 export default function HomePage() {
   const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [postureBarHeight, setPostureBarHeight] = useState(28)
+  const postureBarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -15,14 +17,25 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    const measureBar = () => {
+      if (postureBarRef.current) {
+        setPostureBarHeight(postureBarRef.current.offsetHeight)
+      }
+    }
+    measureBar()
+    window.addEventListener("resize", measureBar)
+    return () => window.removeEventListener("resize", measureBar)
+  }, [])
+
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
       {/* Global Posture Bar */}
-      <div className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center overflow-x-auto whitespace-nowrap">
+      <div ref={postureBarRef} className="bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-5 sm:py-2 px-4 text-center sm:whitespace-nowrap">
         SAN FRANCISCO 10:00 PM · NEW YORK 1:00 AM · PARIS 7:00 AM · ABU DHABI 10:00 AM · SINGAPORE 2:00 PM
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300" style={{ top: scrollY > 50 ? 0 : 28 }}>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300" style={{ top: scrollY > 50 ? 0 : postureBarHeight }}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="font-serif text-2xl tracking-tight text-[#1a2332]">
             SLOANE <span className="text-slate-500">/</span> Adler
