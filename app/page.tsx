@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
       {/* Global Posture Bar */}
-      <div className="hidden md:block bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center overflow-hidden">
+      <div className="hidden sm:block bg-[#1a2332] text-[10px] tracking-widest text-slate-400 uppercase font-sans py-2 px-4 text-center overflow-hidden">
         SAN FRANCISCO 10:00 PM · NEW YORK 1:00 AM · PARIS 7:00 AM · ABU DHABI 10:00 AM · SINGAPORE 2:00 PM
       </div>
 
@@ -146,7 +146,7 @@ export default function HomePage() {
               </p>
               <div className="space-y-6 text-slate-600 leading-relaxed">
                 <p>
-                  We were initially engaged to navigate this volatility for corporate stakeholders. The practice expanded when we recognized that private capital—family offices and investment principals—faced the same systemic opacity.
+                  We were initially engaged to navigate this volatility for corporate stakeholders. The practice expanded when we recognized that private capital - family offices and investment principals - faced the same systemic opacity.
                 </p>
                 <p>We bridge the gap between regulatory reality and strategic intent.</p>
               </div>
