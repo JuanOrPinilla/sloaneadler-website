@@ -48,7 +48,25 @@ All notable changes to the Sloane Adler website will be documented in this file.
 
 ---
 
-## Week 3 (Feb 10 - Feb 16): i18n & Language Support
+## Week 3 (Feb 17 - Feb 23): Content Management System (CMS)
+
+### Sanity CMS Integration
+- Integrated Sanity.io headless CMS
+- Created Sanity client configuration (`lib/sanity.ts`)
+- Set up GROQ queries for content fetching
+- Created Perspectives (posts) listing page (`app/[locale]/posts/page.tsx`)
+- Created individual perspective pages (`app/[locale]/posts/[slug]/page.tsx`)
+- Added webhook handler for n8n integration (`app/api/sanity-webhook/route.ts`)
+
+### Content Distribution
+- Implemented webhook to notify n8n on new perspectives
+- Set up automatic content distribution workflow
+- Added elegant serif typography for long-form content
+
+### Dependencies
+- Added `@sanity/client` and `@portabletext/react`
+
+## Week 2 (Feb 10 - Feb 16): i18n & Language Support
 
 ### Internationalization
 - Implemented next-intl with `[locale]` dynamic segment
