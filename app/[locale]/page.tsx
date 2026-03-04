@@ -90,7 +90,6 @@ export default function HomePage() {
                 {link.label}
               </Link>
             ))}
-            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Hamburger */}

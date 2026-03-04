@@ -126,7 +126,6 @@ export default function ContactPage() {
             <Link href="/login" className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors">
               {t("nav.principals") || "Principals"}
             </Link>
-            <LanguageSwitcher />
           </nav>
 
           <button
