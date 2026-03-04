@@ -275,7 +275,7 @@ When forwarded to n8n, the payload is enriched:
     "locale": "en"
   },
   "meta": {
-    "source": "strapi-cms",
+    "source": "cms",
     "site": "sloaneadler",
     "timestamp": "2024-01-15T10:30:00Z",
     "webhookType": "entry.publish",

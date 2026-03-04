@@ -182,7 +182,7 @@ export async function triggerContentWorkflow(
   return triggerWorkflow('content_publish', {
     post,
     meta: {
-      source: 'strapi-cms',
+      source: 'cms',
       site: 'sloaneadler',
       timestamp: new Date().toISOString(),
       webhookType: event,
