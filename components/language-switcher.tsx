@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname } from '@/i18n/routing';
-import { Locale, locales, defaultLocale } from '@/i18n/config';
+import { usePathname, Link } from '@/i18n/routing';
+import { Locale, locales } from '@/i18n/config';
 import { cn } from '@/lib/utils';
 
 const localeNames: Record<Locale, string> = {
@@ -11,22 +11,6 @@ const localeNames: Record<Locale, string> = {
   es: 'Español',
   fr: 'Français',
 };
-
-function getLocalePath(pathname: string, newLocale: string): string {
-  // Remove any existing locale prefix
-  const localesPattern = locales.join('|');
-  const localeRegex = new RegExp(`^/(${localesPattern})(/|$)`);
-  const pathWithoutLocale = pathname.replace(localeRegex, '/');
-  
-  // For default locale (en), don't add prefix when using 'as-needed'
-  if (newLocale === defaultLocale) {
-    return pathWithoutLocale || '/';
-  }
-  
-  // For non-default locales, add the prefix
-  const cleanPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
-  return `/${newLocale}${cleanPath}`;
-}
 
 export function LanguageSwitcher({ 
   variant = 'footer' 
@@ -69,8 +53,9 @@ export function LanguageSwitcher({
       >
         {locales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
-            <a
-              href={getLocalePath(pathname, loc)}
+            <Link
+              href={pathname}
+              locale={loc}
               className={cn(
                 "cursor-pointer hover:text-foreground transition-colors focus:outline-none focus:underline",
                 loc === locale && "font-medium text-foreground"
@@ -79,7 +64,7 @@ export function LanguageSwitcher({
               aria-label={`${t('label')}: ${localeNames[loc]}`}
             >
               {localeNames[loc]}
-            </a>
+            </Link>
             {index < locales.length - 1 && <span>|</span>}
           </span>
         ))}
@@ -95,7 +80,9 @@ export function LanguageSwitcher({
         onChange={(e) => {
           const newLocale = e.target.value as Locale;
           if (newLocale !== locale) {
-            window.location.href = getLocalePath(pathname, newLocale);
+            // Use window.location to navigate with locale change
+            const newPath = `/${newLocale}${pathname}`;
+            window.location.href = newPath;
           }
         }}
         className="bg-transparent border border-border rounded px-2 py-1 text-sm cursor-pointer appearance-none pr-8"
