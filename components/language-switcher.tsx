@@ -1,8 +1,8 @@
 'use client';
 
-import { useTransition, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { Locale, locales } from '@/i18n/config';
 import { cn } from '@/lib/utils';
 
@@ -20,21 +20,11 @@ export function LanguageSwitcher({
   const [mounted, setMounted] = useState(false);
   const locale = useLocale() as Locale;
   const t = useTranslations('locale_switcher');
-  const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  function handleLocaleChange(newLocale: Locale) {
-    if (newLocale === locale) return;
-    
-    startTransition(() => {
-      router.replace(pathname, { locale: newLocale, scroll: false });
-    });
-  }
 
   // Prevent hydration mismatch - render static version on server
   if (!mounted) {
@@ -63,20 +53,19 @@ export function LanguageSwitcher({
       >
         {locales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
-            <button
-              onClick={() => handleLocaleChange(loc)}
-              disabled={isPending}
+            <Link
+              href={pathname}
+              locale={loc}
+              scroll={false}
               className={cn(
                 "cursor-pointer hover:text-foreground transition-colors focus:outline-none focus:underline",
-                loc === locale && "font-medium text-foreground",
-                isPending && "opacity-50 cursor-wait"
+                loc === locale && "font-medium text-foreground"
               )}
               aria-current={loc === locale ? 'true' : undefined}
               aria-label={`${t('label')}: ${localeNames[loc]}`}
-              type="button"
             >
               {localeNames[loc]}
-            </button>
+            </Link>
             {index < locales.length - 1 && <span>|</span>}
           </span>
         ))}
@@ -84,19 +73,33 @@ export function LanguageSwitcher({
     );
   }
 
+  // Inline select variant - uses native select with Link for each option
   return (
-    <select
-      value={locale}
-      onChange={(e) => handleLocaleChange(e.target.value as Locale)}
-      disabled={isPending}
-      className="bg-transparent border border-border rounded px-2 py-1 text-sm cursor-pointer"
-      aria-label={t('label')}
-    >
-      {locales.map((loc) => (
-        <option key={loc} value={loc}>
-          {localeNames[loc]}
-        </option>
-      ))}
-    </select>
+    <div className="relative">
+      <select
+        value={locale}
+        onChange={(e) => {
+          const newLocale = e.target.value as Locale;
+          if (newLocale !== locale) {
+            // Navigate to the same page with new locale
+            const link = document.createElement('a');
+            link.href = `/${newLocale}${pathname === '/' ? '' : pathname}`;
+            link.click();
+          }
+        }}
+        className="bg-transparent border border-border rounded px-2 py-1 text-sm cursor-pointer appearance-none pr-8"
+        aria-label={t('label')}
+        style={{ minWidth: '120px' }}
+      >
+        {locales.map((loc) => (
+          <option key={loc} value={loc}>
+            {localeNames[loc]}
+          </option>
+        ))}
+      </select>
+      <span className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-xs">
+        ▼
+      </span>
+    </div>
   );
 }
