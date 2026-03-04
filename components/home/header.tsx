@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
-import { LanguageSwitcher } from "@/components/language-switcher"
+
 
 interface HeaderProps {
   scrollY: number
@@ -64,7 +64,7 @@ export function Header({ scrollY }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
-            <LanguageSwitcher />
+
           </nav>
 
           {/* Mobile Hamburger */}
