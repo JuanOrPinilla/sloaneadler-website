@@ -4,8 +4,11 @@ import { Analytics } from "@vercel/analytics/next"
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
 import { Inter, Crimson_Pro } from "next/font/google"
+import { SkipLink } from '@/components/skip-link'
+import { AriaAnnouncer } from '@/components/aria-announcer'
 import "../globals.css"
 
 const inter = Inter({
@@ -97,7 +100,7 @@ export default async function LocaleLayout({
   const { locale } = await params
   
   // Validate that the incoming locale is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as Locale)) {
     notFound()
   }
   
@@ -110,8 +113,12 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://sloaneadler.com" />
       </head>
       <body className="font-sans antialiased">
+        <SkipLink />
+        <AriaAnnouncer />
         <NextIntlClientProvider messages={messages} locale={locale}>
-          {children}
+          <main id="main-content" tabIndex={-1}>
+            {children}
+          </main>
         </NextIntlClientProvider>
         <Analytics />
       </body>

@@ -22,8 +22,11 @@ export function Footer() {
             <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
               News
             </Link>
-            <Link href="/policies" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Policies
+            <Link href="/legal/terms" className="text-slate-600 hover:text-[#1a2332] transition-colors">
+              Terms
+            </Link>
+            <Link href="/legal/privacy" className="text-slate-600 hover:text-[#1a2332] transition-colors">
+              Privacy
             </Link>
             <Link href="/correspondence" className="text-slate-600 hover:text-[#1a2332] transition-colors">
               Contact
