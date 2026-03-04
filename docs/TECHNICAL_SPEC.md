@@ -43,7 +43,7 @@ components/
 └── theme-provider.tsx         # Theme context
 
 middleware.ts                  # Auth middleware
-next.config.js                # Next.js configuration
+next.config.mjs                # Next.js configuration
 Dockerfile                    # Container definition
 cloudbuild.yaml               # CI/CD pipeline
 ```
@@ -152,7 +152,7 @@ The site supports multiple languages via the footer selector:
 - Middleware for auth
 
 ## Monitoring
-Health check endpoint: `/api/health`
+Health check endpoint: `/api/health` (Planned but not implemented)
 
 ## Maintenance
 - Node.js 22+ required
