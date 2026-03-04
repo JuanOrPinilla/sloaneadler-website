@@ -28,7 +28,6 @@ Family office and advisory firm website with a sophisticated, institutional aest
 - [Security](#security)
 - [Accessibility](#accessibility)
 - [Project Structure](#project-structure)
-- [Changelog](#changelog)
 
 ---
 
@@ -286,30 +285,6 @@ sloaneadler-website/
 | `lib/db/` | GCP Cloud SQL PostgreSQL connection pool configuration |
 | `database/` | SQL migrations and database setup documentation |
 | `workflows/` | n8n automation workflow JSON files |
-
----
-
-## Changelog
-
-### March 4, 2026
-- Fixed Next.js 16 `cookies()` Promise requirement
-- Added all 3 n8n workflow files
-- Enhanced technical documentation
-
-### March 3, 2026
-- Added password protection
-- Added language selector
-- Added GCP deployment setup
-- Created n8n workflows
-
-### February 14, 2026
-- Updated tagline and navigation
-- Implemented live timezone clocks
-- Updated footer styling
-
-### December 24, 2025
-- Initial repository setup
-- First site launch
 
 ---
 

@@ -2,100 +2,52 @@
 
 ## SLOANE / Adler Website
 
-All notable changes to this project will be documented in this file.
+This document tracks features and capabilities of the project.
 
-## [1.0.0] - 2026-03-04
+## Current Features
 
-### Added
+### Internationalization
 - Multi-language support (English, Spanish, French) via next-intl
-- Password protection with middleware-based auth
-- GCP Cloud SQL database integration
 - Language switcher component in footer
-- Error boundaries (error.tsx, not-found.tsx, global-error.tsx)
-- SEO files (robots.ts, sitemap.ts, manifest.ts)
-- Security headers (CSP, X-Frame-Options, etc.)
-- Health check endpoint (/api/health)
-- Comprehensive documentation in /docs folder
+- Automatic locale detection from cookie or browser preferences
 
-### Changed
-- Moved TECHNICAL_SPEC.md to docs/
-- Updated footer components to use LanguageSwitcher
-- Fixed TypeScript errors in assignments page
-- Replaced hardcoded language buttons with component
+### Authentication & Security
+- Password protection with middleware-based auth
+- HTTP-only session cookies
+- Rate limiting on API endpoints
+- Security headers (CSP, X-Frame-Options, X-Content-Type-Options)
 
-### Fixed
-- Language switcher not working (missing NextIntlClientProvider)
-- Hydration mismatches in LanguageSwitcher
-- Build errors with optional properties
+### Database & Backend
+- GCP Cloud SQL PostgreSQL integration
+- User account management system
+- Contact form persistence
+- Session management
 
-## [0.9.0] - 2026-03-03
-
-### Added
-- n8n workflow files (contact form, email processing, social media)
-- Workflows organized in /workflows folder
-- .env.example with all required variables
-- Database setup documentation
-
-### Changed
-- Removed Supabase references, using GCP Cloud SQL
-- Updated middleware for i18n support
-
-## [0.8.0] - 2026-03-02
-
-### Added
-- Error handling pages (404, error boundary)
+### UI Components
+- shadcn/ui component library
+- Navy/gold institutional aesthetic
+- Global posture bar (5-city time display)
+- Expandable news/insights section
+- Partner portal placeholder
+- Error boundaries (404, error, global-error pages)
 - Loading states
+
+### SEO & Performance
+- Sitemap generation
+- Robots.txt
+- Web manifest
 - Structured data components
+- Next.js Image optimization
 
-## [0.7.0] - 2026-03-01
+### Deployment
+- Docker containerization
+- GCP Cloud Run configuration
+- Health check endpoint
+- Vercel deployment ready
 
-### Added
-- Password protection system
-- /access page for authentication
-- Auth API routes (/api/auth/verify, /api/auth/logout)
-
-## [0.6.0] - 2026-02-28
-
-### Added
-- GCP Cloud Run deployment setup
-- Dockerfile and cloudbuild.yaml
-- next.config.mjs with standalone output
-
-## [0.5.0] - 2026-02-15
-
-### Added
-- Multi-page site structure
-- Field-themed sections
-- Theme toggle (dark/light)
-- World clock component
-
-## [0.4.0] - 2026-02-10
-
-### Added
-- shadcn/ui components
-- Tailwind CSS setup
-- Google Fonts integration
-
-## [0.3.0] - 2026-02-05
-
-### Added
-- Contact form with validation
-- Zod schema validation
-- Rate limiting
-
-## [0.2.0] - 2026-02-01
-
-### Added
-- Next.js 16 setup
-- React 19
-- TypeScript configuration
-
-## [0.1.0] - 2026-01-29
-
-### Added
-- Initial repository setup
-- Basic site structure
-- README.md
+### Automation
+- n8n workflow integration (contact forms, email processing, social media)
+- Webhook support for external services
 
 ---
 

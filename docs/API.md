@@ -90,7 +90,7 @@ Check service health.
 ```json
 {
   "status": "healthy",
-  "timestamp": "2026-03-04T12:00:00Z"
+  "timestamp": "<ISO8601-timestamp>"
 }
 ```
 

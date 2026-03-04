@@ -215,18 +215,18 @@
             "hs_body_preview": "Email from: Subject: Body:",
             "hs_body_preview_html": "<html>\n<head></head>\n<body>\nEmail from: Subject: Body:\n</body>\n</html>",
             "hs_body_preview_is_truncated": "false",
-            "hs_createdate": "2026-03-02T22:33:33.790Z",
-            "hs_lastmodifieddate": "2026-03-02T22:33:33.790Z",
+            "hs_createdate": "<timestamp>",
+            "hs_lastmodifieddate": "<timestamp>",
             "hs_note_body": "Email from: \n\nSubject: \n\nBody:\n",
             "hs_obj_coords": "0-46-105538571606",
             "hs_object_id": "105538571606",
             "hs_object_source": "INTEGRATION",
             "hs_object_source_id": "24916978",
             "hs_object_source_label": "INTEGRATION",
-            "hs_timestamp": "2026-03-02T22:33:33.590Z"
+            "hs_timestamp": "<timestamp>"
           },
-          "createdAt": "2026-03-02T22:33:33.790Z",
-          "updatedAt": "2026-03-02T22:33:33.790Z",
+          "createdAt": "<timestamp>",
+          "updatedAt": "<timestamp>",
           "archived": false,
           "url": "https://app.hubspot.com/contacts/8282691/objects/0-46/views/all/list?filters=%5B%7B%22property%22%3A%22hs_object_id%22%2C%22operator%22%3A%22EQ%22%2C%22value%22%3A%22105538571606%22%7D%5D"
         }
