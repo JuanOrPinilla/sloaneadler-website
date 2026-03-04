@@ -2,10 +2,10 @@
 
 All notable changes to the Sloane Adler website will be documented in this file.
 
-## [1.0.0] - 2025-02-23
+## [1.0.0] - 2026-02-23
 
 ### Timeline
-- **Development Period**: January 21, 2025 - February 23, 2025 (4 weeks)
+- **Development Period**: January 21, 2026 - February 23, 2026 (4 weeks)
 - **Status**: Production Handoff Complete
 
 ---
