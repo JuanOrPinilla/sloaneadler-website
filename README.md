@@ -24,7 +24,8 @@ Family office and advisory firm website with a sophisticated, institutional aest
 - [Development](#development)
 - [Deployment](#deployment)
 - [Environment Variables](#environment-variables)
-- [Automation Workflows](#automation-workflows)
+- [n8n Automation](#n8n-automation)
+- [CMS Integration](#cms-integration)
 - [Security](#security)
 - [Accessibility](#accessibility)
 - [Project Structure](#project-structure)
@@ -78,13 +79,30 @@ User visits site → Middleware checks cookie → No cookie? → Redirect to /ac
 User enters password → POST /api/auth/verify → Sets HTTP-only cookie → Redirect
 ```
 
-### Contact Form Flow
+### Contact Form Flow with n8n
 ```
 Form submission → Client validation (Zod) → POST /api/contact
                                                 ↓
-Rate limit check (5/min per IP) → Server validation → n8n webhook
+Rate limit check → Server validation → lib/n8n.ts → n8n Webhook
                                                 ↓
-Optional: Resend email notification
+                                    ┌───────────┼───────────┐
+                                    ▼           ▼           ▼
+                                 HubSpot     Slack      PostgreSQL
+                                  CRM      Notification   Logs
+```
+
+### Strapi Content Distribution Flow
+```
+Strapi CMS → POST /api/strapi-webhook
+                    ↓
+            Verify webhook secret
+                    ↓
+            lib/n8n.ts → n8n Content Webhook
+                    ↓
+        ┌───────────┼───────────┐
+        ▼           ▼           ▼
+    Social Media  Email      Slack
+    (LinkedIn)  Newsletter  Notification
 ```
 
 ### Theme System
@@ -102,11 +120,11 @@ Optional: Resend email notification
 | Language | TypeScript | 5.x |
 | Styling | Tailwind CSS | 4.1.9 |
 | CMS | Strapi v5 | - |
+| Automation | n8n | - |
 | Icons | Lucide React | ^0.454.0 |
 | Fonts | Google Fonts (next/font) | - |
 | Validation | Zod | ^3.25.76 |
 | Analytics | Vercel Analytics | ^1.3.1 |
-| Automation | n8n | - |
 
 ---
 
@@ -116,6 +134,7 @@ Optional: Resend email notification
 - Node.js 22+
 - npm or pnpm
 - Google Cloud SDK (for GCP deployment)
+- n8n instance (local or cloud)
 
 ### Installation
 ```bash
@@ -177,6 +196,8 @@ gcloud run deploy sloaneadler \
 
 ## Environment Variables
 
+### Core Application
+
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `SITE_PASSWORD` | No | `password123!` | Access password |
@@ -184,13 +205,60 @@ gcloud run deploy sloaneadler \
 | `STRAPI_API_TOKEN` | **Yes** | - | Strapi API authentication token |
 | `RESEND_API_KEY` | No | - | Resend API key |
 | `CONTACT_EMAIL` | No | `correspondence@sloaneadler.com` | Notification email |
-| `N8N_WEBHOOK_URL` | No | - | n8n webhook URL for contact form |
-| `N8N_WEBHOOK_SECRET` | No | - | Webhook secret |
-| `N8N_CONTENT_WEBHOOK_URL` | No | - | n8n webhook for Strapi content |
-| `STRAPI_WEBHOOK_SECRET` | No | - | Secret for verifying Strapi webhooks |
-| `CSRF_SECRET` | No | - | CSRF protection key |
-| `NEXT_PUBLIC_SENTRY_DSN` | No | - | Sentry error tracking DSN |
-| `SENTRY_AUTH_TOKEN` | No | - | Sentry auth token |
+
+### n8n Automation
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `N8N_BASE_URL` | No | n8n instance URL (e.g., `https://automation.sloaneadler.com`) |
+| `N8N_WEBHOOK_URL` | No | Webhook URL for contact forms |
+| `N8N_CONTENT_WEBHOOK_URL` | No | Webhook URL for Strapi content |
+| `N8N_API_KEY` | No | n8n API key for programmatic access |
+| `N8N_WEBHOOK_SECRET` | No | Secret for webhook verification |
+
+### HubSpot CRM Integration
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `HUBSPOT_API_KEY` | No | HubSpot Private App token |
+| `HUBSPOT_PORTAL_ID` | No | HubSpot account portal ID |
+
+### PostgreSQL (n8n Database)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `N8N_DB_HOST` | No | PostgreSQL host |
+| `N8N_DB_PORT` | No | PostgreSQL port (default: 5432) |
+| `N8N_DB_NAME` | No | n8n database name |
+| `N8N_DB_USER` | No | Database user |
+| `N8N_DB_PASSWORD` | No | Database password |
+| `N8N_DATABASE_URL` | No | Full PostgreSQL connection URL |
+
+### Slack Notifications
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `SLACK_WEBHOOK_URL` | No | Incoming webhook URL |
+| `SLACK_CHANNEL` | No | Default channel for notifications |
+| `SLACK_BOT_TOKEN` | No | Bot token for advanced features |
+
+### AWS S3 (Backups)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `AWS_ACCESS_KEY_ID` | No | AWS access key |
+| `AWS_SECRET_ACCESS_KEY` | No | AWS secret key |
+| `AWS_REGION` | No | AWS region (e.g., `us-east-1`) |
+| `AWS_S3_BUCKET_NAME` | No | Backup bucket name |
+
+### Security
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `STRAPI_WEBHOOK_SECRET` | No | Secret for verifying Strapi webhooks |
+| `CSRF_SECRET` | No | CSRF protection key |
+| `UPSTASH_REDIS_REST_URL` | No | Redis URL for distributed rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | No | Redis token |
 
 ### Environment Setup
 
@@ -203,9 +271,122 @@ gcloud run deploy sloaneadler \
 
 3. For Strapi CMS integration, obtain an API token from your Strapi admin panel
 
+4. For n8n, configure webhooks and copy URLs to environment variables
+
 ---
 
-## CMS Integration (Strapi v5)
+## n8n Automation
+
+The website integrates with [n8n](https://n8n.io) for workflow automation, connecting form submissions and content updates with HubSpot, Slack, PostgreSQL, and AWS S3.
+
+### Client Library
+
+The `lib/n8n.ts` module provides utilities for triggering workflows:
+
+```typescript
+import { 
+  triggerContactWorkflow,
+  triggerContentWorkflow,
+  getN8NStatus 
+} from '@/lib/n8n';
+
+// Trigger contact form workflow
+const result = await triggerContactWorkflow(
+  { name: 'John', email: 'john@example.com', inquiryType: 'general', message: 'Hello' },
+  { ipAddress: '1.2.3.4', userAgent: '...' }
+);
+
+// Check n8n configuration
+const status = getN8NStatus();
+```
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/contact` | POST | Contact form with n8n integration |
+| `/api/correspondence` | POST | Detailed HNW inquiry form with lead scoring |
+| `/api/strapi-webhook` | POST | Strapi CMS webhook handler |
+| `/api/n8n/trigger` | POST | Programmatic workflow triggers |
+| `/api/n8n/trigger` | GET | n8n configuration status |
+
+### Workflow Types
+
+#### Contact Form Workflow
+- **Trigger**: Form submission on `/contact`
+- **Rate Limit**: 5 requests/minute
+- **Actions**: HubSpot contact creation, Slack notification, email confirmation
+
+#### Correspondence Workflow
+- **Trigger**: Form submission on `/correspondence`
+- **Rate Limit**: 3 requests/minute
+- **Features**: Lead scoring (0-100), AUM tracking, family office classification
+- **Actions**: HubSpot contact + company, deal creation for high-value leads, priority routing
+
+#### Content Distribution Workflow
+- **Trigger**: Strapi CMS publish events
+- **Actions**: Social media posting, email newsletter, Slack notification
+
+#### Lead Enrichment Workflow
+- **Trigger**: Programmatic via `/api/n8n/trigger`
+- **Actions**: Data enrichment, background checks, company research
+
+### n8n Setup
+
+1. **Deploy n8n:**
+   ```bash
+   docker run -it --rm \
+     --name n8n \
+     -p 5678:5678 \
+     -v ~/.n8n:/home/node/.n8n \
+     n8nio/n8n
+   ```
+
+2. **Create Webhooks:**
+   - Create webhook nodes in n8n for each workflow
+   - Copy webhook URLs to environment variables
+   - Set `N8N_WEBHOOK_SECRET` for security
+
+3. **Import Workflows:**
+   - Import workflow files from `/workflows/` directory
+   - Activate workflows in n8n UI
+   - Test with sample payloads
+
+### Testing
+
+```bash
+# Test contact form
+curl -X POST http://localhost:3000/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Test User",
+    "email": "test@example.com",
+    "inquiryType": "general",
+    "message": "Test message"
+  }'
+
+# Test n8n trigger endpoint
+curl -X POST http://localhost:3000/api/n8n/trigger \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow": "contact_form",
+    "formData": {
+      "name": "Test",
+      "email": "test@example.com",
+      "inquiryType": "general",
+      "message": "Test"
+    }
+  }'
+
+# Check n8n status
+curl http://localhost:3000/api/n8n/trigger
+```
+
+For detailed n8n documentation, see [docs/N8N_INTEGRATION.md](./docs/N8N_INTEGRATION.md).
+
+---
+
+## CMS Integration
 
 The website uses **Strapi v5** as its headless CMS for content management.
 
@@ -218,6 +399,7 @@ Set the following environment variables:
 ```bash
 STRAPI_URL=http://localhost:1337
 STRAPI_API_TOKEN=your_strapi_api_token_here
+STRAPI_WEBHOOK_SECRET=your_webhook_secret_here
 ```
 
 ### Fetching Content
@@ -225,56 +407,36 @@ Content is fetched from Strapi using the REST API:
 - Posts listing: `GET /api/posts?populate=*`
 - Single post: `GET /api/posts/:slug?populate=*`
 
-## Webhook Endpoints
-
 ### Strapi Webhook (`/api/strapi-webhook`)
+
 Receives events from Strapi CMS when content is published/updated.
 
 **Events Handled:**
 - `entry.publish` - New content published
 - `entry.update` - Existing content updated
 - `entry.create` - New entry created
+- `entry.unpublish` - Content unpublished
 
 **Security:**
 - Verifies `x-strapi-webhook-secret` header against `STRAPI_WEBHOOK_SECRET`
 
-**Integration with n8n:**
-- Forwards post data to `N8N_CONTENT_WEBHOOK_URL` for automated distribution
-- Payload includes post metadata, URL, and publish timestamp
-
-### Contact Form Webhook (`/api/contact`)
-Handles contact form submissions and forwards to n8n.
-
-**Rate Limiting:**
-- 5 requests per minute per IP address
-
 **n8n Integration:**
-- Forwards to `N8N_WEBHOOK_URL`
-- Includes form data with CSRF protection
-
-## Automation Workflows
-
-Three n8n workflows included:
-
-| Workflow | File | Purpose |
-|----------|------|---------|
-| Contact Form | `n8n-workflow-contact-form.json` | Process inquiries, family office lead scoring |
-| Email Processing | `n8n-workflow-email-processing.json` | Handle correspondence@ inbox |
-| Social Media | `n8n-workflow-social-media-automation.json` | Family office advisory content automation |
-| Content Distribution | Configured via Strapi webhook | Auto-publish posts to social/email |
-
-**Lead Scoring Criteria**: Optimized for family offices, high-net-worth families, institutional investors, and generational wealth advisory.
+- Forwards post data to `N8N_CONTENT_WEBHOOK_URL`
+- Triggers content distribution workflows
+- Payload includes post metadata, URL, and publish timestamp
 
 ---
 
 ## Security
 
 - ✅ Password protection via Next.js middleware
-- ✅ Rate limiting (5 requests/minute per IP)
+- ✅ Rate limiting (5 requests/minute for contact, 3 for correspondence)
 - ✅ Input validation with Zod
 - ✅ Server-side form processing
 - ✅ HTTP-only session cookies
 - ✅ Secure cookie flags
+- ✅ Webhook secret verification
+- ✅ CSRF protection on forms
 
 ---
 
@@ -317,7 +479,13 @@ sloaneadler-website/
 │   ├── layout.tsx                # Root layout (pass-through)
 │   ├── globals.css               # Global styles
 │   └── api/                      # API routes (non-localized)
-│       ├── contact/route.ts
+│       ├── contact/route.ts      # Contact form with n8n
+│       ├── correspondence/       # Detailed inquiry form
+│       │   └── route.ts
+│       ├── strapi-webhook/       # CMS webhook handler
+│       │   └── route.ts
+│       ├── n8n/trigger/          # n8n workflow triggers
+│       │   └── route.ts
 │       └── auth/
 │           ├── verify/route.ts
 │           └── logout/route.ts
@@ -326,6 +494,7 @@ sloaneadler-website/
 │   └── theme-provider.tsx        # Theme context
 ├── lib/                          # Utility libraries
 │   ├── utils.ts                  # Utilities
+│   ├── n8n.ts                    # n8n client library ⭐
 │   └── db/                       # Database client (GCP Cloud SQL)
 │       └── index.ts              # PostgreSQL pool configuration
 ├── messages/                     # i18n translation files (next-intl)
@@ -339,14 +508,27 @@ sloaneadler-website/
 ├── database/                     # Database migrations and scripts
 │   ├── migrations/               # SQL migration files
 │   └── README.md                 # Database setup instructions
+├── docs/                         # Documentation
+│   └── N8N_INTEGRATION.md        # n8n integration guide ⭐
 ├── middleware.ts                 # Auth middleware + i18n routing
+├── workflows/                    # n8n workflow JSON files
 ├── public/
 │   └── images/                   # Art images
-├── n8n-workflow-*.json          # Workflows
 ├── Dockerfile
 ├── cloudbuild.yaml
 └── next.config.mjs
 ```
+
+### Key Files for n8n Integration
+
+| File | Purpose |
+|------|---------|
+| `lib/n8n.ts` | n8n client library - workflow triggers, status checks |
+| `app/api/n8n/trigger/route.ts` | API endpoint for programmatic workflow triggers |
+| `app/api/contact/route.ts` | Contact form with n8n integration |
+| `app/api/correspondence/route.ts` | Detailed inquiry form with lead scoring |
+| `app/api/strapi-webhook/route.ts` | CMS webhook handler with n8n forwarding |
+| `docs/N8N_INTEGRATION.md` | Complete n8n integration documentation |
 
 ### Key Folders Explained
 
@@ -354,8 +536,10 @@ sloaneadler-website/
 |--------|---------|
 | `messages/` | Internationalization translations (JSON) for English, Spanish, French |
 | `i18n/` | next-intl configuration files for routing and locale management |
+| `lib/` | Utility libraries including n8n client |
 | `lib/db/` | GCP Cloud SQL PostgreSQL connection pool configuration |
 | `database/` | SQL migrations and database setup documentation |
+| `docs/` | Project documentation including n8n integration guide |
 | `workflows/` | n8n automation workflow JSON files |
 
 ---
