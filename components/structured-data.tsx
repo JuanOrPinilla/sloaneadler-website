@@ -26,7 +26,6 @@ export function StructuredData({
   const orgData = type === 'organization' ? {
     ...baseData,
     '@type': 'Organization',
-    '@context': 'https://schema.org',
     name: 'SLOANE / Adler Holdings',
     alternateName: 'SLOANE / Adler',
     url: 'https://sloaneadler.com',
@@ -42,7 +41,7 @@ export function StructuredData({
   } : null
 
   const websiteData = type === 'website' ? {
-    '@context': 'https://schema.org',
+    ...baseData,
     '@type': 'WebSite',
     name: 'SLOANE / Adler',
     url: 'https://sloaneadler.com',
@@ -57,7 +56,7 @@ export function StructuredData({
   } : null
 
   const serviceData = type === 'financialService' ? {
-    '@context': 'https://schema.org',
+    ...baseData,
     '@type': 'FinancialService',
     name: 'SLOANE / Adler Advisory Services',
     provider: {
@@ -103,9 +102,8 @@ export function StructuredData({
   } : null
 
   const webpageData = type === 'webpage' ? {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
     ...baseData,
+    '@type': 'WebPage',
     isPartOf: {
       '@type': 'WebSite',
       name: 'SLOANE / Adler',
