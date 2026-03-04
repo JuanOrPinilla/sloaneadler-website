@@ -234,17 +234,20 @@ Three n8n workflows included:
 ```
 sloaneadler-website/
 ├── app/
-│   ├── page.tsx                  # Home page
-│   ├── layout.tsx                # Root layout
-│   ├── globals.css               # Navy/gold theme
-│   ├── approach/                 # Approach page
-│   ├── investor/                 # Investor relations
-│   ├── news/                     # News/insights
-│   ├── policies/                 # Policies page
-│   ├── correspondence/           # Contact form
-│   ├── login/                    # Partner portal (WIP)
-│   ├── access/                   # Password gate
-│   └── api/                      # API routes
+│   ├── [locale]/                 # i18n locale routes (en, es, fr)
+│   │   ├── page.tsx              # Home page
+│   │   ├── layout.tsx            # Locale layout with i18n providers
+│   │   ├── globals.css           # Navy/gold theme
+│   │   ├── approach/             # Approach page
+│   │   ├── investor/             # Investor relations
+│   │   ├── news/                 # News/insights
+│   │   ├── policies/             # Policies page
+│   │   ├── correspondence/       # Contact form
+│   │   ├── login/                # Partner portal (WIP)
+│   │   └── access/               # Password gate
+│   ├── layout.tsx                # Root layout (pass-through)
+│   ├── globals.css               # Global styles
+│   └── api/                      # API routes (non-localized)
 │       ├── contact/route.ts
 │       └── auth/
 │           ├── verify/route.ts
