@@ -6,12 +6,12 @@ const passwordSchema = z.object({
   password: z.string().min(1),
 });
 
+// Default password for all sites
+const DEFAULT_PASSWORD = "password123!";
+
 function verifyPassword(input: string): boolean {
-  const expectedPassword = process.env.SITE_PASSWORD;
-  if (!expectedPassword) {
-    console.error("SITE_PASSWORD environment variable not set");
-    return false;
-  }
+  // Check env var first, fallback to default
+  const expectedPassword = process.env.SITE_PASSWORD || DEFAULT_PASSWORD;
   return input === expectedPassword;
 }
 

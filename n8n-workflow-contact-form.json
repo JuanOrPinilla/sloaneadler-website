@@ -1,0 +1,196 @@
+{
+  "name": "SLOANE / Adler - Correspondence Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sloaneadler-correspondence",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "Correspondence Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "sloaneadler-correspondence"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "validate-input",
+              "leftValue": "={{ $json.body.formData.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "validate-node",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Calculate priority score based on inquiry type and referral\nconst formData = $input.first().json.body.formData;\nconst inquiryType = formData.inquiryType;\nconst referralSource = formData.referralSource || '';\n\nlet priorityScore = 0;\n\n// Score based on inquiry type\nif (inquiryType === 'advisory') priorityScore += 40;\nif (inquiryType === 'access') priorityScore += 35;\nif (inquiryType === 'press') priorityScore += 30;\nif (inquiryType === 'general') priorityScore += 20;\n\n// Score based on referral source (introductions score higher)\nif (referralSource && referralSource.length > 0) {\n  priorityScore += 25;\n}\n\n// Cap at 100\npriorityScore = Math.min(priorityScore, 100);\n\nreturn [{\n  json: {\n    ...$input.first().json,\n    priorityScore,\n    priorityTier: priorityScore >= 70 ? 'High' : priorityScore >= 40 ? 'Medium' : 'Standard'\n  }\n}];"
+      },
+      "id": "priority-node",
+      "name": "Calculate Priority",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "correspondence@sloaneadler.com",
+        "toEmail": "={{ $json.body.formData.email }}",
+        "subject": "Your correspondence has been received - SLOANE / Adler",
+        "text": "={{ 'Dear ' + $json.body.formData.name + ',\\n\\nThank you for your correspondence to SLOANE / Adler. We have received your inquiry regarding ' + $json.body.formData.inquiryType + '.\\n\\nAll correspondence is treated with discretion and will be reviewed accordingly.\\n\\nBest regards,\\nSLOANE / Adler' }}",
+        "options": {}
+      },
+      "id": "email-confirmation-node",
+      "name": "Send Acknowledgment",
+      "type": "n8n-nodes-base.resend",
+      "typeVersion": 1,
+      "position": [850, 200],
+      "credentials": {
+        "resendApi": {
+          "id": "resend-credentials",
+          "name": "Resend API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "correspondence@sloaneadler.com",
+        "toEmail": "correspondence@sloaneadler.com",
+        "subject": "=New Correspondence: {{ $json.body.formData.inquiryType }} - {{ $json.body.formData.name }}",
+        "text": "={{ 'New Correspondence Received\\n\\nName: ' + $json.body.formData.name + '\\nOrganization: ' + ($json.body.formData.organization || 'Not provided') + '\\nEmail: ' + $json.body.formData.email + '\\nInquiry Type: ' + $json.body.formData.inquiryType + '\\nReferral Source: ' + ($json.body.formData.referralSource || 'Not provided') + '\\nPriority Score: ' + $json.priorityScore + ' (' + $json.priorityTier + ')\\n\\nMessage:\\n' + $json.body.formData.message + '\\n\\nSubmitted: ' + $json.body.meta.timestamp }}",
+        "options": {}
+      },
+      "id": "email-notification-node",
+      "name": "Send Internal Alert",
+      "type": "n8n-nodes-base.resend",
+      "typeVersion": 1,
+      "position": [850, 400],
+      "credentials": {
+        "resendApi": {
+          "id": "resend-credentials",
+          "name": "Resend API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond-success-node",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\": \"Invalid input\"}",
+        "options": {
+          "statusCode": 400
+        }
+      },
+      "id": "respond-error-node",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [450, 500]
+    }
+  ],
+  "connections": {
+    "Correspondence Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input": {
+      "main": [
+        [
+          {
+            "node": "Calculate Priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Priority": {
+      "main": [
+        [
+          {
+            "node": "Send Acknowledgment",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Internal Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Acknowledgment": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Internal Alert": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["sloaneadler", "correspondence", "family-office"]
+}

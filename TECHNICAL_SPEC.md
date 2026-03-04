@@ -3,6 +3,10 @@
 ## Overview
 Family office and advisory firm website with secure correspondence forms and password protection.
 
+## Default Access Credentials
+- **Password:** `password123!`
+- Can be overridden by setting `SITE_PASSWORD` environment variable
+
 ## Architecture
 
 ### Tech Stack
@@ -13,6 +17,7 @@ Family office and advisory firm website with secure correspondence forms and pas
 - **UI Components**: shadcn/ui (New York style)
 - **Authentication**: Custom middleware-based password protection
 - **Form Handling**: Server-side API routes with Zod validation
+- **Email**: Resend integration ready
 - **Deployment**: Configured for GCP Cloud Run
 
 ### Project Structure
@@ -50,7 +55,7 @@ cloudbuild.yaml               # CI/CD pipeline
 2. Middleware checks for `site_session` cookie
 3. If missing/invalid, redirect to `/access`
 4. User submits password to `/api/auth/verify`
-5. Server validates against `SITE_PASSWORD` env var
+5. Server validates against password (default: "password123!")
 6. On success, sets HTTP-only `site_session` cookie
 7. User redirected to original destination
 
@@ -63,11 +68,16 @@ cloudbuild.yaml               # CI/CD pipeline
 
 ### Environment Variables
 ```bash
-SITE_PASSWORD              # Required: Access password
-N8N_WEBHOOK_URL           # Optional: n8n webhook endpoint
-N8N_WEBHOOK_SECRET        # Optional: Webhook verification
-RESEND_API_KEY            # Optional: Email API key
-CONTACT_EMAIL             # Optional: Notification email
+# Optional: Override default password
+SITE_PASSWORD=your_custom_password
+
+# Required for email notifications
+RESEND_API_KEY=re_your_api_key
+CONTACT_EMAIL=correspondence@sloaneadler.com
+
+# Optional: n8n webhook
+N8N_WEBHOOK_URL=https://your-n8n.com/webhook/contact-form
+N8N_WEBHOOK_SECRET=your-webhook-secret
 ```
 
 ## API Endpoints
@@ -78,7 +88,7 @@ Authenticates user and sets session cookie.
 **Request:**
 ```json
 {
-  "password": "string"
+  "password": "password123!"
 }
 ```
 
@@ -120,15 +130,20 @@ gcloud builds submit --config cloudbuild.yaml
 gcloud run deploy sloaneadler \
   --source . \
   --region=us-central1 \
-  --set-env-vars=SITE_PASSWORD=yourpassword \
   --allow-unauthenticated
 ```
 
-### Environment Setup
-1. Create `.env` from `.env.example`
-2. Set `SITE_PASSWORD` (required)
-3. Configure n8n webhook (optional)
-4. Set up Resend API key (optional)
+### Email Setup (Resend)
+1. Sign up at https://resend.com
+2. Create API key
+3. Set `RESEND_API_KEY` environment variable
+4. Configure `CONTACT_EMAIL` for notifications
+
+## Languages
+The site supports multiple languages via the footer selector:
+- English (default)
+- Spanish
+- French
 
 ## Performance Notes
 - Home page is large (435 lines) - candidate for code splitting

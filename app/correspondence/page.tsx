@@ -275,8 +275,17 @@ export default function CorrespondencePage() {
             </nav>
           </div>
 
-          <div className="text-sm text-slate-500 text-center md:text-left">
-            {"© SLOANE / Adler Holdings. Confidential and proprietary."}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-slate-500">
+              {"© SLOANE / Adler Holdings. Confidential and proprietary."}
+            </p>
+            <div className="flex items-center gap-2 text-sm text-slate-500">
+              <button className="hover:text-[#1a2332] transition-colors font-medium text-[#1a2332]">English</button>
+              <span>|</span>
+              <button className="hover:text-[#1a2332] transition-colors">Español</button>
+              <span>|</span>
+              <button className="hover:text-[#1a2332] transition-colors">Français</button>
+            </div>
           </div>
         </div>
       </footer>
