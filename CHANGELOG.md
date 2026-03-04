@@ -2,90 +2,60 @@
 
 All notable changes to the Sloane Adler website will be documented in this file.
 
-## [Unreleased] - 2025-02-22
-
-### Added
-- Implemented Strapi v5 CMS integration for enhanced content management
-- Added Strapi webhook integration with n8n for automated content distribution
-- Created Contact page (`/contact`) with general inquiry form
-- Implemented API endpoint `/api/strapi-webhook` for CMS event handling
-- Added environment variable `N8N_CONTENT_WEBHOOK_URL` for content publish notifications
-- Added environment variable `STRAPI_WEBHOOK_SECRET` for webhook security
-
-## [1.0.0] - 2026-02-23
+## [1.0.0] - 2025-02-23
 
 ### Timeline
-- **Development Period**: January 21, 2026 - February 23, 2026 (4 weeks)
+- **Development Period**: January 21, 2025 - February 23, 2025 (4 weeks)
 - **Status**: Production Handoff Complete
 
 ---
 
-## Week 4 (Feb 17 - Feb 23): Production Handoff & Final Polish
+## Week 4 (Feb 17 - Feb 23): CMS Integration & Production Polish
 
-### Security & Performance
-- Added HSTS headers with `max-age=31536000; includeSubDomains; preload`
-- Implemented CSRF protection infrastructure (`lib/csrf.ts`)
-- Added Redis-based rate limiting (`lib/rate-limit.ts`)
-- Created Sentry error tracking infrastructure (instrumentation files)
-
-### Accessibility (Major Improvements)
-- Added skip-to-content link component (`components/skip-link.tsx`)
-- Implemented ARIA live regions (`components/aria-announcer.tsx`)
-- Added reduced-motion support CSS and `useReducedMotion()` hook
-- **Fixed all form label associations** (added `htmlFor`/`id` links)
-- **Added focus-visible indicators** (replaced `outline-none` with `focus-visible:ring-2`)
-- **Fixed semantic landmark regions** (`<main id="main-content">`)
-- Added `aria-required`, `aria-busy`, `aria-label` attributes
-
-### Legal & Compliance
-- Created comprehensive Terms of Service page (`app/[locale]/legal/terms/page.tsx`)
-- Created comprehensive Privacy Policy page (`app/[locale]/legal/privacy/page.tsx`)
-- Updated footer with legal links (Terms, Privacy)
-
-### Code Quality
-- **Major refactor**: Split 440-line `page.tsx` into 8 component files:
-  - `components/home/hero-section.tsx`
-  - `components/home/fracturing-section.tsx`
-  - `components/home/philosophy-section.tsx`
-  - `components/home/practice-section.tsx`
-  - `components/home/engagement-section.tsx`
-  - `components/home/domains-section.tsx`
-  - `components/home/long-view-section.tsx`
-  - `components/home/velvet-rope.tsx`
-- Fixed TypeScript type safety (`as any` → `as Locale`)
-- Added global error boundary (`app/global-error.tsx`)
-- Fixed raw `<img>` to use Next.js `<Image>` component
-
----
-
-## Week 3 (Feb 17 - Feb 23): Content Management System (CMS)
-
-### Sanity CMS Integration
-- Integrated Sanity.io headless CMS
-- Created Sanity client configuration (`lib/sanity.ts`)
-- Set up GROQ queries for content fetching
-- Created Perspectives (posts) listing page (`app/[locale]/posts/page.tsx`)
-- Created individual perspective pages (`app/[locale]/posts/[slug]/page.tsx`)
-- Added webhook handler for n8n integration (`app/api/sanity-webhook/route.ts`)
-
-### Content Distribution
-- Implemented webhook to notify n8n on new perspectives
+### Content Management
+- Implemented Strapi v5 CMS integration
+- Added Strapi webhook integration with n8n
+- Created Perspectives (posts) listing page
+- Created individual perspective pages
 - Set up automatic content distribution workflow
 - Added elegant serif typography for long-form content
 
-### Dependencies
-- Added `@sanity/client` and `@portabletext/react`
+### Security & Performance
+- Added HSTS headers
+- Implemented CSRF protection infrastructure
+- Added Redis-based rate limiting
+- Created Sentry error tracking infrastructure
 
-## Week 2 (Feb 10 - Feb 16): i18n & Language Support
+### Accessibility
+- Added skip-to-content link component
+- Implemented ARIA live regions
+- Added reduced-motion support
+- Fixed all form label associations
+- Added focus-visible indicators
+- Fixed semantic landmark regions
+- Added aria-required, aria-busy, aria-label attributes
+
+### Legal & Compliance
+- Created comprehensive Terms of Service page
+- Created comprehensive Privacy Policy page
+- Updated footer with legal links
+
+### Code Quality
+- Major refactor: Split 440-line page into 8 component files
+- Fixed TypeScript type safety
+- Added global error boundary
+- Fixed raw img to use Next.js Image component
+
+---
+
+## Week 3 (Feb 10 - Feb 16): i18n & Language Support
 
 ### Internationalization
-- Implemented next-intl with `[locale]` dynamic segment
+- Implemented next-intl with dynamic locale segments
 - Added language switcher component with globe icon
-- Created i18n routing configuration (`i18n/routing.ts`)
-- Added translation files for EN, ES, FR (`messages/`)
-- Implemented `localePrefix: 'as-needed'` strategy
-
-### Content
+- Created i18n routing configuration
+- Added translation files for EN, ES, FR
+- Implemented localePrefix strategy
 - Updated all pages for locale-aware routing
 - Added LanguageSwitcher to header and footer
 
@@ -95,54 +65,55 @@ All notable changes to the Sloane Adler website will be documented in this file.
 
 ### Authentication
 - Implemented password protection middleware
-- Added session cookie validation (`site_session`)
-- Created `/access` password gate page
-- Created `/login` principals page
+- Added session cookie validation
+- Created password gate page
+- Created login principals page
 - Added secure logout functionality
-- Created API auth endpoints (`/api/auth/verify`, `/api/auth/logout`)
+- Created API auth endpoints
 
 ### Security Headers
 - Added comprehensive security headers middleware
-- Implemented Content Security Policy (CSP)
-- Added X-Frame-Options, X-Content-Type-Options, X-XSS-Protection
+- Implemented Content Security Policy
+- Added X-Frame-Options, X-Content-Type-Options
 - Configured Referrer-Policy and Permissions-Policy
 
 ### Content
 - Added contact form (Correspondence page)
+- Created Contact page with general inquiry form
 - Implemented webhook integration for form submissions
 - Created database schema for contact submissions
 
 ---
 
-## Week 1 (Jan 21 - Jan 27): Project Setup & Foundation
+## Week 1 (Jan 21 - Jan 27): Foundation & Setup
 
 ### Project Initialization
 - Initialized Next.js 16 project with App Router
 - Configured TypeScript with strict mode
-- Set up Tailwind CSS with custom configuration
+- Set up Tailwind CSS
 - Configured Inter + Crimson Pro font stack
 
 ### Design System
 - Implemented custom typography system
-- Created Sloane Adler brand colors (#1a2332, #b8a07e)
+- Created Sloane Adler brand colors
 - Set up serif/sans-serif font pairing
 - Added global time display (posture bar)
 
 ### Components
 - Created header with global time display
-- Implemented world time zones (SF, NY, Paris, Abu Dhabi, Singapore)
+- Implemented world time zones
 - Added mobile responsive hamburger menu
 - Created footer with navigation
 
 ### Build & Deploy
 - Created Dockerfile for containerization
 - Added cloudbuild.yaml for GCP deployment
-- Configured next.config.mjs with standalone output
+- Configured next.config.mjs
 
 ### SEO & Metadata
 - Created manifest.ts for PWA support
-- Added robots.ts for search engine directives
-- Implemented sitemap.ts generation
+- Added robots.ts
+- Implemented sitemap.ts
 - Added OpenGraph and Twitter card metadata
 
 ### Pages
@@ -150,7 +121,7 @@ All notable changes to the Sloane Adler website will be documented in this file.
 - Approach page
 - Investor page
 - News page
-- Correspondence (Contact) page
+- Correspondence page
 - Login page
 
 ---
@@ -174,7 +145,7 @@ All notable changes to the Sloane Adler website will be documented in this file.
 SITE_PASSWORD=your-secure-password
 
 # CSRF Protection
-CSRF_SECRET=your-super-secret-csrf-key-min-32-chars-long
+CSRF_SECRET=your-super-secret-csrf-key
 
 # Database
 DATABASE_URL=postgresql://user:pass@host:port/db
@@ -185,11 +156,11 @@ CONTACT_EMAIL=contact@sloaneadler.com
 
 # Webhook (n8n)
 N8N_WEBHOOK_URL=https://n8n.your-domain.com/webhook/contact
-N8N_WEBHOOK_SECRET=your-webhook-secret
+N8N_WEBHOOK_SECRET=your-secret
 
-# Redis (Optional - for production rate limiting)
+# Redis (Optional)
 UPSTASH_REDIS_REST_URL=https://your-instance.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-token-here
+UPSTASH_REDIS_REST_TOKEN=your-token
 
 # Sentry (Optional)
 NEXT_PUBLIC_SENTRY_DSN=https://xxx@xxx.ingest.us.sentry.io/xxx
@@ -202,7 +173,7 @@ SENTRY_AUTH_TOKEN=sntrys_xxx
 
 ## Future Enhancements
 
-- Enable Sentry error tracking (uncomment instrumentation files)
-- Install @vercel/speed-insights for performance monitoring
-- Add Redis rate limiting for distributed deployments
+- Enable Sentry error tracking
+- Install @vercel/speed-insights
+- Add Redis rate limiting
 - Consider implementing art collection CMS
