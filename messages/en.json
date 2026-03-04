@@ -9,10 +9,14 @@
     "investor": "Investor",
     "news": "News",
     "policies": "Policies",
-    "correspondence": "Correspondence"
+    "correspondence": "Correspondence",
+    "principals": "Principals",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "contact": "Contact"
   },
   "footer": {
-    "copyright": "© {year} SLOANE / Adler",
+    "copyright": "© {year} SLOANE / Adler Holdings. Confidential and proprietary.",
     "rights": "All rights reserved.",
     "language": "Language"
   },
@@ -37,5 +41,66 @@
     "submit": "Submit",
     "cancel": "Cancel",
     "loading": "Loading..."
+  },
+  "hero": {
+    "title": "Where Capital Stops Solving Problems.",
+    "subtitle": "Complexity expands faster than internal leadership. Exposure increases without warning. Decisions carry weight beyond the balance sheet. We exist at those moments."
+  },
+  "fracturing": {
+    "label": "The Fracturing",
+    "title": "Sloane / Adler emerged during a period of intense trade and regulatory fracturing.",
+    "paragraph1": "We were initially engaged to navigate this volatility for corporate stakeholders. The practice expanded when we recognized that private capital - family offices and investment principals - faced the same systemic opacity.",
+    "paragraph2": "We bridge the gap between regulatory reality and strategic intent.",
+    "artwork": "Luc Tuymans, The Conversation, 1995"
+  },
+  "philosophy": {
+    "label": "The Quiet Operator",
+    "title": "We operate across governments, institutions, and markets, where discretion and experience matter more than volume.",
+    "subtitle": "We step in when families and enterprises step into visibility without institutional muscle memory."
+  },
+  "practice": {
+    "label": "Our Practice",
+    "title": "Capital",
+    "capital_desc": "Portfolio construction, allocation oversight, and inter-generational capital planning.",
+    "reputation": "Reputation",
+    "reputation_desc": "Narrative integrity, institutional positioning, and response architecture.",
+    "stewardship": "Stewardship",
+    "stewardship_desc": "Governance design, trustee counsel, and continuity planning.",
+    "state_policy": "State & Policy",
+    "state_policy_desc": "Sovereign advisory and regulatory navigation at the threshold of public and private power.",
+    "enterprise": "Enterprise",
+    "enterprise_desc": "Strategic counsel for founders, boards, and leadership in transition."
+  },
+  "engagement": {
+    "label": "Engagement",
+    "title": "We work with a limited number of families, enterprises, and institutions.",
+    "paragraph1": "Engagements are confidential, long-horizon, and entered by mutual election.",
+    "paragraph2": "Relationships are structured for continuity, not transaction.",
+    "artwork": "Gerhard Richter, Oil on Alu Dibond, 1999"
+  },
+  "domains": {
+    "label": "Domains of Counsel",
+    "subtitle": "Where we provide guidance and structure.",
+    "item1": "Cross-border capital alignment",
+    "item2": "Reputation under scrutiny",
+    "item3": "Leadership transition",
+    "item4": "State and jurisdictional exposure",
+    "item5": "Enterprise continuity",
+    "item6": "Inter-generational stewardship"
+  },
+  "longView": {
+    "label": "The Long View",
+    "phase1_title": "Introduction",
+    "phase1_desc": "Through established counsel",
+    "phase2_title": "Alignment",
+    "phase2_desc": "Mutual understanding of scope",
+    "phase3_title": "Counsel",
+    "phase3_desc": "Ongoing advisory partnership",
+    "phase4_title": "Endurance",
+    "phase4_desc": "Multi-generational continuity"
+  },
+  "velvetRope": {
+    "text": "Sloane / Adler accepts new mandates by introduction only. To verify a principal or request a secure file transfer, please contact us.",
+    "contact_link": "contact us"
   }
 }

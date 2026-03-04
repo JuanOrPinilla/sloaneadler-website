@@ -9,10 +9,14 @@
     "investor": "Inversionista",
     "news": "Noticias",
     "policies": "Políticas",
-    "correspondence": "Correspondencia"
+    "correspondence": "Correspondencia",
+    "principals": "Principales",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "contact": "Contacto"
   },
   "footer": {
-    "copyright": "© {year} SLOANE / Adler",
+    "copyright": "© {year} SLOANE / Adler Holdings. Confidencial y propietario.",
     "rights": "Todos los derechos reservados.",
     "language": "Idioma"
   },
@@ -33,9 +37,70 @@
   "common": {
     "read_more": "Leer más",
     "contact_us": "Contáctenos",
-    "learn_more": "Más información",
+    "learn_more": "Aprender más",
     "submit": "Enviar",
     "cancel": "Cancelar",
     "loading": "Cargando..."
+  },
+  "hero": {
+    "title": "Donde el Capital Deja de Resolver Problemas.",
+    "subtitle": "La complejidad se expande más rápido que el liderazgo interno. La exposición aumenta sin advertencia. Las decisiones tienen un peso más allá del balance. Existimos en esos momentos."
+  },
+  "fracturing": {
+    "label": "La Fractura",
+    "title": "Sloane / Adler surgió durante un período de intensa fractura comercial y regulatoria.",
+    "paragraph1": "Inicialmente nos contrataron para navegar esta volatilidad para partes interesadas corporativas. La práctica se expandió cuando reconocimos que el capital privado - las oficinas familiares y los principales inversionistas - enfrentaban la misma opacidad sistémica.",
+    "paragraph2": "Cerramos la brecha entre la realidad regulatoria y la intención estratégica.",
+    "artwork": "Luc Tuymans, The Conversation, 1995"
+  },
+  "philosophy": {
+    "label": "El Operador Silencioso",
+    "title": "Operamos a través de gobiernos, instituciones y mercados, donde la discreción y la experiencia importan más que el volumen.",
+    "subtitle": "Intervenimos cuando las familias y las empresas entran en visibilidad sin memoria institucional."
+  },
+  "practice": {
+    "label": "Nuestra Práctica",
+    "title": "Capital",
+    "capital_desc": "Construcción de cartera, supervisión de asignación y planificación de capital intergeneracional.",
+    "reputation": "Reputación",
+    "reputation_desc": "Integridad narrativa, posicionamiento institucional y arquitectura de respuesta.",
+    "stewardship": "Administración",
+    "stewardship_desc": "Diseño de gobernanza, asesoría de fiduciarios y planificación de continuidad.",
+    "state_policy": "Estado y Política",
+    "state_policy_desc": "Asesoría soberana y navegación regulatoria en el umbral del poder público y privado.",
+    "enterprise": "Empresa",
+    "enterprise_desc": "Asesoramiento estratégico para fundadores, juntas y liderazgo en transición."
+  },
+  "engagement": {
+    "label": "Compromiso",
+    "title": "Trabajamos con un número limitado de familias, empresas e instituciones.",
+    "paragraph1": "Los compromisos son confidenciales, de largo horizonte y se inician por elección mutua.",
+    "paragraph2": "Las relaciones se estructuran para la continuidad, no la transacción.",
+    "artwork": "Gerhard Richter, Oil on Alu Dibond, 1999"
+  },
+  "domains": {
+    "label": "Ámbitos de Asesoría",
+    "subtitle": "Donde proporcionamos orientación y estructura.",
+    "item1": "Alineación de capital transfronterizo",
+    "item2": "Reputación bajo escrutinio",
+    "item3": "Transición de liderazgo",
+    "item4": "Exposición estatal y jurisdiccional",
+    "item5": "Continuidad empresarial",
+    "item6": "Administración intergeneracional"
+  },
+  "longView": {
+    "label": "La Visión a Largo Plazo",
+    "phase1_title": "Introducción",
+    "phase1_desc": "A través de asesores establecidos",
+    "phase2_title": "Alineación",
+    "phase2_desc": "Comprensión mutua del alcance",
+    "phase3_title": "Asesoría",
+    "phase3_desc": "Asociación asesora continua",
+    "phase4_title": "Resistencia",
+    "phase4_desc": "Continuidad multigeneracional"
+  },
+  "velvetRope": {
+    "text": "Sloane / Adler acepta nuevos mandatos solo por presentación. Para verificar un principal o solicitar una transferencia de archivos segura, por favor contáctenos.",
+    "contact_link": "contáctenos"
   }
 }
