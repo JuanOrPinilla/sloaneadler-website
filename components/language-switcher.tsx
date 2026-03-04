@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { Locale, locales } from '@/i18n/config';
@@ -17,11 +17,16 @@ export function LanguageSwitcher({
 }: { 
   variant?: 'footer' | 'inline' 
 }) {
+  const [mounted, setMounted] = useState(false);
   const locale = useLocale() as Locale;
   const t = useTranslations('locale_switcher');
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function handleLocaleChange(newLocale: Locale) {
     if (newLocale === locale) return;
@@ -29,6 +34,25 @@ export function LanguageSwitcher({
     startTransition(() => {
       router.replace(pathname, { locale: newLocale });
     });
+  }
+
+  // Prevent hydration mismatch - render static version on server
+  if (!mounted) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        {locales.map((loc, index) => (
+          <span key={loc} className="flex items-center gap-2">
+            <span className={cn(
+              "hover:text-foreground transition-colors",
+              loc === locale && "font-medium text-foreground"
+            )}>
+              {localeNames[loc]}
+            </span>
+            {index < locales.length - 1 && <span>|</span>}
+          </span>
+        ))}
+      </div>
+    );
   }
 
   if (variant === 'footer') {

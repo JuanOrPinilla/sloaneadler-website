@@ -1,5 +1,7 @@
 "use client"
 
+import { LanguageSwitcher } from "@/components/language-switcher"
+
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -428,13 +430,7 @@ export default function HomePage() {
           <div className="text-sm text-slate-500 text-center md:text-left">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
               <p>{"© SLOANE / Adler Holdings. Confidential and proprietary."}</p>
-              <div className="flex items-center gap-2">
-                <button className="hover:text-[#1a2332] transition-colors font-medium text-[#1a2332]">English</button>
-                <span>|</span>
-                <button className="hover:text-[#1a2332] transition-colors">Español</button>
-                <span>|</span>
-                <button className="hover:text-[#1a2332] transition-colors">Français</button>
-              </div>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>

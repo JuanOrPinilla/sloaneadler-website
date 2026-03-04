@@ -1,5 +1,7 @@
 "use client"
 
+import { LanguageSwitcher } from "@/components/language-switcher"
+
 import type React from "react"
 
 import { useState } from "react"

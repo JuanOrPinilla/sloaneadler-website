@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 import { Inter, Crimson_Pro } from "next/font/google"
 import "./globals.css"
 
@@ -82,11 +84,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const messages = await getMessages()
+  
   return (
     <html lang="en" className={`${inter.variable} ${crimsonPro.variable}`}>
       <head>
@@ -94,7 +98,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://sloaneadler.com" />
       </head>
       <body className="font-sans antialiased">
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>
