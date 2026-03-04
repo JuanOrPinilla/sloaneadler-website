@@ -2,6 +2,25 @@
 
 All notable changes to the Sloane Adler website will be documented in this file.
 
+## [Unreleased] - 2025-03-04
+
+### Changed
+- Migrated from Sanity CMS to Strapi v5 for content management
+- Updated CMS integration architecture with new webhook endpoints
+- Deprecated Sanity client and GROQ queries in favor of Strapi REST API
+
+### Added
+- Strapi webhook integration with n8n for automated content distribution
+- Contact page (`/contact`) with general inquiry form
+- New API endpoint: `/api/strapi-webhook` for Strapi CMS events
+- Environment variable `N8N_CONTENT_WEBHOOK_URL` for content publish notifications
+- Environment variable `STRAPI_WEBHOOK_SECRET` for webhook security
+
+### Removed
+- Sanity CMS client configuration (`lib/sanity.ts`)
+- Sanity webhook handler (`/api/sanity-webhook`)
+- Sanity-specific environment variables (replaced with Strapi equivalents)
+
 ## [1.0.0] - 2026-02-23
 
 ### Timeline

@@ -1,7 +1,8 @@
-import { sanityClient, queries, getSanityImageUrl } from '@/lib/sanity'
+import { getPostBySlug } from '@/lib/strapi'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { StrapiBlocksRenderer } from '@/components/strapi-blocks-renderer'
 
 interface PostPageProps {
   params: Promise<{ slug: string; locale: string }>
@@ -9,7 +10,7 @@ interface PostPageProps {
 
 export async function generateMetadata({ params }: PostPageProps) {
   const { slug } = await params
-  const post = await sanityClient.fetch(queries.postBySlug, { slug })
+  const post = await getPostBySlug(slug)
 
   if (!post) {
     return { title: 'Not Found' }
@@ -23,13 +24,11 @@ export async function generateMetadata({ params }: PostPageProps) {
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params
-  const post = await sanityClient.fetch(queries.postBySlug, { slug })
+  const post = await getPostBySlug(slug)
 
   if (!post) {
     notFound()
   }
-
-  const imageUrl = post.coverImage ? getSanityImageUrl(post.coverImage.asset._ref) : null
 
   return (
     <main className="min-h-screen bg-white text-[#1a2332] pt-32 pb-24">
@@ -50,8 +49,8 @@ export default async function PostPage({ params }: PostPageProps) {
               month: 'long',
               day: 'numeric'
             })}</span>
-            {post.categories?.map((cat: any) => (
-              <span key={cat.slug.current} className="text-[#b8a07e]">
+            {post.categories?.map((cat) => (
+              <span key={cat.slug} className="text-[#b8a07e]">
                 {cat.title}
               </span>
             ))}
@@ -67,10 +66,10 @@ export default async function PostPage({ params }: PostPageProps) {
         </header>
 
         {/* Cover Image */}
-        {imageUrl && (
+        {post.coverImage && (
           <div className="relative aspect-[16/9] mb-12 overflow-hidden">
             <Image
-              src={imageUrl}
+              src={post.coverImage}
               alt={post.title}
               fill
               className="object-cover"
@@ -81,24 +80,11 @@ export default async function PostPage({ params }: PostPageProps) {
 
         {/* Content */}
         <div className="prose prose-lg prose-slate max-w-none font-serif">
-          {post.content && (
-            <div className="space-y-6 text-slate-700 leading-relaxed">
-              {post.content.map((block: any, index: number) => {
-                if (block._type === 'block') {
-                  return (
-                    <p key={index} className="text-lg">
-                      {block.children?.map((child: any) => child.text).join('')}
-                    </p>
-                  )
-                }
-                return null
-              })}
-            </div>
-          )}
+          {post.content && <StrapiBlocksRenderer content={post.content} />}
         </div>
 
         {/* Tags */}
-        {post.tags?.length > 0 && (
+        {post.tags && post.tags.length > 0 && (
           <div className="mt-16 pt-8 border-t border-slate-200">
             <div className="flex flex-wrap gap-3">
               {post.tags.map((tag: string) => (

@@ -1,6 +1,5 @@
-import { sanityClient, queries, getSanityImageUrl } from '@/lib/sanity'
+import { getPosts } from '@/lib/strapi'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export const metadata = {
   title: 'News & Insights | SLOANE / Adler',
@@ -8,7 +7,7 @@ export const metadata = {
 }
 
 export default async function PostsPage() {
-  const posts = await sanityClient.fetch(queries.allPosts)
+  const posts = await getPosts()
 
   return (
     <main className="min-h-screen bg-white text-[#1a2332] pt-32 pb-24">
@@ -25,8 +24,8 @@ export default async function PostsPage() {
 
         {/* Posts List */}
         <div className="space-y-12">
-          {posts?.map((post: any) => (
-            <PostItem key={post._id} post={post} />
+          {posts?.map((post) => (
+            <PostItem key={post.id} post={post} />
           ))}
         </div>
 
@@ -40,10 +39,21 @@ export default async function PostsPage() {
   )
 }
 
-function PostItem({ post }: { post: any }) {
+interface PostItemProps {
+  post: {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt?: string;
+    publishedAt: string;
+    categories?: Array<{ id: number; title: string; slug: string }>;
+  };
+}
+
+function PostItem({ post }: PostItemProps) {
   return (
     <article className="group border-b border-slate-200 pb-12">
-      <Link href={`/posts/${post.slug.current}`} className="block">
+      <Link href={`/posts/${post.slug}`} className="block">
         <div className="flex items-start justify-between gap-8">
           <div className="flex-1">
             <div className="flex items-center gap-4 text-xs text-slate-500 uppercase tracking-wider mb-3">

@@ -49,7 +49,8 @@ Family office and advisory firm website with a sophisticated, institutional aest
 | Investor | `/investor` | Investor relations (Coming Soon for existing) |
 | News | `/news` | News/insights with expandable posts |
 | Policies | `/policies` | Confidentiality, referral, independence |
-| Correspondence | `/correspondence` | Contact form with referral source |
+| Contact | `/contact` | General contact form |
+| Correspondence | `/correspondence` | Detailed contact form with referral source |
 | Login | `/login` | Partner portal (placeholder) |
 | Access | `/access` | Password entry gate |
 
@@ -100,10 +101,12 @@ Optional: Resend email notification
 | UI Library | React | 19.2.0 |
 | Language | TypeScript | 5.x |
 | Styling | Tailwind CSS | 4.1.9 |
+| CMS | Strapi v5 | - |
 | Icons | Lucide React | ^0.454.0 |
 | Fonts | Google Fonts (next/font) | - |
 | Validation | Zod | ^3.25.76 |
 | Analytics | Vercel Analytics | ^1.3.1 |
+| Automation | n8n | - |
 
 ---
 
@@ -177,12 +180,77 @@ gcloud run deploy sloaneadler \
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `SITE_PASSWORD` | No | `password123!` | Access password |
+| `STRAPI_URL` | **Yes** | `http://localhost:1337` | Strapi CMS base URL |
+| `STRAPI_API_TOKEN` | **Yes** | - | Strapi API authentication token |
 | `RESEND_API_KEY` | No | - | Resend API key |
 | `CONTACT_EMAIL` | No | `correspondence@sloaneadler.com` | Notification email |
-| `N8N_WEBHOOK_URL` | No | - | n8n webhook URL |
+| `N8N_WEBHOOK_URL` | No | - | n8n webhook URL for contact form |
 | `N8N_WEBHOOK_SECRET` | No | - | Webhook secret |
+| `N8N_CONTENT_WEBHOOK_URL` | No | - | n8n webhook for Strapi content |
+| `STRAPI_WEBHOOK_SECRET` | No | - | Secret for verifying Strapi webhooks |
+| `CSRF_SECRET` | No | - | CSRF protection key |
+| `NEXT_PUBLIC_SENTRY_DSN` | No | - | Sentry error tracking DSN |
+| `SENTRY_AUTH_TOKEN` | No | - | Sentry auth token |
+
+### Environment Setup
+
+1. Copy the example file:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Fill in required values for your environment
+
+3. For Strapi CMS integration, obtain an API token from your Strapi admin panel
 
 ---
+
+## CMS Integration (Strapi v5)
+
+The website uses **Strapi v5** as its headless CMS for content management.
+
+### Content Types
+- **Posts**: Blog posts, perspectives, and news articles
+- **Pages**: Dynamic page content (optional)
+
+### Configuration
+Set the following environment variables:
+```bash
+STRAPI_URL=http://localhost:1337
+STRAPI_API_TOKEN=your_strapi_api_token_here
+```
+
+### Fetching Content
+Content is fetched from Strapi using the REST API:
+- Posts listing: `GET /api/posts?populate=*`
+- Single post: `GET /api/posts/:slug?populate=*`
+
+## Webhook Endpoints
+
+### Strapi Webhook (`/api/strapi-webhook`)
+Receives events from Strapi CMS when content is published/updated.
+
+**Events Handled:**
+- `entry.publish` - New content published
+- `entry.update` - Existing content updated
+- `entry.create` - New entry created
+
+**Security:**
+- Verifies `x-strapi-webhook-secret` header against `STRAPI_WEBHOOK_SECRET`
+
+**Integration with n8n:**
+- Forwards post data to `N8N_CONTENT_WEBHOOK_URL` for automated distribution
+- Payload includes post metadata, URL, and publish timestamp
+
+### Contact Form Webhook (`/api/contact`)
+Handles contact form submissions and forwards to n8n.
+
+**Rate Limiting:**
+- 5 requests per minute per IP address
+
+**n8n Integration:**
+- Forwards to `N8N_WEBHOOK_URL`
+- Includes form data with CSRF protection
 
 ## Automation Workflows
 
@@ -193,6 +261,7 @@ Three n8n workflows included:
 | Contact Form | `n8n-workflow-contact-form.json` | Process inquiries, family office lead scoring |
 | Email Processing | `n8n-workflow-email-processing.json` | Handle correspondence@ inbox |
 | Social Media | `n8n-workflow-social-media-automation.json` | Family office advisory content automation |
+| Content Distribution | Configured via Strapi webhook | Auto-publish posts to social/email |
 
 **Lead Scoring Criteria**: Optimized for family offices, high-net-worth families, institutional investors, and generational wealth advisory.
 
