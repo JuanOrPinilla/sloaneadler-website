@@ -17,20 +17,31 @@ export default function CorrespondencePage() {
     message: "",
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitting(true)
+    setError("")
 
-    // Send to API route that forwards to email
     try {
-      await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formState),
       })
+      
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || "Failed to submit")
+      }
+      
       setSubmitted(true)
-    } catch (error) {
-      console.error("Error submitting form:", error)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to submit. Please try again.")
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -144,6 +155,12 @@ export default function CorrespondencePage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
+              {error && (
+                <div className="p-4 border border-red-200 bg-red-50 text-red-700 text-sm">
+                  {error}
+                </div>
+              )}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm text-slate-600">Name</label>
@@ -216,9 +233,10 @@ export default function CorrespondencePage() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors"
+                  disabled={submitting}
+                  className="px-8 py-3 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Correspondence
+                  {submitting ? "Submitting..." : "Submit Correspondence"}
                 </button>
               </div>
 
