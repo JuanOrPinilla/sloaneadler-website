@@ -251,10 +251,24 @@ sloaneadler-website/
 │           ├── verify/route.ts
 │           └── logout/route.ts
 ├── components/
+│   ├── language-switcher.tsx     # Language selector UI
 │   └── theme-provider.tsx        # Theme context
-├── lib/
-│   └── utils.ts                  # Utilities
-├── middleware.ts                 # Auth middleware
+├── lib/                          # Utility libraries
+│   ├── utils.ts                  # Utilities
+│   └── db/                       # Database client (GCP Cloud SQL)
+│       └── index.ts              # PostgreSQL pool configuration
+├── messages/                     # i18n translation files (next-intl)
+│   ├── en.json                   # English translations
+│   ├── es.json                   # Spanish translations
+│   └── fr.json                   # French translations
+├── i18n/                         # i18n configuration
+│   ├── routing.ts                # NextIntl routing config
+│   ├── config.ts                 # i18n settings
+│   └── request.ts                # Request-time locale detection
+├── database/                     # Database migrations and scripts
+│   ├── migrations/               # SQL migration files
+│   └── README.md                 # Database setup instructions
+├── middleware.ts                 # Auth middleware + i18n routing
 ├── public/
 │   └── images/                   # Art images
 ├── n8n-workflow-*.json          # Workflows
@@ -262,6 +276,16 @@ sloaneadler-website/
 ├── cloudbuild.yaml
 └── next.config.mjs
 ```
+
+### Key Folders Explained
+
+| Folder | Purpose |
+|--------|---------|
+| `messages/` | Internationalization translations (JSON) for English, Spanish, French |
+| `i18n/` | next-intl configuration files for routing and locale management |
+| `lib/db/` | GCP Cloud SQL PostgreSQL connection pool configuration |
+| `database/` | SQL migrations and database setup documentation |
+| `workflows/` | n8n automation workflow JSON files |
 
 ---
 

@@ -157,5 +157,6 @@ Health check endpoint: `/api/health`
 ## Maintenance
 - Node.js 22+ required
 - Next.js 16 with Turbopack
-- No database dependencies
-- Stateless architecture
+- GCP Cloud SQL PostgreSQL database
+- User account and session management
+- Contact form persistence
