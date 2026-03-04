@@ -1,0 +1,344 @@
+{
+  "name": "🔥 Email Processing - correspondence@sloaneadler.com",
+  "nodes": [
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a lead scoring analyst for SLOANE / Adler. Evaluate this contact form submission and assign a lead score from 0-100.\n\nSCORING CRITERIA:\n1. Firm/Organization (0-40 points):\n   - Multi-Family Office/Ultra-HNW Family: 35-40\n   - Single Family Office: 30-38\n   - Private Bank/Wealth Manager: 25-35\n   - Investment Office/Foundation: 25-35\n   - Professional Services (legal, tax): 20-30\n   - Family Business/Legacy Enterprise: 20-30\n   - Other: 0-15\n\n2. Authority (0-25 points):\n   - Family Principal/Member: 25, Chief Investment Officer: 25, Family Office CEO: 23, CFO/COO: 20, Investment Director: 20, Family Advisor: 18, Manager: 15\n\n3. Intent/Message Quality (0-35 points):\n   - High intent (succession planning, governance, family constitution, strategic advisory): +30-35\n   - Medium intent (investment strategy, due diligence, family education): +20-25\n   - General inquiry: +10-15\n   - Detailed message (100+ words): +15, Moderate (50-99): +10, Brief: +5\n\n4. Email Domain (0-10 points):\n   - Family office domain: +10, Private bank domain: +8, Corporate: +5, Free provider: 0\n\nLEAD DATA:\nName: {{ $json.body.name }}\nEmail: {{ $json.body.email }}\nOrganization: {{ $json.body.organization || 'Not provided' }}\nReason: {{ $json.body.reason || 'Not provided' }}\nMessage: {{ $json.body.message }}\n\nOUTPUT FORMAT - Return ONLY this JSON:\n{\n  \"score\": <0-100>,\n  \"apollo_trigger\": \"<YES if score >= 65, else NO>\"\nYou are a lead scoring analyst for SLOANE / Adler. Evaluate this email and assign a lead score from 0-100.\n\nSCORING CRITERIA:\n1. Firm/Organization (0-40 points):\n- Multi-Family Office/Ultra-HNW Family: 35-40\n- Single Family Office: 30-38\n- Private Bank/Wealth Manager: 25-35\n- Investment Office/Foundation: 25-35\n- Professional Services (legal, tax): 20-30\n- Family Business/Legacy Enterprise: 20-30\n- Other: 0-15\n2. Authority (0-25 points):\n- Family Principal/Member: 25, Chief Investment Officer: 25, Family Office CEO: 23, CFO/COO: 20, Investment Director: 20, Family Advisor: 18, Manager: 15\n3. Intent/Message Quality (0-35 points):\nYou are a lead scoring analyst for SLOANE / Adler. Evaluate this incoming email and assign a lead score from 0-100.\n\nSCORING CRITERIA:\n1. Firm/Organizat..."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7d9a0f45-1f4c-4e0e-ac1e-86e14b6b1333",
+      "name": "Message a model",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "position": [
+        -2944,
+        912
+      ],
+      "typeVersion": 1,
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ARA2SPGhsDEMSvR1",
+          "name": "correspondence@sloaneadler.com"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "94bc4ad7-5854-4898-b238-b74bf34006bf",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -1920,
+        912
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "a760242d-1e50-4814-910a-300e06db0617"
+    },
+    {
+      "parameters": {
+        "fromEmail": "correspondence@sloaneadler.com",
+        "toEmail": "advisory@sloaneadler.com",
+        "subject": "=[sloaneadler.com] New Email Lead: {{ $json.from }}",
+        "emailFormat": "text",
+        "text": "Hi Team,\n\nYou have a new email lead.\n\nDETAILS:\nFrom: {{ $json.from }}\nSubject: {{ $json.subject }}\nBody: {{ $json.textPlain || $json.textHtml }}\nReceived: {{ new Date().toLocaleString() }}\n\n---\nThe SLOANE / Adler Team",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "c7a7078d-5de3-477c-92f4-7877a242f179",
+      "name": "Notify Team",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        -1696,
+        816
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "63997c72-d69d-4e49-8e98-0cbd10bae664",
+      "credentials": {
+        "smtp": {
+          "id": "Lym7Gfdw5Q6bZ7Sl",
+          "name": "correspondence@sloaneadler.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "correspondence@sloaneadler.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Thank you for contacting SLOANE / Adler",
+        "emailFormat": "text",
+        "text": "Hi there,\n\nThank you for contacting SLOANE / Adler. We have received your email and will respond shortly.\n\nHere's a copy of your message:\n\nFrom: {{ $json.from }}\nSubject: {{ $json.subject }}\nMessage: {{ $json.text }}\n\nBest regards,\nThe SLOANE / Adler Team",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "b3c56433-fb28-4cf3-a3a8-e73fbe24aff3",
+      "name": "Confirm w/ Submitter",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        -1696,
+        1008
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "9d387fe0-c763-4259-9fba-d0e089815cc5",
+      "credentials": {
+        "smtp": {
+          "id": "Lym7Gfdw5Q6bZ7Sl",
+          "name": "correspondence@sloaneadler.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\":\"success\",\"message\":\"Thank you for your submission. We will respond shortly.\"}",
+        "options": {}
+      },
+      "id": "1260dec3-264a-44a3-a7d3-01476551786c",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        -1472,
+        912
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get Gemini output\nconst geminiData = $input.first().json;\n\n// Get original email data from Email Trigger (IMAP) - needed for downstream nodes\nconst emailTriggerData = $('Email Trigger (IMAP)').first().json;\n\n// Extract email address from \"from\" field (handles \"Name <email>\" format)\nconst fromField = emailTriggerData.from || '';\nconst emailMatch = fromField.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/);\nconst email = emailMatch ? emailMatch[0] : '';\n\n// Extract text from Gemini response\nlet geminiText = '';\nif (geminiData.content && geminiData.content.parts &&\n    geminiData.content.parts[0] && geminiData.content.parts[0].text) {\n  geminiText = geminiData.content.parts[0].text;\n} else if (geminiData.text) {\n  geminiText = geminiData.text;\n} else {\n  geminiText = JSON.stringify(geminiData);\n}\n\n// Parse JSON from Gemini\nlet parsed;\ntry {\n  const cleanText = geminiText.replace(/^```json\\s*/, '').replace(/\\s*```$/, '');\n  parsed = JSON.parse(cleanText);\n} catch (e) {\n  // Return with email data even if Gemini parsing fails\n  return [{ json: { \n    score: 0, \n    apollo_trigger: 'NO',\n    email: email,\n    from: fromField,\n    subject: emailTriggerData.subject || '',\n    text: emailTriggerData.text || emailTriggerData.textPlain || '',\n    html: emailTriggerData.html || emailTriggerData.textHtml || ''\n  } }];\n}\n\n// Extract values from Gemini\nconst score = typeof parsed.score === 'number' ? parsed.score : 0;\nconst apollo_trigger = parsed.apollo_trigger === 'YES' || score >= 65 ? 'YES' : 'NO';\n\n// Return ALL fields needed by downstream nodes\nreturn [{ json: { \n  score: score, \n  apollo_trigger: apollo_trigger,\n  // CRITICAL: Include email and all email data for downstream nodes\n  email: email,\n  from: fromField,\n  subject: emailTriggerData.subject || '',\n  text: emailTriggerData.text || emailTriggerData.textPlain || '',\n  html: emailTriggerData.html || emailTriggerData.textHtml ||..."
+      },
+      "id": "43bc8c02-614c-4c96-9ace-b4c59ddc896d",
+      "name": "Parse Lead Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2592,
+        912
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "hubspotAppToken",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"inputs\": [\n    {\n      \"id\": \"{{ $json.email }}\",\n      \"idProperty\": \"email\",\n      \"properties\": {\n        \"email\": \"{{ $json.email }}\",\n        \"score\": {{ $json.score || 0 }}\n      }\n    }\n  ]\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "90620c44-eb2f-4248-8af8-22dc0c7128ae",
+      "name": "Create or update a contact in HubSpot1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2368,
+        912
+      ],
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "zsfVpwLX2KRzXdzm",
+          "name": "advisory@sloaneadler.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        -3168,
+        912
+      ],
+      "id": "ce5663cb-2864-474e-b2c4-2d516b3f62dc",
+      "name": "Email Trigger (IMAP)",
+      "credentials": {
+        "imap": {
+          "id": "bCHQnmO3gYH2aoxk",
+          "name": "correspondence@sloaneadler.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/notes",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "hubspotAppToken",
+        "sendBody": true,
+        "specifyBody": "={{ {\n  properties: {\n    hs_note_body: \"Email from: \" + $(\"Parse Lead Score\").first().json.from + \"\\n\\nSubject: \" + $(\"Parse Lead Score\").first().json.subject + \"\\n\\nBody:\\n\" + $(\"Parse Lead Score\").first().json.text,\n    hs_timestamp: Date.now()\n  },\n  associations: [{\n    to: { id: $json.results[0].id },\n    types: [{ associationCategory: \"HUBSPOT_DEFINED\", associationTypeId: 202 }]\n  }]\n} }}son",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2144,
+        912
+      ],
+      "id": "2a48fb59-ef42-4844-afa7-53431a66e1d9",
+      "name": "Create a HubSpot Note",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "zsfVpwLX2KRzXdzm",
+          "name": "advisory@sloaneadler.com"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Create a HubSpot Note": [
+      {
+        "json": {
+          "id": "105538571606",
+          "properties": {
+            "hs_body_preview": "Email from: Subject: Body:",
+            "hs_body_preview_html": "<html>\n<head></head>\n<body>\nEmail from: Subject: Body:\n</body>\n</html>",
+            "hs_body_preview_is_truncated": "false",
+            "hs_createdate": "2026-03-02T22:33:33.790Z",
+            "hs_lastmodifieddate": "2026-03-02T22:33:33.790Z",
+            "hs_note_body": "Email from: \n\nSubject: \n\nBody:\n",
+            "hs_obj_coords": "0-46-105538571606",
+            "hs_object_id": "105538571606",
+            "hs_object_source": "INTEGRATION",
+            "hs_object_source_id": "24916978",
+            "hs_object_source_label": "INTEGRATION",
+            "hs_timestamp": "2026-03-02T22:33:33.590Z"
+          },
+          "createdAt": "2026-03-02T22:33:33.790Z",
+          "updatedAt": "2026-03-02T22:33:33.790Z",
+          "archived": false,
+          "url": "https://app.hubspot.com/contacts/8282691/objects/0-46/views/all/list?filters=%5B%7B%22property%22%3A%22hs_object_id%22%2C%22operator%22%3A%22EQ%22%2C%22value%22%3A%22105538571606%22%7D%5D"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Parse Lead Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Confirm w/ Submitter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Team": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirm w/ Submitter": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Lead Score": {
+      "main": [
+        [
+          {
+            "node": "Create or update a contact in HubSpot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create or update a contact in HubSpot1": {
+      "main": [
+        [
+          {
+            "node": "Create a HubSpot Note",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a HubSpot Note": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "454124df-0f8c-4e65-82ed-13edfa4a0b2d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ff590716c2441c9acffe1c66ef9a47f10dd5144709f995f2997767d5d40acdde"
+  },
+  "id": "kpUT9pjLROURwMYa",
+  "tags": []
+}

@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     cookieStore.set("site_session", "authenticated", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
