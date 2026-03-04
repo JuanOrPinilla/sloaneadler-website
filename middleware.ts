@@ -6,8 +6,8 @@ import { routing } from './i18n/routing';
 // Create next-intl middleware
 const intlMiddleware = createIntlMiddleware(routing);
 
-// Routes that don't require authentication
-const publicRoutes = ["/access", "/api/auth/verify", "/api/auth/logout"];
+// Routes that don't require authentication (with or without locale prefix)
+const publicRoutes = ["/access", "/api/auth/verify", "/api/auth/logout", "/en/access", "/es/access", "/fr/access"];
 
 // Security headers to add to all responses
 const securityHeaders = {
@@ -59,7 +59,13 @@ export function middleware(request: NextRequest) {
 
     if (session?.value !== "authenticated") {
       const url = request.nextUrl.clone();
-      url.pathname = "/access";
+      // Check if pathname already has locale prefix
+      const localeMatch = pathname.match(/^\/(en|es|fr)\//);
+      if (localeMatch) {
+        url.pathname = `/${localeMatch[1]}/access`;
+      } else {
+        url.pathname = "/access";
+      }
       url.searchParams.set("redirect", pathname);
       response = NextResponse.redirect(url);
     } else {
