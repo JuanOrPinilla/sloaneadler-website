@@ -176,7 +176,7 @@ export async function triggerContactWorkflow(
  */
 export async function triggerContentWorkflow(
   post: Record<string, unknown>,
-  event: 'entry.publish' | 'entry.update' | 'entry.create' | 'entry.unpublish',
+  event: 'entry.publish' | 'entry.update' | 'entry.create' | 'entry.unpublish' | 'entry.delete',
   model: string
 ): Promise<WorkflowResult> {
   return triggerWorkflow('content_publish', {

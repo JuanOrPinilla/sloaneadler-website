@@ -382,7 +382,7 @@ curl -X POST http://localhost:3000/api/n8n/trigger \
 curl http://localhost:3000/api/n8n/trigger
 ```
 
-For detailed n8n documentation, see [docs/N8N_INTEGRATION.md](./docs/N8N_INTEGRATION.md).
+For detailed architecture and automation documentation, see [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
 
 ---
 
@@ -509,7 +509,8 @@ sloaneadler-website/
 │   ├── migrations/               # SQL migration files
 │   └── README.md                 # Database setup instructions
 ├── docs/                         # Documentation
-│   └── N8N_INTEGRATION.md        # n8n integration guide ⭐
+│   ├── ARCHITECTURE.md           # Architecture & automation docs ⭐
+│   └── CMS_INTEGRATION.md        # Strapi CMS integration guide ⭐
 ├── middleware.ts                 # Auth middleware + i18n routing
 ├── workflows/                    # n8n workflow JSON files
 ├── public/
@@ -528,7 +529,8 @@ sloaneadler-website/
 | `app/api/contact/route.ts` | Contact form with n8n integration |
 | `app/api/correspondence/route.ts` | Detailed inquiry form with lead scoring |
 | `app/api/strapi-webhook/route.ts` | CMS webhook handler with n8n forwarding |
-| `docs/N8N_INTEGRATION.md` | Complete n8n integration documentation |
+| `docs/ARCHITECTURE.md` | Complete architecture & n8n integration documentation |
+| `docs/CMS_INTEGRATION.md` | Strapi CMS integration documentation |
 
 ### Key Folders Explained
 

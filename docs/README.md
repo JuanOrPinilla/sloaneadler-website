@@ -1,6 +1,6 @@
 # Documentation
 
-This folder contains technical documentation for the Sloane Adler website.
+This folder contains technical documentation for the SLOANE / Adler website.
 
 ## Main Documentation
 
@@ -9,7 +9,8 @@ This folder contains technical documentation for the Sloane Adler website.
 
 ## Technical Documentation
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture and design decisions
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture, CMS integration, automation, security, and deployment
+- **[CMS_INTEGRATION.md](./CMS_INTEGRATION.md)** - Strapi v5 CMS configuration and integration
 - **[TECHNICAL_SPEC.md](./TECHNICAL_SPEC.md)** - Technical specifications and patterns
 - **[API.md](./API.md)** - API endpoints and usage
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deployment procedures
@@ -21,6 +22,7 @@ This folder contains technical documentation for the Sloane Adler website.
 - [Environment Variables Setup](../.env.example)
 - [Deployment Guide](./DEPLOYMENT.md)
 - [API Documentation](./API.md)
+- [CMS Integration](./CMS_INTEGRATION.md)
 
 ---
 

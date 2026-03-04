@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
 
     // Build metadata
     const enrichedMeta = {
+      source: (meta?.source as string) || 'website',
       ...meta,
       ipAddress: ip,
       userAgent,

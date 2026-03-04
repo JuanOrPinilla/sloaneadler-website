@@ -32,7 +32,7 @@ export function LanguageSwitcher({
     if (newLocale === locale) return;
     
     startTransition(() => {
-      router.replace(pathname, { locale: newLocale });
+      router.replace(pathname, { locale: newLocale, scroll: false });
     });
   }
 
@@ -43,7 +43,7 @@ export function LanguageSwitcher({
         {locales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
             <span className={cn(
-              "hover:text-foreground transition-colors",
+              "cursor-pointer hover:text-foreground transition-colors",
               loc === locale && "font-medium text-foreground"
             )}>
               {localeNames[loc]}
@@ -67,12 +67,13 @@ export function LanguageSwitcher({
               onClick={() => handleLocaleChange(loc)}
               disabled={isPending}
               className={cn(
-                "hover:text-foreground transition-colors",
+                "cursor-pointer hover:text-foreground transition-colors focus:outline-none focus:underline",
                 loc === locale && "font-medium text-foreground",
                 isPending && "opacity-50 cursor-wait"
               )}
               aria-current={loc === locale ? 'true' : undefined}
               aria-label={`${t('label')}: ${localeNames[loc]}`}
+              type="button"
             >
               {localeNames[loc]}
             </button>
@@ -88,7 +89,7 @@ export function LanguageSwitcher({
       value={locale}
       onChange={(e) => handleLocaleChange(e.target.value as Locale)}
       disabled={isPending}
-      className="bg-transparent border border-border rounded px-2 py-1 text-sm"
+      className="bg-transparent border border-border rounded px-2 py-1 text-sm cursor-pointer"
       aria-label={t('label')}
     >
       {locales.map((loc) => (
