@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "title": "SLOANE / Adler | Administración a Través de Generaciones",
+    "description": "Asesoramiento para familias, empresas e instituciones en capital, reputación, gobernanza y continuidad."
+  },
+  "nav": {
+    "home": "Inicio",
+    "approach": "Enfoque",
+    "investor": "Inversionista",
+    "news": "Noticias",
+    "policies": "Políticas",
+    "correspondence": "Correspondencia"
+  },
+  "footer": {
+    "copyright": "© {year} SLOANE / Adler",
+    "rights": "Todos los derechos reservados.",
+    "language": "Idioma"
+  },
+  "locale_switcher": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "label": "Seleccionar idioma"
+  },
+  "access": {
+    "title": "SLOANE / Adler",
+    "subtitle": "Acceso Requerido",
+    "placeholder": "Ingrese contraseña",
+    "error": "Contraseña incorrecta.",
+    "submit": "Entrar",
+    "loading": "Verificando..."
+  },
+  "common": {
+    "read_more": "Leer más",
+    "contact_us": "Contáctenos",
+    "learn_more": "Más información",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "loading": "Cargando..."
+  }
+}

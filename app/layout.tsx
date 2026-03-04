@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Inter, Crimson_Pro } from "next/font/google"
 import "./globals.css"
@@ -14,11 +14,21 @@ const crimsonPro = Crimson_Pro({
   variable: "--font-crimson",
 })
 
-export const metadata: Metadata = {
-  title: "SLOANE / Adler - Stewardship Across Generations",
-  description:
-    "Advisory counsel for families, enterprises, and institutions across capital, reputation, governance, and continuity.",
+const siteUrl = 'https://sloaneadler.com'
+const siteName = 'SLOANE / Adler'
+const defaultDescription = 'Advisory counsel for families, enterprises, and institutions across capital, reputation, governance, and continuity.'
 
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords: ['family office', 'wealth management', 'stewardship', 'governance', 'capital advisory', 'reputation management'],
+  authors: [{ name: 'SLOANE / Adler' }],
+  creator: 'SLOANE / Adler Holdings',
+  publisher: 'SLOANE / Adler Holdings',
   icons: {
     icon: [
       {
@@ -27,6 +37,49 @@ export const metadata: Metadata = {
       },
     ],
   },
+  manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName,
+    title: siteName,
+    description: defaultDescription,
+    images: [
+      {
+        url: '/placeholder-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'SLOANE / Adler',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteName,
+    description: defaultDescription,
+    images: ['/placeholder-logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#1a2332",
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -36,6 +89,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${crimsonPro.variable}`}>
+      <head>
+        <link rel="dns-prefetch" href="//sloaneadler.com" />
+        <link rel="preconnect" href="https://sloaneadler.com" />
+      </head>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

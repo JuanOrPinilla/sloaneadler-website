@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "title": "SLOANE / Adler | Stewardship Across Generations",
+    "description": "Advisory counsel for families, enterprises, and institutions across capital, reputation, governance, and continuity."
+  },
+  "nav": {
+    "home": "Home",
+    "approach": "Approach",
+    "investor": "Investor",
+    "news": "News",
+    "policies": "Policies",
+    "correspondence": "Correspondence"
+  },
+  "footer": {
+    "copyright": "© {year} SLOANE / Adler",
+    "rights": "All rights reserved.",
+    "language": "Language"
+  },
+  "locale_switcher": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "label": "Select language"
+  },
+  "access": {
+    "title": "SLOANE / Adler",
+    "subtitle": "Access Required",
+    "placeholder": "Enter password",
+    "error": "Incorrect password.",
+    "submit": "Enter",
+    "loading": "Verifying..."
+  },
+  "common": {
+    "read_more": "Read more",
+    "contact_us": "Contact Us",
+    "learn_more": "Learn More",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading..."
+  }
+}
