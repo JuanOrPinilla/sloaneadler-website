@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { Link, usePathname } from '@/i18n/routing';
-import { Locale, locales } from '@/i18n/config';
+import { usePathname } from '@/i18n/routing';
+import { Locale, locales, defaultLocale } from '@/i18n/config';
 import { cn } from '@/lib/utils';
 
 const localeNames: Record<Locale, string> = {
@@ -11,6 +11,22 @@ const localeNames: Record<Locale, string> = {
   es: 'Español',
   fr: 'Français',
 };
+
+function getLocalePath(pathname: string, newLocale: string): string {
+  // Remove any existing locale prefix
+  const localesPattern = locales.join('|');
+  const localeRegex = new RegExp(`^/(${localesPattern})(/|$)`);
+  const pathWithoutLocale = pathname.replace(localeRegex, '/');
+  
+  // For default locale (en), don't add prefix when using 'as-needed'
+  if (newLocale === defaultLocale) {
+    return pathWithoutLocale || '/';
+  }
+  
+  // For non-default locales, add the prefix
+  const cleanPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
+  return `/${newLocale}${cleanPath}`;
+}
 
 export function LanguageSwitcher({ 
   variant = 'footer' 
@@ -53,10 +69,8 @@ export function LanguageSwitcher({
       >
         {locales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
-            <Link
-              href={pathname}
-              locale={loc}
-              scroll={false}
+            <a
+              href={getLocalePath(pathname, loc)}
               className={cn(
                 "cursor-pointer hover:text-foreground transition-colors focus:outline-none focus:underline",
                 loc === locale && "font-medium text-foreground"
@@ -65,7 +79,7 @@ export function LanguageSwitcher({
               aria-label={`${t('label')}: ${localeNames[loc]}`}
             >
               {localeNames[loc]}
-            </Link>
+            </a>
             {index < locales.length - 1 && <span>|</span>}
           </span>
         ))}
@@ -73,7 +87,7 @@ export function LanguageSwitcher({
     );
   }
 
-  // Inline select variant - uses native select with Link for each option
+  // Inline select variant
   return (
     <div className="relative">
       <select
@@ -81,10 +95,7 @@ export function LanguageSwitcher({
         onChange={(e) => {
           const newLocale = e.target.value as Locale;
           if (newLocale !== locale) {
-            // Navigate to the same page with new locale
-            const link = document.createElement('a');
-            link.href = `/${newLocale}${pathname === '/' ? '' : pathname}`;
-            link.click();
+            window.location.href = getLocalePath(pathname, newLocale);
           }
         }}
         className="bg-transparent border border-border rounded px-2 py-1 text-sm cursor-pointer appearance-none pr-8"
