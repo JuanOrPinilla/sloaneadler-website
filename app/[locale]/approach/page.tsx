@@ -3,7 +3,7 @@
 import { LanguageSwitcher } from "@/components/language-switcher"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { Menu, X } from "lucide-react"
 
 export default function ApproachPage() {

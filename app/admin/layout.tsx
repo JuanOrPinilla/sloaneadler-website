@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { useRouter, usePathname } from "next/navigation"
 import {
   LayoutDashboard,

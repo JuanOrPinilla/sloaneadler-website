@@ -1,6 +1,6 @@
 'use client';
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Footer() {
