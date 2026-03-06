@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "title": "SLOANE / Adler | Administration au Fil des Générations",
+    "description": "Conseil pour les familles, les entreprises et les institutions en matière de capital, de réputation, de gouvernance et de continuité."
+  },
+  "nav": {
+    "home": "Accueil",
+    "approach": "Approche",
+    "investor": "Investisseur",
+    "news": "Actualités",
+    "policies": "Politiques",
+    "correspondence": "Correspondance"
+  },
+  "footer": {
+    "copyright": "© {year} SLOANE / Adler",
+    "rights": "Tous droits réservés.",
+    "language": "Langue"
+  },
+  "locale_switcher": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "label": "Choisir la langue"
+  },
+  "access": {
+    "title": "SLOANE / Adler",
+    "subtitle": "Accès Requis",
+    "placeholder": "Entrez le mot de passe",
+    "error": "Mot de passe incorrect.",
+    "submit": "Entrer",
+    "loading": "Vérification..."
+  },
+  "common": {
+    "read_more": "Lire la suite",
+    "contact_us": "Contactez-nous",
+    "learn_more": "En savoir plus",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "loading": "Chargement..."
+  }
+}
