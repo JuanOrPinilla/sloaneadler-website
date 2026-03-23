@@ -35,5 +35,5 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - 'gcr.io/$PROJECT_ID/sloaneadler:$COMMIT_SHA'
-  - 'gcr.io/$PROJECT_ID/sloaneadler:latest'
+  - 'us-docker.pkg.dev/$PROJECT_ID/sloaneadler/sloaneadler:$COMMIT_SHA'
+  - 'us-docker.pkg.dev/$PROJECT_ID/sloaneadler/sloaneadler:latest'
