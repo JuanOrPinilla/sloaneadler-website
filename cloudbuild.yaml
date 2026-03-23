@@ -32,6 +32,7 @@ steps:
 
 options:
   machineType: 'E2_MEDIUM'
+  logging: CLOUD_LOGGING_ONLY
 
 images:
   - 'gcr.io/$PROJECT_ID/sloaneadler:$COMMIT_SHA'
