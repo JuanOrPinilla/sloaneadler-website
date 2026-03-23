@@ -27,8 +27,8 @@ steps:
       - '--max-instances=10'
       - '--min-instances=0'
       - '--timeout=300s'
-      - '--set-env-vars=NODE_ENV=production'
-      - '--set-secrets=SITE_PASSWORD=site-password:latest'
+      - '--set-env-vars=NODE_ENV=production,NEXT_PUBLIC_SITE_URL=https://sloaneadler.com'
+      - '--set-secrets=SITE_PASSWORD=site-password:latest,CSRF_SECRET=csrf-secret:latest'
 
 options:
   machineType: 'E2_MEDIUM'
