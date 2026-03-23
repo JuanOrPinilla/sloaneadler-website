@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to the Sloane Adler website will be documented in this file.
 
 ## [1.0.0] - 2026-02-23
