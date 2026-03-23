@@ -6,9 +6,6 @@ import { routing } from './i18n/routing';
 // Create next-intl middleware
 const intlMiddleware = createIntlMiddleware(routing);
 
-// Routes that don't require authentication (with or without locale prefix)
-const publicRoutes = ["/access", "/api/auth/verify", "/api/auth/logout", "/en/access", "/es/access", "/fr/access"];
-
 // Security headers to add to all responses
 const securityHeaders = {
   'X-Frame-Options': 'DENY',
@@ -57,31 +54,8 @@ export function middleware(request: NextRequest) {
     return intlResponse;
   }
 
-  let response: NextResponse;
-
-  // Allow public routes
-  if (publicRoutes.some((route) => pathname.startsWith(route))) {
-    response = intlResponse;
-  }
-  // Check for auth cookie
-  else {
-    const session = request.cookies.get("site_session");
-
-    if (session?.value !== "authenticated") {
-      const url = request.nextUrl.clone();
-      // Check if pathname already has locale prefix
-      const localeMatch = pathname.match(/^\/(en|es|fr)\//);
-      if (localeMatch) {
-        url.pathname = `/${localeMatch[1]}/access`;
-      } else {
-        url.pathname = "/access";
-      }
-      url.searchParams.set("redirect", pathname);
-      response = NextResponse.redirect(url);
-    } else {
-      response = intlResponse;
-    }
-  }
+  // No authentication gate: always allow the request through.
+  const response: NextResponse = intlResponse;
 
   // Add security headers
   Object.entries(securityHeaders).forEach(([key, value]) => {

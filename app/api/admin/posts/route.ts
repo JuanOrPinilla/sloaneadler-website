@@ -1,17 +1,9 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { z } from "zod"
 import axios from "axios"
 
 const STRAPI_URL = process.env.STRAPI_URL || "http://localhost:1337"
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN
-
-// Authentication check helper
-async function checkAuth() {
-  const cookieStore = await cookies()
-  const session = cookieStore.get("site_session")
-  return session?.value === "authenticated"
-}
 
 // Create axios instance for Strapi
 const strapiClient = axios.create({
@@ -38,10 +30,6 @@ const createPostSchema = z.object({
 // GET /api/admin/posts - List all posts
 export async function GET() {
   try {
-    if (!(await checkAuth())) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
     const response = await strapiClient.get("/posts", {
       params: {
         sort: ["publishedAt:desc"],
@@ -102,10 +90,6 @@ export async function GET() {
 // POST /api/admin/posts - Create a new post
 export async function POST(request: Request) {
   try {
-    if (!(await checkAuth())) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
     const body = await request.json()
     const validatedData = createPostSchema.parse(body)
 

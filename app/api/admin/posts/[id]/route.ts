@@ -1,17 +1,9 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { z } from "zod"
 import axios from "axios"
 
 const STRAPI_URL = process.env.STRAPI_URL || "http://localhost:1337"
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN
-
-// Authentication check helper
-async function checkAuth() {
-  const cookieStore = await cookies()
-  const session = cookieStore.get("site_session")
-  return session?.value === "authenticated"
-}
 
 // Create axios instance for Strapi
 const strapiClient = axios.create({
@@ -42,10 +34,6 @@ interface RouteParams {
 // GET /api/admin/posts/[id] - Get a single post
 export async function GET(request: Request, { params }: RouteParams) {
   try {
-    if (!(await checkAuth())) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
     const { id } = await params
 
     const response = await strapiClient.get(`/posts/${id}`, {
@@ -110,10 +98,6 @@ export async function GET(request: Request, { params }: RouteParams) {
 // PUT /api/admin/posts/[id] - Update a post
 export async function PUT(request: Request, { params }: RouteParams) {
   try {
-    if (!(await checkAuth())) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
     const { id } = await params
     const body = await request.json()
     const validatedData = updatePostSchema.parse(body)
@@ -148,10 +132,6 @@ export async function PUT(request: Request, { params }: RouteParams) {
 // DELETE /api/admin/posts/[id] - Delete a post
 export async function DELETE(request: Request, { params }: RouteParams) {
   try {
-    if (!(await checkAuth())) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
-
     const { id } = await params
 
     await strapiClient.delete(`/posts/${id}`)

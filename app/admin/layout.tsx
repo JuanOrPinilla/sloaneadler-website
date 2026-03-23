@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link } from "@/i18n/routing"
 import { useRouter, usePathname } from "next/navigation"
 import {
@@ -29,29 +29,7 @@ export default function AdminLayout({
 }) {
   const router = useRouter()
   const pathname = usePathname()
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    // Check authentication
-    const checkAuth = async () => {
-      try {
-        const response = await fetch("/api/auth/check", {
-          credentials: "include",
-        })
-        if (response.ok) {
-          setIsAuthenticated(true)
-        } else {
-          setIsAuthenticated(false)
-          router.push("/access")
-        }
-      } catch {
-        setIsAuthenticated(false)
-        router.push("/access")
-      }
-    }
-    checkAuth()
-  }, [router])
 
   const handleLogout = async () => {
     try {
@@ -59,22 +37,10 @@ export default function AdminLayout({
         method: "POST",
         credentials: "include",
       })
-      router.push("/access")
+      router.push("/")
     } catch (error) {
       console.error("Logout error:", error)
     }
-  }
-
-  if (isAuthenticated === null) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="animate-pulse text-[#1a2332]">Loading...</div>
-      </div>
-    )
-  }
-
-  if (isAuthenticated === false) {
-    return null
   }
 
   return (
