@@ -1,3 +1,4 @@
+
 -- GCP Cloud SQL PostgreSQL Schema for Ike Theodore Website
 -- Migration: 001_initial_schema
 
