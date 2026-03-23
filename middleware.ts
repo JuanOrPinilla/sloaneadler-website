@@ -36,9 +36,22 @@ const cspHeader = `
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Handle i18n first
+  // Skip i18n middleware for API routes entirely
+  if (pathname.startsWith("/api/")) {
+    const response = NextResponse.next();
+    Object.entries(securityHeaders).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
+    response.headers.set(
+      'Content-Security-Policy',
+      cspHeader.replace(/\s{2,}/g, ' ').trim()
+    );
+    return response;
+  }
+
+  // Handle i18n first for page routes
   const intlResponse = intlMiddleware(request);
-  
+
   // If next-intl returns a redirect, return that response
   if (intlResponse.status !== 200) {
     return intlResponse;
@@ -48,10 +61,6 @@ export function middleware(request: NextRequest) {
 
   // Allow public routes
   if (publicRoutes.some((route) => pathname.startsWith(route))) {
-    response = intlResponse;
-  }
-  // Allow API routes
-  else if (pathname.startsWith("/api/")) {
     response = intlResponse;
   }
   // Check for auth cookie
