@@ -5,8 +5,6 @@ import { Link } from "@/i18n/routing"
 import { Menu, X } from "lucide-react"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { HeroSection } from "@/components/home/hero-section"
-import { FracturingSection } from "@/components/home/fracturing-section"
-import { PhilosophySection } from "@/components/home/philosophy-section"
 import { PracticeSection } from "@/components/home/practice-section"
 import { EngagementSection } from "@/components/home/engagement-section"
 import { DomainsSection } from "@/components/home/domains-section"
@@ -122,8 +120,6 @@ export default function HomePage() {
       </header>
 
       <HeroSection scrollY={scrollY} />
-      <FracturingSection />
-      <PhilosophySection />
       <PracticeSection />
       <EngagementSection />
       <DomainsSection />
