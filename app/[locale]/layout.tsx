@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from 'next-intl'
 import { GoogleAnalytics } from '@/components/google-analytics'
-import { CookieConsent } from '@/components/cookie-consent'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/config'
@@ -122,7 +121,6 @@ export default async function LocaleLayout({
           </main>
         </NextIntlClientProvider>
         <GoogleAnalytics measurementId={process.env.GA_MEASUREMENT_ID ?? ''} />
-        <CookieConsent />
       </body>
     </html>
   )
