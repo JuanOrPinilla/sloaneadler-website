@@ -27,7 +27,7 @@ steps:
       - '--max-instances=10'
       - '--min-instances=0'
       - '--timeout=300s'
-      - '--set-env-vars=NODE_ENV=production,NEXT_PUBLIC_SITE_URL=https://sloaneadler.com'
+      - '--set-env-vars=NODE_ENV=production,NEXT_PUBLIC_SITE_URL=https://sloaneadler.com,GA_MEASUREMENT_ID=$_GA_ID'
       - '--set-secrets=SITE_PASSWORD=site-password:latest,CSRF_SECRET=csrf-secret:latest'
 
 options:
