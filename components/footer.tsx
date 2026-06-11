@@ -2,6 +2,7 @@
 
 import { Link } from "@/i18n/routing";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { trackEvent } from "@/lib/analytics";
 
 export function Footer() {
   return (
@@ -13,24 +14,23 @@ export function Footer() {
           </div>
 
           <nav className="flex flex-col md:flex-row gap-6 text-sm">
-            <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Approach
-            </Link>
-            <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Investor
-            </Link>
-            <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              News
-            </Link>
-            <Link href="/legal/terms" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Terms
-            </Link>
-            <Link href="/legal/privacy" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Privacy
-            </Link>
-            <Link href="/correspondence" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-              Contact
-            </Link>
+            {[
+              { href: '/approach', label: 'Approach' },
+              { href: '/investor', label: 'Investor' },
+              { href: '/news', label: 'News' },
+              { href: '/legal/terms', label: 'Terms' },
+              { href: '/legal/privacy', label: 'Privacy' },
+              { href: '/correspondence', label: 'Contact' },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-slate-600 hover:text-[#1a2332] transition-colors"
+                onClick={() => trackEvent('nav_click', { link_text: link.label, destination: link.href, location: 'footer' })}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </div>
 

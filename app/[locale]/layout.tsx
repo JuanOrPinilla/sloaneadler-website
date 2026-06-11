@@ -1,7 +1,8 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Analytics } from "@vercel/analytics/next"
 import { NextIntlClientProvider } from 'next-intl'
+import { GoogleAnalytics } from '@/components/google-analytics'
+import { CookieConsent } from '@/components/cookie-consent'
 import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/config'
@@ -120,7 +121,8 @@ export default async function LocaleLayout({
             {children}
           </main>
         </NextIntlClientProvider>
-        <Analytics />
+        <GoogleAnalytics measurementId={process.env.GA_MEASUREMENT_ID ?? ''} />
+        <CookieConsent />
       </body>
     </html>
   )

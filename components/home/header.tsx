@@ -3,6 +3,7 @@
 import { Link } from "@/i18n/routing"
 import { Menu, X } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
+import { trackEvent } from "@/lib/analytics"
 
 
 interface HeaderProps {
@@ -56,10 +57,11 @@ export function Header({ scrollY }: HeaderProps) {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-12 items-center">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.href}
-                href={link.href} 
+                href={link.href}
                 className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
+                onClick={() => trackEvent('nav_click', { link_text: link.label, destination: link.href })}
               >
                 {link.label}
               </Link>
@@ -86,7 +88,10 @@ export function Header({ scrollY }: HeaderProps) {
                   key={link.href}
                   href={link.href}
                   className="text-sm tracking-wide text-slate-600 hover:text-[#1a2332] transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    trackEvent('nav_click', { link_text: link.label, destination: link.href })
+                  }}
                 >
                   {link.label}
                 </Link>
