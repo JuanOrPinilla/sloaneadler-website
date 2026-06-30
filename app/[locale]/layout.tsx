@@ -109,6 +109,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${crimsonPro.variable}`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap" rel="stylesheet" />
         <link rel="dns-prefetch" href="//sloaneadler.com" />
         <link rel="preconnect" href="https://sloaneadler.com" />
       </head>

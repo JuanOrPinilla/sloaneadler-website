@@ -75,8 +75,11 @@ export default function AccessPage() {
           <h1 className="font-serif text-2xl tracking-tight text-[#1a2332]">
             SLOANE <span className="text-slate-500">/</span> Adler
           </h1>
-          <p className="text-sm text-slate-500 mt-2">
-            Access Required
+          <p className="text-sm font-medium text-[#1a2332] mt-3">
+            Restricted Access
+          </p>
+          <p className="text-xs text-slate-500 mt-3 leading-relaxed max-w-xs mx-auto">
+            Access to the Sloane / Adler Partner Portal is restricted to authorized principals and client designees. Unsuccessful login attempts are logged for security purposes.
           </p>
         </div>
         <Suspense fallback={<div className="text-center text-slate-500">Loading...</div>}>

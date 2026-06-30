@@ -11,24 +11,26 @@ const domains = [
 
 export function DomainsSection() {
   return (
-    <section className="py-28 px-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500 mb-4">
-            Domains of Counsel
-          </h2>
-          <p className="text-lg text-slate-600">Where we provide guidance and structure.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
-          {domains.map((domain) => (
-            <div key={domain} className="flex items-start gap-4">
-              <div className="h-px w-8 bg-[#b8a07e] mt-3 shrink-0"></div>
-              <div>
-                <h3 className="font-serif text-lg text-[#1a2332]">{domain}</h3>
+    <section className="py-28 px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:items-center">
+          <div className="lg:col-span-3 space-y-6" style={{ transform: "translateY(5rem)" }}>
+            <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332]">
+              Domains of
+              <br />
+              Guidance and Structure
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Our counsel extends across the full spectrum of challenges facing those who carry consequence from capital to sovereignty, reputation to continuity.
+            </p>
+          </div>
+          <div className="lg:col-span-2">
+            {domains.map((domain) => (
+              <div key={domain} className="border-b border-slate-200 py-5 first:border-t">
+                <p className="font-serif text-lg text-[#1a2332]">{domain}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
