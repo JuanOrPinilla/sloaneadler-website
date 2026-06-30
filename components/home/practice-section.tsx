@@ -30,7 +30,7 @@ const practices = [
 
 export function PracticeSection() {
   return (
-    <section id="practice" className="py-28 px-8 bg-[#f8f7f5]">
+    <section id="practice" className="py-28 px-8 bg-[#F9FAFC]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-end mb-44">
           <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332] lg:col-span-2">

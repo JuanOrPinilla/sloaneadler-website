@@ -6,14 +6,14 @@ export function HeroSection() {
   return (
     <section className="pt-32 md:pt-40 lg:pt-48 pb-24 px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[1.02] text-[#1a2332] mb-8 max-w-5xl">
+        <h1 className="font-serif leading-[1.02] text-[#1a2332] mb-8 max-w-5xl" style={{ fontSize: "clamp(3rem, 7vw, 8.5rem)", lineHeight: "0.95" }}>
           When Leadership
           <br />
           Escalates. We Are
           <br />
           There
         </h1>
-        <p className="text-base leading-relaxed text-slate-600 max-w-md mb-12">
+        <p className="text-base leading-relaxed text-slate-600 max-w-2xl mb-12">
           Complexity expands faster than internal leadership. Exposure increases without warning. Decisions carry weight beyond the balance sheet. We exist at those moments.
         </p>
         <div className="flex items-center justify-start gap-12 md:gap-14">
