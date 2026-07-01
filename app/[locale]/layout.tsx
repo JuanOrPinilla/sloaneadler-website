@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 import { Inter, Cormorant_Garamond } from "next/font/google"
 import { SkipLink } from '@/components/skip-link'
 import { AriaAnnouncer } from '@/components/aria-announcer'
+import { SiteNavbar } from '@/components/site-navbar'
 import "../globals.css"
 
 const inter = Inter({
@@ -120,6 +121,7 @@ export default async function LocaleLayout({
         <SkipLink />
         <AriaAnnouncer />
         <NextIntlClientProvider messages={messages} locale={locale}>
+          <SiteNavbar />
           <main id="main-content" tabIndex={-1}>
             {children}
           </main>
