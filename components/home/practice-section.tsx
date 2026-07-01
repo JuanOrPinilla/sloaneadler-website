@@ -30,7 +30,7 @@ const practices = [
 
 export function PracticeSection() {
   return (
-    <section id="practice" className="py-28 px-8 bg-[#F9FAFC]">
+    <section id="practice" className="px-8 bg-[#F9FAFC] flex items-center" style={{ minHeight: "100vh", paddingTop: "5rem", paddingBottom: "5rem" }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-end mb-44">
           <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332] lg:col-span-2">
@@ -38,6 +38,7 @@ export function PracticeSection() {
             <br />
             of Counsel
           </h2>
+          <div className="hidden lg:block" />
           <p className="text-base text-slate-700 leading-relaxed lg:col-span-2 lg:text-right" style={{ marginTop: "auto", paddingTop: "3rem" }}>
             We work at the intersection of capital, reputation, and state
             power providing structurally sound counsel for those operating
@@ -53,7 +54,7 @@ export function PracticeSection() {
               style={index > 0 ? { borderLeft: "1px solid #1a2332", paddingLeft: "2rem" } : undefined}
             >
               <p className="text-xs text-slate-400 font-sans mb-3">{practice.number}</p>
-              <h3 className="text-xs uppercase tracking-widest font-medium text-[#1a2332] mb-3" style={{ fontFamily: "'Castoro Titling', serif" }}>
+              <h3 className="uppercase tracking-widest font-medium text-[#1a2332] mb-3" style={{ fontFamily: "'Castoro Titling', serif", fontSize: "0.85rem" }}>
                 {practice.title}
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">{practice.description}</p>

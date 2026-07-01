@@ -27,7 +27,7 @@ export function LongViewSection() {
   return (
     <section className="py-28 px-8 bg-white">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-20">
+        <div className="text-center mb-5">
           <h2 className="font-serif text-5xl md:text-6xl text-[#1a2332] mb-6">How We Begin</h2>
           <p className="text-slate-600">
             A four-stage path built for permanence,
@@ -36,8 +36,8 @@ export function LongViewSection() {
           </p>
         </div>
 
-        <div className="relative flex items-start" style={{ paddingTop: "4rem" }}>
-          <div className="absolute h-px bg-slate-300" style={{ top: "7rem", left: "12.5%", right: "12.5%" }} />
+        <div className="relative flex items-start" style={{ paddingTop: "2.5rem" }}>
+          <div className="absolute h-px bg-slate-300" style={{ top: "5.5rem", left: "12.5%", right: "12.5%" }} />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-0 w-full">
             {phases.map((phase) => (
               <div key={phase.title} className="flex flex-col items-center text-center px-4">

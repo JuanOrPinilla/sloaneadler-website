@@ -69,7 +69,7 @@ export default function HomePage() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center" style={{ gap: "3rem" }}>
+            <nav className="hidden md:flex items-center" style={{ gap: "6rem" }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}

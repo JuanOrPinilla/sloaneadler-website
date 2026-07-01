@@ -5,7 +5,7 @@ import { trackEvent } from "@/lib/analytics"
 
 export function VelvetRope() {
   return (
-    <section className="py-28 px-8 bg-[#F9FAFC]">
+    <section className="px-8 bg-[#F9FAFC] flex items-center justify-center" style={{ minHeight: "100vh" }}>
       <div className="max-w-3xl mx-auto text-center space-y-8">
         <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332]">
           By Introduction
