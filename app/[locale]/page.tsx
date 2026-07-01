@@ -62,7 +62,7 @@ export default function HomePage() {
 
         {/* Header */}
         <header style={{ backgroundColor: "rgba(255,255,255,0.97)", borderBottom: "1px solid #e2e8f0" }} className="backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-8 flex items-center justify-between" style={{ height: "5rem" }}>
+          <div className="max-w-7xl mx-auto px-8" style={{ height: "5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             {/* Logo */}
             <Link href="/">
               <Image src="/images/sloane.png" alt="Sloane Adler" width={180} height={180} style={{ objectFit: "contain" }} />
