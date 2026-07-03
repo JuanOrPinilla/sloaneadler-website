@@ -15,7 +15,7 @@ export function EngagementSection() {
               We work with a limited number of families, enterprises, and institutions. Engagements are confidential, long-horizon, and entered by mutual election.
             </p>
             <blockquote className="border-l-2 border-slate-300 pl-4">
-              <p className="font-serif text-lg italic text-slate-500 leading-relaxed">
+              <p className="font-serif text-lg text-slate-500 leading-relaxed">
                 Relationships are structured for continuity, not transaction. Every mandate is singular.
               </p>
             </blockquote>

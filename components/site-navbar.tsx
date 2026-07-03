@@ -64,8 +64,8 @@ export function SiteNavbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm transition-colors"
-                style={{ color: "#475569", letterSpacing: "0.02em" }}
+                className="transition-colors"
+                style={{ color: "#475569", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
               >
                 {link.label}
               </Link>
