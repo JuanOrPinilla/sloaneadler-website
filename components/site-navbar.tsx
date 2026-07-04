@@ -54,7 +54,7 @@ export function SiteNavbar() {
       <header style={{ backgroundColor: "rgba(255,255,255,0.97)", borderBottom: "1px solid #e2e8f0", backdropFilter: "blur(8px)" }}>
         <div className="max-w-7xl mx-auto px-8" style={{ height: "5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {/* Logo */}
-          <Link href="/">
+          <Link href="/" style={{ marginLeft: "-4.5rem" }}>
             <Image src="/images/sloane.png" alt="Sloane Adler" width={180} height={180} style={{ objectFit: "contain" }} />
           </Link>
 

@@ -39,7 +39,7 @@ export function PracticeSection() {
             of Counsel
           </h2>
           <div className="hidden lg:block" />
-          <p className="text-base text-slate-700 leading-relaxed lg:col-span-2 lg:text-right" style={{ marginTop: "auto", paddingTop: "3rem" }}>
+          <p className="text-base text-slate-700 leading-relaxed lg:col-span-2 lg:text-right" style={{ marginTop: "auto", paddingTop: "3rem", paddingBottom: "2rem" }}>
             We work at the intersection of capital, reputation, and state
             power providing structurally sound counsel for those operating
             at the highest levels of consequence.
