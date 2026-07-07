@@ -37,8 +37,8 @@ export function LongViewSection() {
         </div>
 
         <div className="relative flex items-start" style={{ paddingTop: "2.5rem" }}>
-          <div className="absolute h-px bg-slate-300" style={{ top: "5.5rem", left: "12.5%", right: "12.5%" }} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 w-full">
+          <div className="hidden md:block absolute h-px bg-slate-300" style={{ top: "5.5rem", left: "12.5%", right: "12.5%" }} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-0 md:gap-y-0 w-full">
             {phases.map((phase) => (
               <div key={phase.title} className="flex flex-col items-center text-center px-4">
                 <div className="relative z-10 border border-slate-300 flex items-center justify-center bg-white mb-8" style={{ borderRadius: "50%", width: "6rem", height: "6rem", flexShrink: 0 }}>
