@@ -32,7 +32,7 @@ export function PracticeSection() {
   return (
     <section id="practice" className="px-8 bg-[#F9FAFC] flex items-center" style={{ minHeight: "100vh", paddingTop: "5rem", paddingBottom: "5rem" }}>
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-end mb-44">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-end mb-12 lg:mb-44">
           <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332] lg:col-span-2">
             Five Domains
             <br />
@@ -51,7 +51,7 @@ export function PracticeSection() {
             <div
               key={practice.title}
               className="px-0 lg:px-8 lg:first:pl-0 lg:last:pr-0 py-8 lg:py-4"
-              style={index > 0 ? { borderLeft: "1px solid #1a2332", paddingLeft: "2rem" } : undefined}
+              style={index >= 0 ? { borderLeft: "1px solid #1a2332", paddingLeft: "2rem" } : undefined}
             >
               <p className="text-xs text-slate-400 font-sans mb-3">{practice.number}</p>
               <h3 className="uppercase tracking-widest font-medium text-[#1a2332] mb-3" style={{ fontFamily: "'Castoro Titling', serif", fontSize: "0.85rem" }}>

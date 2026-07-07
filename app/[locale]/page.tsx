@@ -22,7 +22,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer style={{ backgroundColor: "#0D172F", paddingTop: "4rem", paddingBottom: "2rem", paddingLeft: "2rem", paddingRight: "2rem" }}>
         <div className="max-w-7xl mx-auto">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "3rem", paddingBottom: "4rem", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12" style={{ paddingBottom: "4rem", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
             {/* Left: Logo + tagline */}
             <div>
               <div className="font-serif text-xl" style={{ color: "#ffffff", marginBottom: "1rem" }}>
@@ -34,7 +34,7 @@ export default function HomePage() {
             </div>
 
             {/* Spacer */}
-            <div />
+            <div className="hidden lg:block" />
 
             {/* Navigation column */}
             <div>
@@ -67,7 +67,7 @@ export default function HomePage() {
           </div>
 
           {/* Bottom bar */}
-          <div style={{ paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" style={{ paddingTop: "1.5rem" }}>
             <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
               {"© SLOANE / Adler Holdings. Confidential and proprietary."}
             </p>

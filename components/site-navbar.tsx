@@ -41,7 +41,7 @@ export function SiteNavbar() {
   return (
     <div className="sticky top-0 z-50">
       {/* Global Posture Bar */}
-      <div className="overflow-x-auto" style={{ backgroundColor: "#1a2332", color: "#94a3b8", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.5rem 1rem", textAlign: "center", whiteSpace: "nowrap" }}>
+      <div className="sm:whitespace-nowrap" style={{ backgroundColor: "#1a2332", color: "#94a3b8", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.5rem 1rem", textAlign: "center" }}>
         {timeZones.map((tz, index) => (
           <span key={tz.zone}>
             {tz.city} {formatTime(currentTime, tz.zone)}
