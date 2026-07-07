@@ -6,9 +6,10 @@ import { getMessages } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/config'
 import { notFound } from 'next/navigation'
-import { Inter, Crimson_Pro } from "next/font/google"
+import { Inter, Cormorant_Garamond } from "next/font/google"
 import { SkipLink } from '@/components/skip-link'
 import { AriaAnnouncer } from '@/components/aria-announcer'
+import { SiteNavbar } from '@/components/site-navbar'
 import "../globals.css"
 
 const inter = Inter({
@@ -16,8 +17,9 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
-const crimsonPro = Crimson_Pro({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-crimson",
 })
 
@@ -107,8 +109,11 @@ export default async function LocaleLayout({
   const messages = await getMessages()
   
   return (
-    <html lang={locale} className={`${inter.variable} ${crimsonPro.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${cormorantGaramond.variable}`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap" rel="stylesheet" />
         <link rel="dns-prefetch" href="//sloaneadler.com" />
         <link rel="preconnect" href="https://sloaneadler.com" />
       </head>
@@ -116,6 +121,7 @@ export default async function LocaleLayout({
         <SkipLink />
         <AriaAnnouncer />
         <NextIntlClientProvider messages={messages} locale={locale}>
+          <SiteNavbar />
           <main id="main-content" tabIndex={-1}>
             {children}
           </main>
