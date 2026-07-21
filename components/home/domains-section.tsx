@@ -12,7 +12,7 @@ const domains = [
 export function DomainsSection() {
   return (
     <section className="py-28 px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[85.5rem] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
           <div className="lg:col-span-2 space-y-6 lg:translate-y-20">
             <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332]">

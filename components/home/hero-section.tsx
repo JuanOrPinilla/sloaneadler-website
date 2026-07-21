@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing"
 export function HeroSection() {
   return (
     <section className="pt-32 md:pt-40 lg:pt-48 pb-24 px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[85.5rem] mx-auto">
         <h1 className="font-serif leading-[1.02] text-[#1a2332] mb-8 max-w-5xl" style={{ fontSize: "clamp(2.25rem, 9vw, 8.5rem)", lineHeight: "0.95" }}>
           When Leadership
           <br />
