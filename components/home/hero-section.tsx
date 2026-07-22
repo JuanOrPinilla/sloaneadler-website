@@ -36,7 +36,7 @@ export function HeroSection() {
             fill
             priority={index === 0}
             sizes="100vw"
-            className="object-contain transition-opacity duration-1000 ease-in-out"
+            className="object-cover transition-opacity duration-1000 ease-in-out"
             style={{ opacity: index === activeIndex ? 1 : 0 }}
           />
         ))}
