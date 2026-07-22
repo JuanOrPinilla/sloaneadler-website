@@ -36,7 +36,14 @@ export function SiteNavbar() {
   const [scrolled, setScrolled] = useState(false)
 
   const isHome = pathname === "/"
-  const isTransparent = isHome && !scrolled
+  const isTransparent = isHome && !scrolled && !mobileMenuOpen
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000)
@@ -52,10 +59,13 @@ export function SiteNavbar() {
   }, [isHome])
 
   return (
-    <div className={`${isHome ? "fixed" : "sticky"} top-0 left-0 right-0 z-50 transition-colors duration-500`}>
+    <div
+      className={`${mobileMenuOpen ? "fixed inset-0 flex flex-col overflow-y-auto" : isHome ? "fixed top-0 left-0 right-0" : "sticky top-0 left-0 right-0"} z-50 transition-colors`}
+      style={{ backgroundColor: mobileMenuOpen ? "#1a2332" : "transparent", transitionDuration: mobileMenuOpen ? "0ms" : "500ms" }}
+    >
       {/* Global Posture Bar */}
       <div
-        className="sm:whitespace-nowrap transition-colors duration-500"
+        className="sm:whitespace-nowrap transition-colors shrink-0"
         style={{
           backgroundColor: isTransparent ? "transparent" : "#1a2332",
           color: "#ffffff",
@@ -64,6 +74,7 @@ export function SiteNavbar() {
           textTransform: "uppercase",
           padding: "0.5rem 1rem",
           textAlign: "center",
+          transitionDuration: mobileMenuOpen ? "0ms" : "500ms",
         }}
       >
         {timeZones.map((tz, index) => (
@@ -76,14 +87,15 @@ export function SiteNavbar() {
 
       {/* Header */}
       <header
-        className="relative transition-colors duration-500"
+        className={`relative transition-colors ${mobileMenuOpen ? "flex-1 flex flex-col min-h-0" : ""}`}
         style={{
           backgroundColor: isTransparent ? "transparent" : "#1a2332",
           borderBottom: isTransparent ? "1px solid transparent" : "1px solid rgba(255,255,255,0.1)",
+          transitionDuration: mobileMenuOpen ? "0ms" : "500ms",
         }}
       >
         {/* Mobile row: logo + toggle (desktop uses absolute-positioned elements below) */}
-        <div className="lg:hidden flex items-center justify-between px-4" style={{ height: "5.5rem" }}>
+        <div className="lg:hidden shrink-0 flex items-center justify-between px-4" style={{ height: "5.5rem" }}>
           <Link href="/">
             <Image
               src="/images/sloane.png"
@@ -172,14 +184,17 @@ export function SiteNavbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden" style={{ backgroundColor: "#1a2332", borderTop: "1px solid rgba(255,255,255,0.1)", padding: "1.5rem 2rem" }}>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          <div
+            className="lg:hidden flex-1 flex flex-col justify-center"
+            style={{ backgroundColor: "#1a2332", borderTop: "1px solid rgba(255,255,255,0.1)", padding: "1.5rem 2rem" }}
+          >
+            <nav style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ color: "#ffffff", fontSize: "0.85rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
+                  style={{ color: "#ffffff", fontSize: "1.1rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
                 >
                   {link.label}
                 </Link>

@@ -27,11 +27,11 @@ const practices = [
 
 export function PracticeSection() {
   return (
-    <section id="practice" className="px-8 bg-[#F9FAFC] flex items-center" style={{ minHeight: "100vh", paddingTop: "5rem", paddingBottom: "5rem" }}>
+    <section id="practice" className="px-6 sm:px-8 bg-[#F9FAFC] flex items-center" style={{ minHeight: "100vh", paddingTop: "5rem", paddingBottom: "5rem" }}>
       <div className="max-w-[85.5rem] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-12 lg:mb-40">
           <Reveal>
-            <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332] whitespace-nowrap">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-[#1a2332] lg:whitespace-nowrap">
               Five Domains of Counsel
             </h2>
           </Reveal>

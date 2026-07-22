@@ -25,7 +25,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center px-8 overflow-hidden bg-[#1a2332]">
+    <section className="relative min-h-screen flex items-center px-4 sm:px-8 overflow-hidden bg-[#1a2332]">
       {/* City carousel background */}
       <div className="absolute inset-0 z-0">
         {cityImages.map((image, index) => (
@@ -45,7 +45,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 bg-[#1a2332]/30" />
 
       <div className="relative z-10 w-full max-w-[85.5rem] mx-auto text-center">
-        <h1 className="font-serif leading-[1.02] text-white mx-auto" style={{ fontSize: "clamp(2rem, 7.5vw, 7rem)", lineHeight: "0.95" }}>
+        <h1 className="font-serif leading-[1.02] text-white mx-auto" style={{ fontSize: "clamp(1.6rem, 8.5vw, 7rem)", lineHeight: "0.95" }}>
           When Leadership
           <br />
           Escalates. We Are
@@ -55,13 +55,13 @@ export function HeroSection() {
       </div>
 
       <div
-        className="z-10 flex flex-nowrap items-center justify-center gap-3 sm:gap-6 md:gap-14"
-        style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", bottom: "4rem" }}
+        className="z-10 flex flex-nowrap items-center justify-center gap-3 sm:gap-6 md:gap-14 px-4"
+        style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", bottom: "2.5rem", width: "100%", maxWidth: "100vw" }}
       >
         <Link
           href="/correspondence"
           className="inline-block whitespace-nowrap bg-transparent text-white uppercase hover:opacity-70 transition-opacity shrink-0"
-          style={{ fontFamily: "'Castoro Titling', serif", fontSize: "1.35rem", letterSpacing: "0.15em", padding: "1rem 1.5rem" }}
+          style={{ fontFamily: "'Castoro Titling', serif", fontSize: "clamp(0.85rem, 3.2vw, 1.35rem)", letterSpacing: "0.12em", padding: "0.75rem 1rem" }}
         >
           Begin Correspondence
         </Link>

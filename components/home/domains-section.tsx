@@ -13,11 +13,11 @@ const domains = [
 
 export function DomainsSection() {
   return (
-    <section className="py-28 px-8 bg-white">
+    <section className="py-16 sm:py-28 px-6 sm:px-8 bg-white">
       <div className="max-w-[85.5rem] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
           <Reveal className="lg:col-span-2 space-y-6 lg:translate-y-20">
-            <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332]">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-[#1a2332]">
               Domains of
               <br />
               Guidance and Structure
