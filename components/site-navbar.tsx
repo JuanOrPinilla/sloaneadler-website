@@ -120,6 +120,7 @@ export function SiteNavbar() {
           />
         </Link>
 
+
         {/* Desktop: Navigation (absolute centered) */}
         <nav
           className="hidden lg:flex"
