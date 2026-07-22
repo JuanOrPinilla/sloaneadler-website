@@ -2,11 +2,12 @@
 
 import { Link } from "@/i18n/routing"
 import { trackEvent } from "@/lib/analytics"
+import { Reveal } from "@/components/reveal"
 
 export function VelvetRope() {
   return (
     <section className="px-8 bg-[#F9FAFC] flex items-center justify-center" style={{ minHeight: "100vh" }}>
-      <div className="max-w-3xl mx-auto text-center space-y-8">
+      <Reveal className="max-w-3xl mx-auto text-center space-y-8">
         <h2 className="font-serif text-5xl md:text-6xl leading-tight text-[#1a2332]">
           By Introduction
           <br />
@@ -30,7 +31,7 @@ export function VelvetRope() {
         <p className="text-[10px] uppercase tracking-widest text-slate-400 font-sans">
           All communications are treated as strictly confidential.
         </p>
-      </div>
+      </Reveal>
     </section>
   )
 }
