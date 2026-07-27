@@ -69,14 +69,13 @@ export function SiteNavbar() {
     >
       {/* Global Posture Bar */}
       <div
-        className="sm:whitespace-nowrap shrink-0 overflow-hidden"
+        className="shrink-0 overflow-hidden"
         style={{
           backgroundColor: "#1a2332",
           color: "#ffffff",
           fontSize: "10px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          textAlign: "center",
           maxHeight: pastHero ? "0px" : "2.25rem",
           opacity: pastHero ? 0 : 1,
           padding: pastHero ? "0 1rem" : "0.5rem 1rem",
@@ -84,12 +83,24 @@ export function SiteNavbar() {
           transitionDuration: mobileMenuOpen ? "0ms" : undefined,
         }}
       >
-        {timeZones.map((tz, index) => (
-          <span key={tz.city}>
-            {tz.city} {formatTime(currentTime, tz.zone)}
-            {index < timeZones.length - 1 && " · "}
+        <div className="navbar-marquee-track flex w-max whitespace-nowrap sm:w-full sm:justify-center">
+          <span className="shrink-0 pr-8 sm:pr-0">
+            {timeZones.map((tz, index) => (
+              <span key={tz.city}>
+                {tz.city} {formatTime(currentTime, tz.zone)}
+                {index < timeZones.length - 1 && " · "}
+              </span>
+            ))}
           </span>
-        ))}
+          <span className="shrink-0 pr-8 sm:hidden" aria-hidden="true">
+            {timeZones.map((tz, index) => (
+              <span key={tz.city}>
+                {tz.city} {formatTime(currentTime, tz.zone)}
+                {index < timeZones.length - 1 && " · "}
+              </span>
+            ))}
+          </span>
+        </div>
       </div>
 
       {/* Header */}
@@ -109,7 +120,7 @@ export function SiteNavbar() {
               alt="Sloane Adler"
               width={220}
               height={220}
-              className="h-auto w-32 transition-all duration-500"
+              className="h-auto w-44 transition-all duration-500"
               style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
             />
           </Link>

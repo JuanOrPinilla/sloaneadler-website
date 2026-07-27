@@ -57,9 +57,9 @@ export function LongViewSection() {
           </Reveal>
           {allPhasesOrdered.map((phase, index) => (
             <Reveal key={phase.title} delay={index * 100} className="text-center">
-              <span className="block font-serif text-2xl text-[#1a2332] mb-1">{phase.numeral}</span>
-              <h3 className="font-serif text-3xl text-[#1a2332] mb-3">{phase.title}</h3>
-              <p className="text-lg text-slate-600 leading-relaxed">{phase.description}</p>
+              <span className="block font-serif text-base text-[#1a2332] mb-1">{phase.numeral}</span>
+              <h3 className="font-serif text-lg text-[#1a2332] mb-3">{phase.title}</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">{phase.description}</p>
             </Reveal>
           ))}
         </div>

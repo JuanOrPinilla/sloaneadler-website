@@ -3,6 +3,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes navbar-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.navbar-marquee-track {
+  animation: navbar-marquee 16s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .navbar-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
+
 :root {
   /* Navy, slate, white, muted gold color palette */
   --background: oklch(1 0 0); /* white */

@@ -12,7 +12,7 @@ export function EngagementSection() {
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl leading-tight text-[#1a2332]">
               Long-Horizon Relationships
             </h2>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-slate-600 leading-relaxed text-justify sm:text-left">
               We work with a limited number of families, enterprises, and institutions. Engagements are confidential, long-horizon, and entered by mutual election.
             </p>
           </Reveal>

@@ -22,7 +22,7 @@ export function VelvetRope() {
           <br />
           Only
         </h2>
-        <p className="text-slate-600 leading-relaxed font-semibold">
+        <p className="text-slate-600 leading-relaxed sm:font-semibold">
           Inquiries are welcomed through referral or introduction.
           <br />
           Please provide context for your correspondence.

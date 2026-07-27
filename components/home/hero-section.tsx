@@ -45,7 +45,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 bg-[#1a2332]/30" />
 
       <div className="relative z-10 w-full max-w-[85.5rem] mx-auto text-center">
-        <h1 className="font-serif leading-[1.02] text-white mx-auto" style={{ fontSize: "clamp(1.6rem, 8.5vw, 7rem)", lineHeight: "0.95" }}>
+        <h1 className="font-serif leading-[1.02] text-white mx-auto" style={{ fontSize: "clamp(2.4rem, 11vw, 7rem)", lineHeight: "0.95" }}>
           When Leadership
           <br />
           Escalates. We Are
