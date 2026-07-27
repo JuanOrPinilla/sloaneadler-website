@@ -34,6 +34,7 @@ export function SiteNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
 
   const isHome = pathname === "/"
   const isTransparent = isHome && !scrolled && !mobileMenuOpen
@@ -52,7 +53,10 @@ export function SiteNavbar() {
 
   useEffect(() => {
     if (!isHome) return
-    const handleScroll = () => setScrolled(window.scrollY > 50)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+      setPastHero(window.scrollY > window.innerHeight - 100)
+    }
     handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
@@ -65,16 +69,19 @@ export function SiteNavbar() {
     >
       {/* Global Posture Bar */}
       <div
-        className="sm:whitespace-nowrap transition-colors shrink-0"
+        className="sm:whitespace-nowrap shrink-0 overflow-hidden"
         style={{
-          backgroundColor: isTransparent ? "transparent" : "#1a2332",
+          backgroundColor: "#1a2332",
           color: "#ffffff",
           fontSize: "10px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          padding: "0.5rem 1rem",
           textAlign: "center",
-          transitionDuration: mobileMenuOpen ? "0ms" : "500ms",
+          maxHeight: pastHero ? "0px" : "2.25rem",
+          opacity: pastHero ? 0 : 1,
+          padding: pastHero ? "0 1rem" : "0.5rem 1rem",
+          transition: "max-height 500ms ease, opacity 500ms ease, padding 500ms ease",
+          transitionDuration: mobileMenuOpen ? "0ms" : undefined,
         }}
       >
         {timeZones.map((tz, index) => (
@@ -90,19 +97,19 @@ export function SiteNavbar() {
         className={`relative transition-colors ${mobileMenuOpen ? "flex-1 flex flex-col min-h-0" : ""}`}
         style={{
           backgroundColor: isTransparent ? "transparent" : "#1a2332",
-          borderBottom: isTransparent ? "1px solid transparent" : "1px solid rgba(255,255,255,0.1)",
+          borderBottom: "none",
           transitionDuration: mobileMenuOpen ? "0ms" : "500ms",
         }}
       >
         {/* Mobile row: logo + toggle (desktop uses absolute-positioned elements below) */}
         <div className="lg:hidden shrink-0 flex items-center justify-between px-4" style={{ height: "5.5rem" }}>
-          <Link href="/">
+          <Link href="/" style={{ transform: "translateY(-4px)" }}>
             <Image
               src="/images/sloane.png"
               alt="Sloane Adler"
               width={220}
               height={220}
-              className="h-auto w-36 transition-all duration-500"
+              className="h-auto w-32 transition-all duration-500"
               style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
             />
           </Link>
@@ -120,14 +127,14 @@ export function SiteNavbar() {
         <Link
           href="/"
           className="hidden lg:block"
-          style={{ position: "absolute", top: "50%", left: "1rem", transform: "translateY(-50%)" }}
+          style={{ position: "absolute", top: "50%", left: "1rem", transform: "translateY(calc(-50% - 6px))" }}
         >
           <Image
             src="/images/sloane.png"
             alt="Sloane Adler"
             width={280}
             height={280}
-            className="h-auto w-[280px] transition-all duration-500"
+            className="h-auto w-[200px] transition-all duration-500"
             style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
           />
         </Link>
@@ -160,7 +167,7 @@ export function SiteNavbar() {
         {/* Desktop: CTA Button (absolute right) */}
         <Link
           href="/correspondence"
-          className="hidden lg:inline-block transition-opacity hover:opacity-80"
+          className="hidden lg:inline-flex items-center justify-center transition-opacity hover:opacity-80"
           style={{
             position: "absolute",
             top: "50%",
@@ -168,8 +175,9 @@ export function SiteNavbar() {
             transform: "translateY(-50%)",
             backgroundColor: "#1a2332",
             color: "#ffffff",
-            border: "1px solid rgba(255,255,255,0.6)",
-            padding: "1rem 2.25rem",
+            border: isTransparent ? "1px solid rgba(255,255,255,0.6)" : "none",
+            padding: "0.65rem 2.25rem",
+            lineHeight: 1,
             fontSize: "0.85rem",
             letterSpacing: "0.1em",
             textTransform: "uppercase",

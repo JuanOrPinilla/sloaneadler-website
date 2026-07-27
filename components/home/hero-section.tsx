@@ -61,7 +61,7 @@ export function HeroSection() {
         <Link
           href="/correspondence"
           className="inline-block whitespace-nowrap bg-transparent text-white uppercase hover:opacity-70 transition-opacity shrink-0"
-          style={{ fontFamily: "'Castoro Titling', serif", fontSize: "clamp(0.85rem, 3.2vw, 1.35rem)", letterSpacing: "0.12em", padding: "0.75rem 1rem" }}
+          style={{ fontFamily: "'Castoro Titling', serif", fontSize: "clamp(0.75rem, 2.6vw, 1.1rem)", letterSpacing: "0.12em", padding: "0.75rem 1rem" }}
         >
           Begin Correspondence
         </Link>

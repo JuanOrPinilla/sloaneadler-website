@@ -22,7 +22,7 @@ export function VelvetRope() {
           <br />
           Only
         </h2>
-        <p className="text-slate-600 leading-relaxed">
+        <p className="text-slate-600 leading-relaxed font-semibold">
           Inquiries are welcomed through referral or introduction.
           <br />
           Please provide context for your correspondence.
@@ -37,7 +37,7 @@ export function VelvetRope() {
             Open Correspondence
           </Link>
         </div>
-        <p className="text-[10px] uppercase tracking-widest text-slate-400 font-sans">
+        <p className="text-[10px] uppercase tracking-widest text-slate-600 font-sans font-semibold">
           All communications are treated as strictly confidential.
         </p>
       </Reveal>

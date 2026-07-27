@@ -33,7 +33,7 @@ export function EngagementSection() {
 
           <Reveal delay={280} className="text-center lg:text-right lg:pl-16 lg:self-end">
             <blockquote>
-              <p className="font-serif text-xl text-[#1a2332] leading-relaxed">
+              <p className="font-serif text-xl text-[#1a2332] leading-snug" style={{ transform: "translateY(-28px)" }}>
                 Relationships are structured for continuity, not transaction. Every mandate is singular.
               </p>
             </blockquote>
