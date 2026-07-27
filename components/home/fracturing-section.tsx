@@ -5,7 +5,7 @@ import Image from "next/image"
 export function FracturingSection() {
   return (
     <section className="py-24 px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[85.5rem] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">The Fracturing</h2>

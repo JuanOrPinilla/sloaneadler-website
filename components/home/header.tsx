@@ -49,7 +49,7 @@ export function Header({ scrollY }: HeaderProps) {
         className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300" 
         style={{ top: scrollY > 50 ? 0 : postureBarHeight }}
       >
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="max-w-[85.5rem] mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="font-serif text-2xl tracking-tight text-[#1a2332]">
             SLOANE <span className="text-slate-500">/</span> Adler
           </Link>

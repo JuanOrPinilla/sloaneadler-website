@@ -26,11 +26,13 @@ export function LanguageSwitcher({
     setMounted(true);
   }, []);
 
+  const footerLocales = locales.filter((loc) => loc !== 'en');
+
   // Prevent hydration mismatch - render static version on server
   if (!mounted) {
     return (
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        {locales.map((loc, index) => (
+        {footerLocales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
             <span className={cn(
               "cursor-pointer hover:text-foreground transition-colors",
@@ -38,7 +40,7 @@ export function LanguageSwitcher({
             )}>
               {localeNames[loc]}
             </span>
-            {index < locales.length - 1 && <span>|</span>}
+            {index < footerLocales.length - 1 && <span>|</span>}
           </span>
         ))}
       </div>
@@ -47,11 +49,11 @@ export function LanguageSwitcher({
 
   if (variant === 'footer') {
     return (
-      <div 
+      <div
         className="flex items-center gap-2 text-sm text-muted-foreground"
         aria-label={t('label')}
       >
-        {locales.map((loc, index) => (
+        {footerLocales.map((loc, index) => (
           <span key={loc} className="flex items-center gap-2">
             <Link
               href={pathname}
@@ -65,7 +67,7 @@ export function LanguageSwitcher({
             >
               {localeNames[loc]}
             </Link>
-            {index < locales.length - 1 && <span>|</span>}
+            {index < footerLocales.length - 1 && <span>|</span>}
           </span>
         ))}
       </div>

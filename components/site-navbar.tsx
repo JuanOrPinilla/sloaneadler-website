@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Link } from "@/i18n/routing"
+import { Link, usePathname } from "@/i18n/routing"
 import { Menu, X } from "lucide-react"
 
 const timeZones = [
-  { city: "SAN FRANCISCO", zone: "America/Los_Angeles" },
+  { city: "WASHINGTON, D.C.", zone: "America/New_York" },
   { city: "NEW YORK", zone: "America/New_York" },
-  { city: "PARIS", zone: "Europe/Paris" },
   { city: "ABU DHABI", zone: "Asia/Dubai" },
+  { city: "LONDON", zone: "Europe/London" },
   { city: "SINGAPORE", zone: "Asia/Singapore" },
 ] as const
 
@@ -30,79 +30,190 @@ function formatTime(date: Date, timeZone: string): string {
 }
 
 export function SiteNavbar() {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
+
+  const isHome = pathname === "/"
+  const isTransparent = isHome && !scrolled && !mobileMenuOpen
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000)
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    if (!isHome) return
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+      setPastHero(window.scrollY > window.innerHeight - 100)
+    }
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isHome])
+
   return (
-    <div className="sticky top-0 z-50">
+    <div
+      className={`${mobileMenuOpen ? "fixed inset-0 flex flex-col overflow-y-auto" : isHome ? "fixed top-0 left-0 right-0" : "sticky top-0 left-0 right-0"} z-50 transition-colors`}
+      style={{ backgroundColor: mobileMenuOpen ? "#1a2332" : "transparent", transitionDuration: mobileMenuOpen ? "0ms" : "500ms" }}
+    >
       {/* Global Posture Bar */}
-      <div className="sm:whitespace-nowrap" style={{ backgroundColor: "#1a2332", color: "#94a3b8", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.5rem 1rem", textAlign: "center" }}>
-        {timeZones.map((tz, index) => (
-          <span key={tz.zone}>
-            {tz.city} {formatTime(currentTime, tz.zone)}
-            {index < timeZones.length - 1 && " · "}
+      <div
+        className="shrink-0 overflow-hidden"
+        style={{
+          backgroundColor: "#1a2332",
+          color: "#ffffff",
+          fontSize: "10px",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          maxHeight: pastHero ? "0px" : "2.25rem",
+          opacity: pastHero ? 0 : 1,
+          padding: pastHero ? "0 1rem" : "0.5rem 1rem",
+          transition: "max-height 500ms ease, opacity 500ms ease, padding 500ms ease",
+          transitionDuration: mobileMenuOpen ? "0ms" : undefined,
+        }}
+      >
+        <div className="navbar-marquee-track flex w-max whitespace-nowrap sm:w-full sm:justify-center">
+          <span className="shrink-0 pr-8 sm:pr-0">
+            {timeZones.map((tz, index) => (
+              <span key={tz.city}>
+                {tz.city} {formatTime(currentTime, tz.zone)}
+                {index < timeZones.length - 1 && " · "}
+              </span>
+            ))}
           </span>
-        ))}
+          <span className="shrink-0 pr-8 sm:hidden" aria-hidden="true">
+            {timeZones.map((tz, index) => (
+              <span key={tz.city}>
+                {tz.city} {formatTime(currentTime, tz.zone)}
+                {index < timeZones.length - 1 && " · "}
+              </span>
+            ))}
+          </span>
+        </div>
       </div>
 
       {/* Header */}
-      <header style={{ backgroundColor: "rgba(255,255,255,0.97)", borderBottom: "1px solid #e2e8f0", backdropFilter: "blur(8px)" }}>
-        <div className="max-w-7xl mx-auto px-4 lg:px-8" style={{ height: "5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          {/* Logo */}
-          <Link href="/" className="lg:-ml-[4.5rem]">
-            <Image src="/images/sloane.png" alt="Sloane Adler" width={180} height={180} className="h-auto w-32 lg:w-[180px]" style={{ objectFit: "contain" }} />
+      <header
+        className={`relative transition-colors ${mobileMenuOpen ? "flex-1 flex flex-col min-h-0" : ""}`}
+        style={{
+          backgroundColor: isTransparent ? "transparent" : "#1a2332",
+          borderBottom: "none",
+          transitionDuration: mobileMenuOpen ? "0ms" : "500ms",
+        }}
+      >
+        {/* Mobile row: logo + toggle (desktop uses absolute-positioned elements below) */}
+        <div className="lg:hidden shrink-0 flex items-center justify-between px-4" style={{ height: "5.5rem" }}>
+          <Link href="/" style={{ transform: "translateY(-4px)" }}>
+            <Image
+              src="/images/sloane.png"
+              alt="Sloane Adler"
+              width={220}
+              height={220}
+              className="h-auto w-44 transition-all duration-500"
+              style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
+            />
           </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex" style={{ alignItems: "center", gap: "6rem" }}>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition-colors"
-                style={{ color: "#475569", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
-          <Link
-            href="/correspondence"
-            className="hidden lg:inline-block transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#1a2332", color: "#ffffff", padding: "0.75rem 1.75rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
-          >
-            Correspondence
-          </Link>
-
-          {/* Mobile Menu Toggle */}
           <button
             type="button"
-            className="lg:hidden"
             aria-label="Toggle menu"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            style={{ color: "#1a2332" }}
+            style={{ color: "#ffffff" }}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
+        {/* Desktop: Logo (absolute left) */}
+        <Link
+          href="/"
+          className="hidden lg:block"
+          style={{ position: "absolute", top: "50%", left: "1rem", transform: "translateY(calc(-50% - 6px))" }}
+        >
+          <Image
+            src="/images/sloane.png"
+            alt="Sloane Adler"
+            width={280}
+            height={280}
+            className="h-auto w-[200px] transition-all duration-500"
+            style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
+          />
+        </Link>
+
+
+        {/* Desktop: Navigation (absolute centered) */}
+        <nav
+          className="hidden lg:flex"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            alignItems: "center",
+            gap: "3.75rem",
+          }}
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="transition-colors duration-500"
+              style={{ color: "#ffffff", fontSize: "0.9rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Desktop: CTA Button (absolute right) */}
+        <Link
+          href="/correspondence"
+          className="hidden lg:inline-flex items-center justify-center transition-opacity hover:opacity-80"
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "2.5rem",
+            transform: "translateY(-50%)",
+            backgroundColor: "#1a2332",
+            color: "#ffffff",
+            border: isTransparent ? "1px solid rgba(255,255,255,0.6)" : "none",
+            padding: "0.65rem 2.25rem",
+            lineHeight: 1,
+            fontSize: "0.85rem",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            fontFamily: "'Castoro Titling', serif",
+          }}
+        >
+          Correspondence
+        </Link>
+
+        {/* Spacer to size the header on desktop */}
+        <div className="hidden lg:block" style={{ height: "5.5rem" }} />
+
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden" style={{ backgroundColor: "#ffffff", borderTop: "1px solid #e2e8f0", padding: "1.5rem 2rem" }}>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          <div
+            className="lg:hidden flex-1 flex flex-col justify-center"
+            style={{ backgroundColor: "#1a2332", borderTop: "1px solid rgba(255,255,255,0.1)", padding: "1.5rem 2rem" }}
+          >
+            <nav style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{ color: "#475569", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
+                  style={{ color: "#ffffff", fontSize: "1.1rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif" }}
                 >
                   {link.label}
                 </Link>
@@ -111,7 +222,7 @@ export function SiteNavbar() {
                 href="/correspondence"
                 className="transition-opacity hover:opacity-80"
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ backgroundColor: "#1a2332", color: "#ffffff", padding: "0.75rem 1.75rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif", textAlign: "center" }}
+                style={{ backgroundColor: "#1a2332", color: "#ffffff", border: "1px solid rgba(255,255,255,0.6)", padding: "1rem 2.25rem", fontSize: "0.85rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif", textAlign: "center" }}
               >
                 Correspondence
               </Link>
