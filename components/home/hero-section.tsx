@@ -5,11 +5,11 @@ import Image from "next/image"
 import { Link } from "@/i18n/routing"
 
 const cityImages = [
-  { src: "/images/1.png", city: "Washington, D.C." },
-  { src: "/images/2.png", city: "New York" },
-  { src: "/images/3.png", city: "Abu Dhabi" },
-  { src: "/images/4.png", city: "London" },
-  { src: "/images/5.png", city: "Singapore" },
+  { src: "/images/1.png", mobileSrc: "/mobile/Washington.png", city: "Washington, D.C." },
+  { src: "/images/2.png", mobileSrc: "/mobile/NY.png", city: "New York" },
+  { src: "/images/3.png", mobileSrc: "/mobile/Abu.png", city: "Abu Dhabi" },
+  { src: "/images/4.png", mobileSrc: "/mobile/London.png", city: "London" },
+  { src: "/images/5.png", mobileSrc: "/mobile/Singapore.png", city: "Singapore" },
 ]
 
 const SLIDE_DURATION = 5000
@@ -29,16 +29,26 @@ export function HeroSection() {
       {/* City carousel background */}
       <div className="absolute inset-0 z-0">
         {cityImages.map((image, index) => (
-          <Image
-            key={image.src}
-            src={image.src}
-            alt={image.city}
-            fill
-            priority={index === 0}
-            sizes="100vw"
-            className="object-cover transition-opacity duration-1000 ease-in-out"
-            style={{ opacity: index === activeIndex ? 1 : 0 }}
-          />
+          <div key={image.src} className="absolute inset-0">
+            <Image
+              src={image.mobileSrc}
+              alt={image.city}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover transition-opacity duration-1000 ease-in-out sm:hidden"
+              style={{ opacity: index === activeIndex ? 1 : 0 }}
+            />
+            <Image
+              src={image.src}
+              alt={image.city}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="hidden object-cover transition-opacity duration-1000 ease-in-out sm:block"
+              style={{ opacity: index === activeIndex ? 1 : 0 }}
+            />
+          </div>
         ))}
       </div>
       {/* Darkening overlay for text contrast */}
