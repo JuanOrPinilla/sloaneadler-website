@@ -186,7 +186,7 @@ export function SiteNavbar() {
             transform: "translateY(-50%)",
             backgroundColor: "#1a2332",
             color: "#ffffff",
-            border: isTransparent ? "1px solid rgba(255,255,255,0.6)" : "none",
+            border: "none",
             padding: "0.65rem 2.25rem",
             lineHeight: 1,
             fontSize: "0.85rem",
