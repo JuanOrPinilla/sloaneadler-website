@@ -2,211 +2,70 @@
 
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { Link } from "@/i18n/routing"
-import { CheckCircle2 } from "lucide-react"
+import { InvestorHeroSection } from "@/components/investor/hero-section"
+import { InvestorOverviewSection } from "@/components/investor/overview-section"
+import { VelvetRope } from "@/components/home/velvet-rope"
 
 export default function InvestorPage() {
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-8 border-b border-slate-200">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight mb-6 text-balance">Investor Relations</h1>
-          <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-            A framework for alignment between principals and capital stewards, built on shared understanding and
-            long-horizon commitment.
-          </p>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-1">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Overview</h2>
-            </div>
-            <div className="lg:col-span-2 space-y-6">
-              <p className="text-lg text-slate-700 leading-relaxed">
-                SLOANE / Adler maintains relationships with a limited set of aligned investors who share our orientation
-                toward patient capital, discretion, and enduring value creation.
-              </p>
-              <p className="text-slate-600 leading-relaxed">
-                We do not seek capital broadly. Investor relationships are entered through direct introduction and
-                mutual assessment of alignment. Our structure reflects the same principles we bring to client counsel:
-                clarity, integrity, and long-term thinking.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy Section */}
-      <section className="py-20 px-8 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-1">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Philosophy</h2>
-            </div>
-            <div className="lg:col-span-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#b8a07e]" />
-                    <h3 className="font-serif text-lg text-[#1a2332]">Long-Horizon Orientation</h3>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed pl-8">
-                    We measure success across years and decades, not quarters.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#b8a07e]" />
-                    <h3 className="font-serif text-lg text-[#1a2332]">Judgment Over Formula</h3>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed pl-8">
-                    Decisions are shaped by context and experience, not rigid frameworks.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#b8a07e]" />
-                    <h3 className="font-serif text-lg text-[#1a2332]">Stewardship Mindset</h3>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed pl-8">
-                    Capital is a responsibility, not merely an asset to be managed.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#b8a07e]" />
-                    <h3 className="font-serif text-lg text-[#1a2332]">Aligned Interests</h3>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed pl-8">
-                    Our principals invest alongside our partners. We share outcomes.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Governance Section */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-1">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-500">Governance</h2>
-            </div>
-            <div className="lg:col-span-2 space-y-6">
-              <p className="text-slate-600 leading-relaxed">
-                SLOANE / Adler operates with a governance structure designed for accountability, transparency to aligned
-                partners, and operational independence.
-              </p>
-              <div className="border-l-2 border-[#b8a07e] pl-6 space-y-4">
-                <div>
-                  <h3 className="font-serif text-lg text-[#1a2332]">Advisory Council</h3>
-                  <p className="text-slate-600 text-sm">
-                    Senior advisors with deep expertise across finance, governance, and statecraft.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg text-[#1a2332]">Investor Committee</h3>
-                  <p className="text-slate-600 text-sm">
-                    Quarterly engagement with aligned capital partners on strategic direction.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg text-[#1a2332]">Operating Principals</h3>
-                  <p className="text-slate-600 text-sm">
-                    Day-to-day leadership with full accountability for client relationships and outcomes.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Materials Section */}
-      <section className="py-20 px-8 bg-[#1a2332]">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-1">
-              <h2 className="font-serif text-sm uppercase tracking-widest text-slate-400">Materials</h2>
-            </div>
-            <div className="lg:col-span-2">
-              <div className="border border-slate-600 p-8 text-center space-y-4">
-                <p className="text-white font-serif text-lg">Investor Portal</p>
-                <p className="text-slate-400 text-sm">
-                  Access to quarterly updates, fund documentation, and secure communications.
-                </p>
-                <div className="pt-4">
-                  <Link
-                    href="/login"
-                    className="inline-block px-6 py-3 border border-[#b8a07e] text-[#b8a07e] text-sm tracking-wide hover:bg-[#b8a07e] hover:text-[#1a2332] transition-colors"
-                  >
-                    Sign In
-                  </Link>
-                </div>
-                <p className="text-slate-500 text-xs pt-2">Coming soon for existing investors</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="py-20 px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-2xl text-[#1a2332] mb-4">Inquiries</h2>
-          <p className="text-slate-600 mb-8 max-w-lg mx-auto">
-            For investor-related matters, please use our secure contact form. All inquiries are treated with discretion.
-          </p>
-          <Link
-            href="/correspondence"
-            className="inline-block px-8 py-4 bg-[#1a2332] text-white text-sm tracking-wide hover:bg-[#2a3342] transition-colors"
-          >
-            Contact Us
-          </Link>
-        </div>
-      </section>
+      <InvestorHeroSection />
+      <InvestorOverviewSection />
+      <VelvetRope />
 
       {/* Footer */}
-      <footer className="py-16 px-8 border-t border-slate-200">
+      <footer style={{ backgroundColor: "#0D172F", paddingTop: "4rem", paddingBottom: "2rem", paddingLeft: "2rem", paddingRight: "2rem" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
-            <div className="font-serif text-xl text-[#1a2332]">
-              SLOANE <span className="text-slate-400">/</span> Adler
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12" style={{ paddingBottom: "4rem", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
+            {/* Left: Logo + tagline */}
+            <div>
+              <div className="font-serif text-xl" style={{ color: "#ffffff", marginBottom: "1rem" }}>
+                SLOANE <span style={{ color: "rgba(255,255,255,0.4)" }}>/</span> Adler
+              </div>
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Inquiries are welcomed through referral or introduction. Please provide context for your correspondence.
+              </p>
             </div>
 
-            <nav className="flex flex-col md:flex-row gap-6 text-sm">
-              <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Approach
-              </Link>
-              <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Investor
-              </Link>
-              <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                News
-              </Link>
-              <Link href="/policies" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Policies
-              </Link>
-              <Link href="/correspondence" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Contact
-              </Link>
-            </nav>
+            {/* Spacer */}
+            <div className="hidden lg:block" />
+
+            {/* Navigation column */}
+            <div>
+              <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                Navigation
+              </p>
+              <nav style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <Link href="/approach" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Approach</Link>
+                <Link href="/investor" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Investor</Link>
+                <Link href="/login" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Principals</Link>
+                <Link href="/news" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>News</Link>
+              </nav>
+            </div>
+
+            {/* Legal + Contact column */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              <div>
+                <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                  Legal
+                </p>
+                <Link href="/legal/terms" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Terms of use</Link>
+              </div>
+              <div>
+                <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                  Contact
+                </p>
+                <Link href="/correspondence" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Begin Correspondence</Link>
+              </div>
+            </div>
           </div>
 
-          <div className="text-sm text-slate-500 text-center md:text-left">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
-              <p>{"© SLOANE / Adler Holdings. Confidential and proprietary."}</p>
-              <LanguageSwitcher />
-            </div>
+          {/* Bottom bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" style={{ paddingTop: "1.5rem" }}>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+              {"© SLOANE / Adler Holdings. Confidential and proprietary."}
+            </p>
+            <LanguageSwitcher />
           </div>
         </div>
       </footer>

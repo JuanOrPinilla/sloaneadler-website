@@ -36,8 +36,8 @@ export function SiteNavbar() {
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
 
-  const isHome = pathname === "/"
-  const isTransparent = isHome && !scrolled && !mobileMenuOpen
+  const hasHero = pathname === "/" || pathname === "/approach" || pathname === "/news" || pathname === "/investor"
+  const isTransparent = hasHero && !scrolled && !mobileMenuOpen
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : ""
@@ -52,7 +52,7 @@ export function SiteNavbar() {
   }, [])
 
   useEffect(() => {
-    if (!isHome) return
+    if (!hasHero) return
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
       setPastHero(window.scrollY > window.innerHeight - 100)
@@ -60,11 +60,11 @@ export function SiteNavbar() {
     handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [isHome])
+  }, [hasHero])
 
   return (
     <div
-      className={`${mobileMenuOpen ? "fixed inset-0 flex flex-col overflow-y-auto" : isHome ? "fixed top-0 left-0 right-0" : "sticky top-0 left-0 right-0"} z-50 transition-colors`}
+      className={`${mobileMenuOpen ? "fixed inset-0 flex flex-col overflow-y-auto" : hasHero ? "fixed top-0 left-0 right-0" : "sticky top-0 left-0 right-0"} z-50 transition-colors`}
       style={{ backgroundColor: mobileMenuOpen ? "#1a2332" : "transparent", transitionDuration: mobileMenuOpen ? "0ms" : "500ms" }}
     >
       {/* Global Posture Bar */}

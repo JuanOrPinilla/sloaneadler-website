@@ -28,6 +28,11 @@ export function LanguageSwitcher({
 
   const footerLocales = locales.filter((loc) => loc !== 'en');
 
+  if (variant === 'footer') {
+    // Hidden for now - no additional locales are available yet.
+    return null;
+  }
+
   // Prevent hydration mismatch - render static version on server
   if (!mounted) {
     return (
