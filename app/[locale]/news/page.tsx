@@ -1,132 +1,71 @@
 "use client"
 
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { useState } from "react"
 import { Link } from "@/i18n/routing"
-import { ArrowRight } from "lucide-react"
-
-const posts = [
-  {
-    id: 1,
-    date: "December 30, 2025",
-    title: "On the Nature of Patient Capital",
-    summary:
-      "In an environment shaped by short-term pressures, the discipline of long-horizon thinking remains essential.",
-    body: `The current landscape rewards speed and scale. Yet for families and institutions with multi-generational mandates, the calculus differs fundamentally. Patient capital is not passive capital; it is capital deployed with the clarity that comes from understanding time differently.
-
-We continue to advise principals who measure outcomes across decades, not quarters. This orientation shapes everything: the relationships we enter, the counsel we provide, and the structures we recommend.`,
-  },
-  {
-    id: 2,
-    date: "December 30, 2025",
-    title: "Governance in Transition",
-    summary:
-      "Leadership succession remains one of the most consequential challenges facing enterprises and families alike.",
-    body: `The transfer of leadership; whether in a family enterprise, a sovereign context, or a closely-held fund, carries implications that extend far beyond the immediate transition. Done well, it preserves institutional knowledge while creating space for necessary evolution.
-
-Our work in this area emphasizes preparation over reaction. The most successful transitions we have counseled share a common thread: they began years before any formal announcement.`,
-  },
-  {
-    id: 3,
-    date: "December 30, 2025",
-    title: "Discretion as Discipline",
-    summary: "In an age of transparency, the value of measured communication has only increased.",
-    body: `Discretion is often misunderstood as secrecy. In practice, it is the discipline of speaking precisely, sharing deliberately, and understanding that not all matters benefit from broad visibility.
-
-For the families and institutions we serve, this discipline is foundational. Reputation is built through consistent action over time, and preserved through the wisdom to know when silence serves better than statement.`,
-  },
-  {
-    id: 4,
-    date: "December 30, 2025",
-    title: "Cross-Border Complexity",
-    summary: "Navigating capital, reputation, and governance across jurisdictions requires integrated counsel.",
-    body: `The principals we advise rarely operate within a single jurisdiction. Their interests span continents, their families cross borders, and their enterprises face regulatory environments that shift with political winds.
-
-This complexity demands counsel that sees the whole picture. We work at the intersections; where tax meets reputation, where governance meets culture, where capital meets policy.`,
-  },
-]
+import { NewsHeroSection } from "@/components/news/hero-section"
+import { NewsFeaturedSection } from "@/components/news/featured-section"
+import { NewsArticlesGrid } from "@/components/news/articles-grid"
 
 export default function NewsPage() {
-  const [expandedPost, setExpandedPost] = useState<number | null>(null)
-
   return (
     <div className="min-h-screen bg-white text-[#1a2332]">
-      {/* Main Content */}
-      <main className="pt-32 pb-24 px-8">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="font-serif text-5xl md:text-6xl leading-tight mb-8 text-balance">News</h1>
-
-          <p className="text-xl text-slate-600 leading-relaxed mb-16">
-            Selected updates and perspectives from SLOANE / Adler.
-          </p>
-
-          <div className="space-y-12">
-            {posts.map((post) => (
-              <article key={post.id} className="border-b border-slate-200 pb-12">
-                <time className="text-sm text-slate-500">{post.date}</time>
-                <h2 className="font-serif text-2xl text-[#1a2332] mt-2 mb-3">{post.title}</h2>
-                <p className="text-slate-600 leading-relaxed mb-4">{post.summary}</p>
-
-                {expandedPost === post.id ? (
-                  <div className="space-y-4 mt-6">
-                    {post.body.split("\n\n").map((paragraph, idx) => (
-                      <p key={idx} className="text-slate-600 leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
-                    <button
-                      onClick={() => setExpandedPost(null)}
-                      className="text-sm text-[#1a2332] flex items-center gap-2 mt-4 hover:text-[#b8a07e] transition-colors"
-                    >
-                      Show less
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setExpandedPost(post.id)}
-                    className="text-sm text-[#1a2332] flex items-center gap-2 hover:text-[#b8a07e] transition-colors"
-                  >
-                    Read more <ArrowRight className="w-4 h-4" />
-                  </button>
-                )}
-              </article>
-            ))}
-          </div>
-        </div>
-      </main>
+      <NewsHeroSection />
+      <NewsFeaturedSection />
+      <NewsArticlesGrid />
 
       {/* Footer */}
-      <footer className="py-16 px-8 border-t border-slate-200">
+      <footer style={{ backgroundColor: "#0D172F", paddingTop: "4rem", paddingBottom: "2rem", paddingLeft: "2rem", paddingRight: "2rem" }}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
-            <div className="font-serif text-xl text-[#1a2332]">
-              SLOANE <span className="text-slate-400">/</span> Adler
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12" style={{ paddingBottom: "4rem", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
+            {/* Left: Logo + tagline */}
+            <div>
+              <div className="font-serif text-xl" style={{ color: "#ffffff", marginBottom: "1rem" }}>
+                SLOANE <span style={{ color: "rgba(255,255,255,0.4)" }}>/</span> Adler
+              </div>
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Inquiries are welcomed through referral or introduction. Please provide context for your correspondence.
+              </p>
             </div>
 
-            <nav className="flex flex-col md:flex-row gap-6 text-sm">
-              <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Approach
-              </Link>
-              <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Investor
-              </Link>
-              <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                News
-              </Link>
-              <Link href="/policies" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Policies
-              </Link>
-              <Link href="/correspondence" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                Contact
-              </Link>
-            </nav>
+            {/* Spacer */}
+            <div className="hidden lg:block" />
+
+            {/* Navigation column */}
+            <div>
+              <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                Navigation
+              </p>
+              <nav style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <Link href="/approach" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Approach</Link>
+                <Link href="/investor" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Investor</Link>
+                <Link href="/login" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Principals</Link>
+                <Link href="/news" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>News</Link>
+              </nav>
+            </div>
+
+            {/* Legal + Contact column */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              <div>
+                <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                  Legal
+                </p>
+                <Link href="/legal/terms" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Terms of use</Link>
+              </div>
+              <div>
+                <p className="text-xs tracking-widest uppercase font-sans" style={{ color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem" }}>
+                  Contact
+                </p>
+                <Link href="/correspondence" className="text-sm transition-colors" style={{ color: "rgba(255,255,255,0.7)" }}>Begin Correspondence</Link>
+              </div>
+            </div>
           </div>
 
-          <div className="text-sm text-slate-500 text-center md:text-left">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
-              <p>{"© SLOANE / Adler Holdings. Confidential and proprietary."}</p>
-              <LanguageSwitcher />
-            </div>
+          {/* Bottom bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" style={{ paddingTop: "1.5rem" }}>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+              {"© SLOANE / Adler Holdings. Confidential and proprietary."}
+            </p>
+            <LanguageSwitcher />
           </div>
         </div>
       </footer>
