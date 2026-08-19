@@ -52,33 +52,6 @@ export function LanguageSwitcher({
     );
   }
 
-  if (variant === 'footer') {
-    return (
-      <div
-        className="flex items-center gap-2 text-sm text-muted-foreground"
-        aria-label={t('label')}
-      >
-        {footerLocales.map((loc, index) => (
-          <span key={loc} className="flex items-center gap-2">
-            <Link
-              href={pathname}
-              locale={loc}
-              className={cn(
-                "cursor-pointer hover:text-foreground transition-colors focus:outline-none focus:underline",
-                loc === locale && "font-medium text-foreground"
-              )}
-              aria-current={loc === locale ? 'true' : undefined}
-              aria-label={`${t('label')}: ${localeNames[loc]}`}
-            >
-              {localeNames[loc]}
-            </Link>
-            {index < footerLocales.length - 1 && <span>|</span>}
-          </span>
-        ))}
-      </div>
-    );
-  }
-
   // Inline select variant
   return (
     <div className="relative">
