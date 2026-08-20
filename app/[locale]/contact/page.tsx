@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Link } from "@/i18n/routing"
 import { useTranslations } from "next-intl"
 import { Mail, Phone, MapPin } from "lucide-react"
-import { LanguageSwitcher } from "@/components/language-switcher"
+import { Footer } from "@/components/footer"
 
 export default function ContactPage() {
   const t = useTranslations("contact")
@@ -294,44 +294,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-16 px-8 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
-            <div className="font-serif text-xl text-[#1a2332]">
-              SLOANE <span className="text-slate-400">/</span> Adler
-            </div>
-
-            <nav className="flex flex-col md:flex-row gap-6 text-sm" aria-label="Footer navigation">
-              <Link href="/approach" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.approach") || "Approach"}
-              </Link>
-              <Link href="/investor" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.investor") || "Investor"}
-              </Link>
-              <Link href="/news" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.news") || "News"}
-              </Link>
-              <Link href="/legal/terms" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.terms") || "Terms"}
-              </Link>
-              <Link href="/legal/privacy" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.privacy") || "Privacy"}
-              </Link>
-              <Link href="/contact" className="text-slate-600 hover:text-[#1a2332] transition-colors">
-                {t("nav.contact") || "Contact"}
-              </Link>
-            </nav>
-          </div>
-
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-slate-500">
-              {"© SLOANE / Adler Holdings. Confidential and proprietary."}
-            </p>
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

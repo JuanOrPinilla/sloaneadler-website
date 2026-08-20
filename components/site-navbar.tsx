@@ -178,14 +178,12 @@ export function SiteNavbar() {
         {/* Desktop: CTA Button (absolute right) */}
         <Link
           href="/correspondence"
-          className="hidden lg:inline-flex items-center justify-center transition-opacity hover:opacity-80"
+          className="hidden lg:inline-flex items-center justify-center bg-[#1a2332] text-white hover:bg-slate-400 hover:text-[#1a2332] transition-colors"
           style={{
             position: "absolute",
             top: "50%",
             right: "2.5rem",
             transform: "translateY(-50%)",
-            backgroundColor: "#1a2332",
-            color: "#ffffff",
             border: "none",
             padding: "0.65rem 2.25rem",
             lineHeight: 1,
@@ -220,9 +218,9 @@ export function SiteNavbar() {
               ))}
               <Link
                 href="/correspondence"
-                className="transition-opacity hover:opacity-80"
+                className="bg-[#1a2332] text-white hover:bg-slate-400 hover:text-[#1a2332] transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ backgroundColor: "#1a2332", color: "#ffffff", border: "1px solid rgba(255,255,255,0.6)", padding: "1rem 2.25rem", fontSize: "0.85rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif", textAlign: "center" }}
+                style={{ border: "1px solid rgba(255,255,255,0.6)", padding: "1rem 2.25rem", fontSize: "0.85rem", letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "'Castoro Titling', serif", textAlign: "center" }}
               >
                 Correspondence
               </Link>

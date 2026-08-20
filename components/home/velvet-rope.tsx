@@ -31,7 +31,7 @@ export function VelvetRope() {
           <Link
             href="/correspondence"
             onClick={() => trackEvent("cta_click", { link_text: "open correspondence", destination: "/access", location: "velvet_rope" })}
-            className="inline-block bg-[#1a2332] text-white text-xs tracking-widest uppercase hover:bg-[#2a3342] transition-colors px-10 py-4 sm:px-20"
+            className="inline-block bg-[#1a2332] text-white text-xs tracking-widest uppercase hover:bg-slate-400 hover:text-[#1a2332] transition-colors px-10 py-4 sm:px-20"
             style={{ fontFamily: "'Castoro Titling', serif" }}
           >
             Open Correspondence
