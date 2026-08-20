@@ -27,7 +27,7 @@ export function EngagementSection() {
               />
             </div>
             <div className="text-[10px] uppercase tracking-wider text-slate-400 font-sans border-t border-slate-200/50 pt-2 mt-3 text-left">
-              Gerhard Richter, Oil on Alu Dibond, 1999
+              The Conversation (1995) © Luc Tuymans.
             </div>
           </Reveal>
 

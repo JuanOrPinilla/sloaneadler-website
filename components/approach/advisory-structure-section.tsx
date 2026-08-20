@@ -16,7 +16,7 @@ const formats = [
     category: "Assessment",
     title: "Strategic Review",
     description:
-      "Focused assessment of specific matters transactions, transitions, or structural decisions - with recommendations calibrated for consequence, not speed.",
+      "Focused assessment of specific matters transactions, transitions, or structural decisions with recommendations calibrated for consequence, not speed.",
   },
   {
     number: "03",
@@ -64,7 +64,7 @@ export function AdvisoryStructureSection() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-14 border-t border-slate-200 pt-14 sm:pt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-14 pt-14 sm:pt-16">
           {formats.map((format, index) => (
             <Reveal key={format.title} delay={index * 100} className="space-y-3">
               <span

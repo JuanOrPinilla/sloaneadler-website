@@ -52,7 +52,7 @@ export function LongViewSection() {
               />
             </div>
             <div className="text-[10px] uppercase tracking-wider text-slate-400 font-sans border-t border-slate-200/50 pt-2 text-center">
-              Gerhard Richter, Oil on Alu Dibond, 1999
+            Cage (6) (2006) © Gerhard Richter. Courtesy of Tate Modern.
             </div>
           </Reveal>
           {allPhasesOrdered.map((phase, index) => (
@@ -88,7 +88,7 @@ export function LongViewSection() {
               />
             </div>
             <div className="text-[10px] uppercase tracking-wider text-slate-400 font-sans border-t border-slate-200/50 pt-2 text-center">
-              Gerhard Richter, Oil on Alu Dibond, 1999
+              Cage (6) (2006) © Gerhard Richter. Courtesy of Tate Modern.
             </div>
           </Reveal>
 
