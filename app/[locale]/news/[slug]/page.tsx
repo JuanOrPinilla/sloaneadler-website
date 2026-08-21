@@ -1,14 +1,10 @@
 import { notFound } from "next/navigation"
 import { Link } from "@/i18n/routing"
 import { Footer } from "@/components/footer"
-import { getNewsArticle, newsArticles, type ArticleBlock } from "@/lib/news-articles"
+import { getNewsArticle, type ArticleBlock } from "@/lib/news-articles"
 
 interface ArticlePageProps {
   params: Promise<{ slug: string; locale: string }>
-}
-
-export function generateStaticParams() {
-  return newsArticles.map((article) => ({ slug: article.slug }))
 }
 
 export async function generateMetadata({ params }: ArticlePageProps) {
