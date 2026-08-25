@@ -27,8 +27,8 @@ steps:
       - '--max-instances=10'
       - '--min-instances=0'
       - '--timeout=300s'
-      - '--set-env-vars=NODE_ENV=production,NEXT_PUBLIC_SITE_URL=https://sloaneadler.com,GA_MEASUREMENT_ID=$_GA_ID'
-      - '--set-secrets=SITE_PASSWORD=site-password:latest,CSRF_SECRET=csrf-secret:latest'
+      - '--set-env-vars=NODE_ENV=production,NEXT_PUBLIC_SITE_URL=https://sloaneadler.com,GA_MEASUREMENT_ID=$_GA_ID,CONTACT_EMAIL=Ikeumunnah@gmail.com'
+      - '--set-secrets=SITE_PASSWORD=site-password:latest,CSRF_SECRET=csrf-secret:latest,RESEND_API_KEY=SLOANE_API_KEY:latest'
 
 options:
   machineType: 'E2_MEDIUM'
