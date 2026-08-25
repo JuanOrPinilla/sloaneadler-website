@@ -128,7 +128,7 @@ export async function POST(request: Request) {
           },
           body: JSON.stringify({
             from: "SLOANE / Adler <correspondence@sloaneadler.com>",
-            to: process.env.CONTACT_EMAIL || "correspondence@sloaneadler.com",
+            to: process.env.CONTACT_EMAIL || "Ikeumunnah@gmail.com",
             reply_to: validated.email,
             subject: `[${validated.urgency.toUpperCase()}] Correspondence: ${validated.inquiryType} - ${validated.name}`,
             text: buildEmailContent(validated, leadScore),
